@@ -108,7 +108,7 @@ function toggleMobileNav() {
 // ── SHARED HTML FRAGMENTS ──
 function getHeaderHTML(activePage) {
   const navItems = [
-    { label: 'Join Cloudbet',  href: 'https://www.cloudbet.com', external: true, cta: true },
+    { label: 'Join Cloudbet',  href: 'https://cldbt.cloud/go/en/auth/sign-up?af_token=98f8cd6cce4dc6a600e699ee62740188&aftm_campaign=join-cloudbet&aftm_source=website&aftm_medium=links&aftm_cid=join-cloudbet', external: true, cta: true },
     { label: 'Casino',         href: 'casino.html' },
     { label: 'Sportsbook',     href: 'sportsbook.html' },
     { label: 'Affiliates',     href: 'affiliates.html' },
@@ -173,10 +173,141 @@ function getHeaderHTML(activePage) {
           <path d="M23 8h2.3l-5.8 5.8c-1.9 1.9-5 1.9-6.9 0L6.7 8H9l4.7 4.7c1.3 1.3 3.3 1.3 4.6 0L23 8zm-16.3 16H4.4l5.9-5.9c1.9-1.9 5-1.9 6.9 0l5.9 5.9H21l-4.8-4.8c-1.3-1.3-3.3-1.3-4.6 0L6.7 24z" fill="white"/>
         </svg>
         <span>XRP</span>
-        <button class="footer-crypto-expand" id="footer-expand-btn" onclick="toggleFooterCoins()" title="Show all">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          more
+      </div>
+    </div>
+    <div class="header-right">
+      ${navHTML}
+      <div class="social-icons">
+        <button class="social-btn" title="X / Twitter" onclick="window.open('https://x.com','_blank')">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.258 5.63 5.906-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
         </button>
+        <button class="social-btn" title="Instagram" onclick="window.open('https://instagram.com','_blank')">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </button>
+      </div>
+      <button class="mobile-menu-btn" onclick="toggleMobileNav()" aria-label="Open menu">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><rect y="3" width="20" height="2" rx="1"/><rect y="9" width="20" height="2" rx="1"/><rect y="15" width="20" height="2" rx="1"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobile-nav">
+  <div class="mobile-nav-header">
+    <div class="header-logo">
+      <img src="logo-desktop.png" alt="Crypto Bets Headquarters" class="logo-img logo-img-desktop">
+      <img src="logo-mobile.png" alt="Crypto Bets HQ" class="logo-img logo-img-mobile">
+    </div>
+    <button onclick="toggleMobileNav()" style="background:none;border:none;color:var(--text-pri);font-size:22px;">✕</button>
+  </div>
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="casino.html">Casino</a>
+  <a href="sportsbook.html">Sportsbook</a>
+  <a href="affiliates.html">Affiliates</a>
+</nav>`;
+}
+
+
+function sportEmoji(sport) {
+  return SPORT_SVG[sport] || SPORT_SVG.other;
+}
+
+// ── TIP POPUP ──
+function openTipPopup(tipId) {
+  const tips = DB.get('tips') || [];
+  const tip = tips.find(t => t.id == tipId);
+  if (!tip) return;
+  const sportColors = { football: '#4ade80', esports: '#a78bfa', basketball: '#fb923c', tennis: '#facc15' };
+  const color = sportColors[tip.sport] || '#9998b0';
+  const confDots = Array.from({length:5}, (_,i) => `<div class="conf-dot ${i < tip.conf ? 'on' : ''}"></div>`).join('');
+  document.getElementById('popup-sport').innerHTML = `<span class="tip-sport-icon tip-sport-icon-lg">${sportEmoji(tip.sport)}</span> <span class="tip-sport-badge ${tip.sport}">${tip.sport.toUpperCase()}</span>`;
+  document.getElementById('popup-teams').textContent = `${tip.home} vs ${tip.away}`;
+  document.getElementById('popup-pick').textContent = tip.pick;
+  document.getElementById('popup-pick').style.color = color;
+  document.getElementById('popup-odds').textContent = tip.odds;
+  document.getElementById('popup-time').textContent = `${tip.date} · ${tip.time}`;
+  document.getElementById('popup-conf-dots').innerHTML = confDots;
+  document.getElementById('popup-analysis').textContent = tip.analysis;
+  document.getElementById('tip-popup').classList.add('open');
+}
+function closeTipPopup() {
+  document.getElementById('tip-popup').classList.remove('open');
+}
+
+// ── MOBILE NAV ──
+function toggleMobileNav() {
+  document.getElementById('mobile-nav').classList.toggle('open');
+}
+
+// ── SHARED HTML FRAGMENTS ──
+function getHeaderHTML(activePage) {
+  const navItems = [
+    { label: 'Join Cloudbet',  href: 'https://cldbt.cloud/go/en/auth/sign-up?af_token=98f8cd6cce4dc6a600e699ee62740188&aftm_campaign=join-cloudbet&aftm_source=website&aftm_medium=links&aftm_cid=join-cloudbet', external: true, cta: true },
+    { label: 'Casino',         href: 'casino.html' },
+    { label: 'Sportsbook',     href: 'sportsbook.html' },
+    { label: 'Affiliates',     href: 'affiliates.html' },
+    { label: 'Cloudbet Pulse', href: 'https://www.cloudbet.com/en/pulse', external: true },
+  ];
+  const navHTML = navItems.map(function(item) {
+    var active = !item.external && activePage === item.href.replace('.html','') ? ' active' : '';
+    var ext = item.external ? ' target="_blank" rel="noopener"' : '';
+    var cls = item.cta ? ' cta' : '';
+    return '<a href="' + item.href + '" class="nav-link' + active + cls + '"' + ext + '>' + item.label + '</a>';
+  }).join('');
+
+  return `
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="header-logo">
+      <img src="logo-desktop.png" alt="Crypto Bets Headquarters" class="logo-img logo-img-desktop">
+      <img src="logo-mobile.png" alt="Crypto Bets HQ" class="logo-img logo-img-mobile">
+    </a>
+    <div class="crypto-strip">
+      <!-- BTC -->
+      <div class="crypto-icon">
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="16" cy="16" r="16" fill="#F7931A"/>
+          <path d="M22.5 14.2c.3-2-1.2-3-3.3-3.7l.7-2.7-1.6-.4-.6 2.6-1.3-.3.6-2.6-1.6-.4-.7 2.7-1-.3-2.2-.5-.5 1.7s1.2.3 1.2.3c.7.2.8.6.8 1l-.8 3.4c.1 0 .2.1.3.1l-.3-.1-1.2 4.7c-.1.2-.3.5-.7.4 0 0-1.2-.3-1.2-.3l-.8 1.8 2 .5 1.1.3-.7 2.7 1.6.4.7-2.7 1.3.3-.7 2.7 1.6.4.7-2.7c2.8.5 4.9.3 5.8-2.2.7-2-.1-3.2-1.5-3.9 1-.2 1.8-1 2-2.3zm-3.6 5c-.5 2-3.9 1-5 .7l.9-3.5c1.1.3 4.6.8 4.1 2.8zm.5-5c-.5 1.8-3.3 1-4.2.7l.8-3.2c.9.2 3.9.7 3.4 2.5z" fill="white"/>
+        </svg>
+        <span>BTC</span>
+      </div>
+      <!-- ETH -->
+      <div class="crypto-icon">
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="16" cy="16" r="16" fill="#627EEA"/>
+          <path d="M16.5 6v7.4l6.2 2.8L16.5 6z" fill="white" fill-opacity=".6"/>
+          <path d="M16.5 6L10.3 16.2l6.2-2.8V6z" fill="white"/>
+          <path d="M16.5 21.3v4.7l6.2-8.6-6.2 3.9z" fill="white" fill-opacity=".6"/>
+          <path d="M16.5 26V21.3l-6.2-3.9L16.5 26z" fill="white"/>
+          <path d="M16.5 20.2l6.2-3.9-6.2-2.8v6.7z" fill="white" fill-opacity=".2"/>
+          <path d="M10.3 16.3l6.2 3.9v-6.7l-6.2 2.8z" fill="white" fill-opacity=".6"/>
+        </svg>
+        <span>ETH</span>
+      </div>
+      <!-- USDT -->
+      <div class="crypto-icon">
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="16" cy="16" r="16" fill="#26A17B"/>
+          <path d="M17.9 17.3c-.1 0-.9.1-1.9.1s-1.7-.1-1.9-.1C11 17 8.9 16.3 8.9 15.5s2.1-1.5 5.2-1.8v1.2c.2 0 1 .1 1.9.1.9 0 1.7-.1 1.9-.1v-1.2c3.1.2 5.2 1 5.2 1.8 0 .8-2.1 1.5-5.2 1.8zm0-3.5v-1.1h4.2V10H9.9v2.7h4.2v1.1C10.6 14.1 8 15.2 8 16.5c0 1.3 2.6 2.4 6.1 2.7v5.8h3.8v-5.8c3.5-.3 6.1-1.4 6.1-2.7 0-1.3-2.6-2.4-6.1-2.7z" fill="white"/>
+        </svg>
+        <span>USDT</span>
+      </div>
+      <!-- LTC -->
+      <div class="crypto-icon">
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="16" cy="16" r="16" fill="#BFBBBB"/>
+          <path d="M10 22h12v1.5H10zm2-4.8l4.8-7.2 1.2.8-4.1 6.2H23v1.5H10l2-7.5 1.5.4L12 17.2z" fill="white"/>
+        </svg>
+        <span>LTC</span>
+      </div>
+      <!-- XRP -->
+      <div class="crypto-icon">
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="16" cy="16" r="16" fill="#346AA9"/>
+          <path d="M23 8h2.3l-5.8 5.8c-1.9 1.9-5 1.9-6.9 0L6.7 8H9l4.7 4.7c1.3 1.3 3.3 1.3 4.6 0L23 8zm-16.3 16H4.4l5.9-5.9c1.9-1.9 5-1.9 6.9 0l5.9 5.9H21l-4.8-4.8c-1.3-1.3-3.3-1.3-4.6 0L6.7 24z" fill="white"/>
+        </svg>
+        <span>XRP</span>
       </div>
     </div>
     <div class="header-right">
@@ -280,14 +411,11 @@ function getTipPopupHTML() {
 
 // ── FOOTER COINS EXPAND ──
 function toggleFooterCoins() {
-  var el = document.getElementById('footer-coins');
+  var extra = document.getElementById('footer-coins-extra');
   var btn = document.getElementById('footer-expand-btn');
-  if (!el) return;
-  var expanded = el.classList.toggle('expanded');
-  btn.classList.toggle('open', expanded);
-  var arrow = btn.querySelector('svg');
-  arrow.style.transform = expanded ? 'rotate(180deg)' : '';
-  btn.innerHTML = (expanded
-    ? '<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> less'
-    : '<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> more');
+  if (!extra) return;
+  var expanded = extra.classList.toggle('open');
+  btn.innerHTML = expanded
+    ? '<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 9l4-4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> less'
+    : '<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> more';
 }
