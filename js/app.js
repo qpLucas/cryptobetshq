@@ -116,10 +116,8 @@ function getHeaderHTML(activePage) {
 <header class="site-header">
   <div class="header-inner">
     <a href="index.html" class="header-logo">
-      <div class="logo-lockup">
-        <span class="logo-pill">CB<em>HQ</em></span>
-        <span class="logo-wordmark"><span class="lw-crypto">Crypto</span><span class="lw-bets">Bets</span><span class="lw-hq logo-full">HQ</span></span>
-      </div>
+      <img src="logo-desktop.png" alt="Crypto Bets Headquarters" class="logo-img logo-img-desktop">
+      <img src="logo-mobile.png" alt="Crypto Bets HQ" class="logo-img logo-img-mobile">
     </a>
     <div class="crypto-strip">
       <!-- BTC -->
@@ -191,10 +189,8 @@ function getHeaderHTML(activePage) {
 <nav class="mobile-nav" id="mobile-nav">
   <div class="mobile-nav-header">
     <div class="header-logo">
-      <div class="logo-lockup">
-        <span class="logo-pill">CB<em>HQ</em></span>
-        <span class="logo-wordmark"><span class="lw-crypto">Crypto</span><span class="lw-bets">Bets</span><span class="lw-hq logo-full">HQ</span></span>
-      </div>
+      <img src="logo-desktop.png" alt="Crypto Bets Headquarters" class="logo-img logo-img-desktop">
+      <img src="logo-mobile.png" alt="Crypto Bets HQ" class="logo-img logo-img-mobile">
     </div>
     <button onclick="toggleMobileNav()" style="background:none;border:none;color:var(--text-pri);font-size:22px;">✕</button>
   </div>

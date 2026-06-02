@@ -1024,3 +1024,23 @@ button { cursor: pointer; font-family: inherit; }
   .logo-short { display: inline-flex !important; }
   .lw-hq { display: none !important; }
 }
+
+/* ── LOGO IMAGES ── */
+.logo-img {
+  height: 44px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+.logo-img-desktop { display: block; }
+.logo-img-mobile  { display: none;  }
+
+@media (max-width: 900px) {
+  .logo-img-desktop { display: none;  }
+  .logo-img-mobile  { display: block; height: 40px; }
+}
+
+/* Hide all old CSS logo pieces */
+.logo-lockup, .logo-pill, .logo-wordmark,
+.lw-crypto, .lw-bets, .lw-hq,
+.logo-mark, .logo-text, .logo-text-wrap { display: none !important; }
