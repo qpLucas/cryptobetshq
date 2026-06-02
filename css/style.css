@@ -1460,3 +1460,19 @@ a:hover { color: var(--cta-dim); }
 .admin-nav-link { color: var(--text-sec) !important; }
 .admin-nav-link:hover { color: var(--text-pri) !important; }
 .admin-nav-link.active { color: var(--accent) !important; border-left-color: var(--accent) !important; background: var(--accent-dim) !important; }
+
+/* ── BUTTONS BACK TO GREEN ── */
+.btn-gold { background: var(--cta) !important; color: #0e0e14 !important; }
+.btn-gold:hover { background: var(--cta-dim) !important; }
+
+.btn-outline { color: var(--cta) !important; border-color: rgba(106,199,137,0.4) !important; }
+.btn-outline:hover { background: var(--cta-glow) !important; }
+
+.nav-link.cta { background: var(--cta) !important; color: #0e0e14 !important; }
+.nav-link.cta:hover { background: var(--cta-dim) !important; color: #0e0e14 !important; }
+
+.action-btn.edit { background: rgba(106,199,137,0.15) !important; color: var(--cta) !important; }
+
+/* ── BREADCRUMB LINKS → GREEN ── */
+.breadcrumb a { color: var(--cta) !important; }
+.breadcrumb a:hover { color: var(--cta-dim) !important; }
