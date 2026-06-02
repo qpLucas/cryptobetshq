@@ -78,6 +78,51 @@ function sportEmoji(sport) {
   return SPORT_SVG[sport] || SPORT_SVG.other;
 }
 
+
+// ── TEAM LOGO LOOKUP (TheSportsDB - free, no key) ──
+var logoCache = {};
+
+function getTeamLogo(teamName, callback) {
+  if (!teamName) { callback(null); return; }
+  var key = teamName.toLowerCase().trim();
+  if (logoCache[key] !== undefined) { callback(logoCache[key]); return; }
+  var url = 'https://www.thesportsdb.com/api/v1/json/3/searchteams.php?t=' + encodeURIComponent(teamName);
+  fetch(url)
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      var logo = null;
+      if (data && data.teams && data.teams[0]) {
+        logo = data.teams[0].strTeamBadge || data.teams[0].strTeamLogo || null;
+      }
+      logoCache[key] = logo;
+      callback(logo);
+    })
+    .catch(function() { logoCache[key] = null; callback(null); });
+}
+
+function renderTipRow(tip, logoHome, logoAway) {
+  var conf = Array.from({length:5}, function(_,i) {
+    return '<div class="conf-dot ' + (i < tip.conf ? 'on' : '') + '"></div>';
+  }).join('');
+
+  var homeLogo = logoHome ? '<img src="' + logoHome + '" class="team-logo" alt="">' : '<span class="team-logo-fallback">' + (tip.home||'').charAt(0) + '</span>';
+  var awayLogo = logoAway ? '<img src="' + logoAway + '" class="team-logo" alt="">' : '<span class="team-logo-fallback">' + (tip.away||'').charAt(0) + '</span>';
+
+  return '<div class="tip-row" onclick="openTipPopup(' + tip.id + ')">'
+    + '<div class="tip-time-block"><div class="tip-time">' + tip.time + '</div><div class="tip-date">' + tip.date + '</div></div>'
+    + '<div class="tip-info">'
+    + '<span class="tip-sport-icon">' + sportEmoji(tip.sport) + '</span>'
+    + '<div class="tip-teams-row">'
+    + '<span class="tip-team-wrap">' + homeLogo + '<span class="tip-team-name">' + tip.home + '</span></span>'
+    + '<span class="tip-vs">vs</span>'
+    + '<span class="tip-team-wrap">' + awayLogo + '<span class="tip-team-name">' + tip.away + '</span></span>'
+    + '</div>'
+    + '<div class="tip-pick-label">Pick: <strong>' + tip.pick + '</strong></div>'
+    + '</div>'
+    + '<div class="tip-odds-block"><div class="tip-odds">' + tip.odds + '</div><div class="conf-dots">' + conf + '</div></div>'
+    + '</div>';
+}
+
 // ── TIP POPUP ──
 function openTipPopup(tipId) {
   const tips = DB.get('tips') || [];
@@ -109,6 +154,7 @@ function toggleMobileNav() {
 function getHeaderHTML(activePage) {
   const navItems = [
     { label: 'Join Cloudbet',  href: 'https://cldbt.cloud/go/en/auth/sign-up?af_token=98f8cd6cce4dc6a600e699ee62740188&aftm_campaign=join-cloudbet&aftm_source=website&aftm_medium=links&aftm_cid=join-cloudbet', external: true, cta: true },
+    { label: 'How to',         href: 'how-to.html' },
     { label: 'Casino',         href: 'casino.html' },
     { label: 'Sportsbook',     href: 'sportsbook.html' },
     { label: 'Affiliates',     href: 'affiliates.html' },
@@ -213,6 +259,51 @@ function sportEmoji(sport) {
   return SPORT_SVG[sport] || SPORT_SVG.other;
 }
 
+
+// ── TEAM LOGO LOOKUP (TheSportsDB - free, no key) ──
+var logoCache = {};
+
+function getTeamLogo(teamName, callback) {
+  if (!teamName) { callback(null); return; }
+  var key = teamName.toLowerCase().trim();
+  if (logoCache[key] !== undefined) { callback(logoCache[key]); return; }
+  var url = 'https://www.thesportsdb.com/api/v1/json/3/searchteams.php?t=' + encodeURIComponent(teamName);
+  fetch(url)
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      var logo = null;
+      if (data && data.teams && data.teams[0]) {
+        logo = data.teams[0].strTeamBadge || data.teams[0].strTeamLogo || null;
+      }
+      logoCache[key] = logo;
+      callback(logo);
+    })
+    .catch(function() { logoCache[key] = null; callback(null); });
+}
+
+function renderTipRow(tip, logoHome, logoAway) {
+  var conf = Array.from({length:5}, function(_,i) {
+    return '<div class="conf-dot ' + (i < tip.conf ? 'on' : '') + '"></div>';
+  }).join('');
+
+  var homeLogo = logoHome ? '<img src="' + logoHome + '" class="team-logo" alt="">' : '<span class="team-logo-fallback">' + (tip.home||'').charAt(0) + '</span>';
+  var awayLogo = logoAway ? '<img src="' + logoAway + '" class="team-logo" alt="">' : '<span class="team-logo-fallback">' + (tip.away||'').charAt(0) + '</span>';
+
+  return '<div class="tip-row" onclick="openTipPopup(' + tip.id + ')">'
+    + '<div class="tip-time-block"><div class="tip-time">' + tip.time + '</div><div class="tip-date">' + tip.date + '</div></div>'
+    + '<div class="tip-info">'
+    + '<span class="tip-sport-icon">' + sportEmoji(tip.sport) + '</span>'
+    + '<div class="tip-teams-row">'
+    + '<span class="tip-team-wrap">' + homeLogo + '<span class="tip-team-name">' + tip.home + '</span></span>'
+    + '<span class="tip-vs">vs</span>'
+    + '<span class="tip-team-wrap">' + awayLogo + '<span class="tip-team-name">' + tip.away + '</span></span>'
+    + '</div>'
+    + '<div class="tip-pick-label">Pick: <strong>' + tip.pick + '</strong></div>'
+    + '</div>'
+    + '<div class="tip-odds-block"><div class="tip-odds">' + tip.odds + '</div><div class="conf-dots">' + conf + '</div></div>'
+    + '</div>';
+}
+
 // ── TIP POPUP ──
 function openTipPopup(tipId) {
   const tips = DB.get('tips') || [];
@@ -244,6 +335,7 @@ function toggleMobileNav() {
 function getHeaderHTML(activePage) {
   const navItems = [
     { label: 'Join Cloudbet',  href: 'https://cldbt.cloud/go/en/auth/sign-up?af_token=98f8cd6cce4dc6a600e699ee62740188&aftm_campaign=join-cloudbet&aftm_source=website&aftm_medium=links&aftm_cid=join-cloudbet', external: true, cta: true },
+    { label: 'How to',         href: 'how-to.html' },
     { label: 'Casino',         href: 'casino.html' },
     { label: 'Sportsbook',     href: 'sportsbook.html' },
     { label: 'Affiliates',     href: 'affiliates.html' },

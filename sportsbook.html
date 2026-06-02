@@ -70,22 +70,28 @@ function filterTips(sport) {
   renderTips(sport);
 }
 function renderTips(sport) {
-  const all = DB.get('tips') || [];
-  const tips = sport === 'all' ? all : all.filter(t => t.sport === sport);
-  const list = document.getElementById('tips-list');
+  var all = DB.get('tips') || [];
+  var tips = sport === 'all' ? all : all.filter(function(t){ return t.sport === sport; });
+  var list = document.getElementById('tips-list');
   if (!tips.length) { list.innerHTML = '<div style="padding:24px;text-align:center;color:var(--text-dim)">No tips found.</div>'; return; }
-  list.innerHTML = tips.map(tip => {
-    const conf = Array.from({length:5}, (_,i) => `<div class="conf-dot ${i < tip.conf ? 'on':''}"></div>`).join('');
-    return `<div class="tip-row" onclick="openTipPopup(${tip.id})">
-      <div class="tip-time-block"><div class="tip-time">${tip.time}</div><div class="tip-date">${tip.date}</div></div>
-      <div class="tip-info">
-        <span class="tip-sport-icon">${sportEmoji(tip.sport)}</span>
-        <div class="tip-teams">${tip.home} vs ${tip.away}</div>
-        <div class="tip-pick-label">Pick: <strong>${tip.pick}</strong></div>
-      </div>
-      <div class="tip-odds-block"><div class="tip-odds">${tip.odds}</div><div class="conf-dots">${conf}</div></div>
-    </div>`;
-  }).join('');
+  list.innerHTML = '<div style="padding:24px;text-align:center;color:var(--text-dim);">Loading tips...</div>';
+  var rendered = {};
+  var total = tips.length;
+  var done = 0;
+
+  function tryFinish() {
+    done++;
+    if (done >= total * 2) {
+      list.innerHTML = tips.map(function(tip) {
+        return renderTipRow(tip, rendered[tip.id + '_home'], rendered[tip.id + '_away']);
+      }).join('');
+    }
+  }
+
+  tips.forEach(function(tip) {
+    getTeamLogo(tip.home, function(logo) { rendered[tip.id + '_home'] = logo; tryFinish(); });
+    getTeamLogo(tip.away, function(logo) { rendered[tip.id + '_away'] = logo; tryFinish(); });
+  });
 }
 </script>
 </body>
