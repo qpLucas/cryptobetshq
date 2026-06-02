@@ -498,3 +498,23 @@ button { cursor: pointer; font-family: inherit; }
   transition: opacity .2s; display: flex; align-items: center;
 }
 .r-close:hover { opacity: 1; }
+
+/* ── CRYPTO ICONS: official images ── */
+.crypto-icon img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── FLAGS: w80 source displayed small ── */
+.r-flag {
+  height: 13px;
+  width: auto;
+  border-radius: 2px;
+  opacity: 0.8;
+  vertical-align: middle;
+  transition: opacity .15s;
+}
+.r-flag:hover { opacity: 1; }

@@ -133,29 +133,32 @@ function getHeaderHTML(active) {
 // ── FOOTER ──
 function getFooterHTML() {
   var c7 = [
-    ['BTC','#F7931A','<path d="M22.5 14.2c.3-2-1.2-3-3.3-3.7l.7-2.7-1.6-.4-.6 2.6-1.3-.3.6-2.6-1.6-.4-.7 2.7-1-.3-2.2-.5-.5 1.7s1.2.3 1.2.3c.7.2.8.6.8 1l-.8 3.4.3.1-.3-.1-1.2 4.7c-.1.2-.3.5-.7.4l-1.2-.3-.8 1.8 2 .5 1.1.3-.7 2.7 1.6.4.7-2.7 1.3.3-.7 2.7 1.6.4.7-2.7c2.8.5 4.9.3 5.8-2.2.7-2-.1-3.2-1.5-3.9 1-.2 1.8-1 2-2.3zm-3.6 5c-.5 2-3.9 1-5 .7l.9-3.5c1.1.3 4.6.8 4.1 2.8zm.5-5c-.5 1.8-3.3 1-4.2.7l.8-3.2c.9.2 3.9.7 3.4 2.5z" fill="white"/>'],
-    ['ETH','#627EEA','<path d="M16.5 6v7.4l6.2 2.8L16.5 6z" fill="white" fill-opacity=".6"/><path d="M16.5 6L10.3 16.2l6.2-2.8V6z" fill="white"/><path d="M16.5 21.3v4.7l6.2-8.6-6.2 3.9z" fill="white" fill-opacity=".6"/><path d="M16.5 26V21.3l-6.2-3.9L16.5 26z" fill="white"/>'],
-    ['USDT','#26A17B','<path d="M17.9 17.3c-.1 0-.9.1-1.9.1s-1.7-.1-1.9-.1C11 17 8.9 16.3 8.9 15.5s2.1-1.5 5.2-1.8v1.2c.2 0 1 .1 1.9.1.9 0 1.7-.1 1.9-.1v-1.2c3.1.2 5.2 1 5.2 1.8 0 .8-2.1 1.5-5.2 1.8zm0-3.5v-1.1h4.2V10H9.9v2.7h4.2v1.1C10.6 14.1 8 15.2 8 16.5c0 1.3 2.6 2.4 6.1 2.7v5.8h3.8v-5.8c3.5-.3 6.1-1.4 6.1-2.7 0-1.3-2.6-2.4-6.1-2.7z" fill="white"/>'],
-    ['USDC','#2775CA','<path d="M20 18.9c0-2-1.2-2.7-3.6-3-1.7-.2-2-.7-2-1.4s.5-1.2 1.6-1.2c1 0 1.5.3 1.8 1.1.1.2.2.3.4.3h.9c.3 0 .4-.2.4-.4 0-.9-.8-1.9-2.1-2.1V11c0-.3-.2-.4-.4-.4h-.8c-.3 0-.4.2-.4.4v1.1c-1.5.3-2.4 1.2-2.4 2.5 0 1.9 1.1 2.6 3.5 2.9 1.6.3 2.1.6 2.1 1.5s-.7 1.4-1.9 1.4c-1.5 0-2-.6-2.2-1.4-.1-.2-.2-.3-.4-.3h-.9c-.3 0-.4.1-.4.4 0 1.1.7 2.1 2.3 2.4V22c0 .3.2.4.4.4h.8c.3 0 .4-.2.4-.4v-1.1c1.5-.3 2.6-1.3 2.6-2.8z" fill="white"/>'],
-    ['SOL','#9945FF','<path d="M9 20.5h11.5l2.5-2.5H11.5L9 20.5zm0-7h11.5L23 11H11.5L9 13.5zm2.5 3.5L9 19.5h11.5l2.5-2.5H11.5z" fill="white"/>'],
-    ['BNB','#F3BA2F','<path d="M12.1 14.3L16 10.4l3.9 3.9 2.3-2.3L16 5.8 9.8 12l2.3 2.3zM6 16l2.3-2.3L10.6 16l-2.3 2.3L6 16zm6.1 1.7L16 21.6l3.9-3.9 2.3 2.3L16 26.2l-6.2-6.2 2.3-2.3zm9.3-1.7l2.3-2.3L26 16l-2.3 2.3L21.4 16zm-3.2 0l-2.3-2.3-2.3 2.3 2.3 2.3 2.3-2.3z" fill="white"/>'],
-    ['DOGE','#C2A633','<path d="M16 7h-4.5v18H16c5 0 9-4 9-9s-4-9-9-9zm0 14.5h-2V10.5h2c3.6 0 6.5 2.5 6.5 5.5s-2.9 5.5-6.5 5.5zm-1-8.5v6h1c1.9 0 3.5-1.3 3.5-3s-1.6-3-3.5-3h-1z" fill="white"/>'],
+    ['BTC','','','bitcoin'],
+    ['ETH','','','ethereum'],
+    ['USDT','','','tether'],
+    ['USDC','','','usd-coin'],
+    ['SOL','','','solana'],
+    ['BNB','','','bnb'],
+    ['DOGE','','','dogecoin'],
   ];
   var cExtra = [
-    ['LTC','#BFBBBB','<path d="M10 22h12v1.5H10zm2-4.8l4.8-7.2 1.2.8-4.1 6.2H23v1.5H10l2-7.5 1.5.4L12 17.2z" fill="white"/>'],
-    ['BCH','#8DC351','<path d="M21 13.5c.3-2.1-1.3-3.2-3.5-3.9l.7-2.9-1.7-.4-.7 2.8-1.4-.3.7-2.8-1.7-.4-.7 2.9-3.3-.8-.5 1.8 1.3.3c.7.2.9.6.8 1l-2 8c-.1.3-.4.6-.9.5l-1.3-.3-.6 2 3.3.8-.7 2.9 1.7.4.7-2.9 1.4.3-.7 2.9 1.7.4.7-2.9c3 .6 5.1.3 6-2.1.7-2-.1-3.1-1.5-3.9 1.1-.3 1.9-1.1 2.2-2.4z" fill="white"/>'],
-    ['XRP','#346AA9','<path d="M23 8h2.3l-5.8 5.8c-1.9 1.9-5 1.9-6.9 0L6.7 8H9l4.7 4.7c1.3 1.3 3.3 1.3 4.6 0L23 8zm-16.3 16H4.4l5.9-5.9c1.9-1.9 5-1.9 6.9 0l5.9 5.9H21l-4.8-4.8c-1.3-1.3-3.3-1.3-4.6 0L6.7 24z" fill="white"/>'],
-    ['ADA','#0033AD','<circle cx="16" cy="9" r="2" fill="white"/><circle cx="16" cy="23" r="2" fill="white"/><circle cx="9.5" cy="12.5" r="1.8" fill="white"/><circle cx="22.5" cy="12.5" r="1.8" fill="white"/><circle cx="9.5" cy="19.5" r="1.8" fill="white"/><circle cx="22.5" cy="19.5" r="1.8" fill="white"/>'],
-    ['TRX','#FF0013','<path d="M22.5 11.5L8 9l5.5 15.5 9-13zm-2.5.8l-5.5 7.5-2.5-7 8-.5z" fill="white"/>'],
-    ['DOT','#E6007A','<circle cx="16" cy="9" r="2.5" fill="white"/><circle cx="16" cy="23" r="2.5" fill="white"/><circle cx="9.5" cy="12.5" r="2" fill="white"/><circle cx="22.5" cy="12.5" r="2" fill="white"/><circle cx="9.5" cy="19.5" r="2" fill="white"/><circle cx="22.5" cy="19.5" r="2" fill="white"/>'],
-    ['LINK','#2A5ADA','<path d="M16 7l-2 1.2v4.6L10 15v4l4 2.2v2.4L16 25l2-1.4v-2.4L22 19v-4l-4-2.2V8.2L16 7zm0 5.8l3 1.7v3.4l-3 1.7-3-1.7v-3.4l3-1.7z" fill="white"/>'],
-    ['AVAX','#E84142','<path d="M19.5 21H23l-7-12-3.5 6 2 3.5h-5.5l1.5 2.5h8.5zm-7 0H10l1.5-2.5h1z" fill="white"/>'],
-    ['MATIC','#8247E5','<path d="M20.5 13.5l-2-1.2-4 2.3v4.6l4 2.3 4-2.3v-4l-2-1.7zm0 5.5l-2 1.2-2-1.2v-2.4l2-1.2 2 1.2v2.4zM13.5 10L9 12.7v5.5l2 1.2V14l2.5-1.5 2.5 1.5v5l2-1.2V12.7L13.5 10z" fill="white"/>'],
-    ['DAI','#F5AC37','<path d="M9 10h7.5c3.6 0 6.5 2.5 6.5 5.5h-14V10zm0 7h14c0 3-2.9 5.5-6.5 5.5H9V17zm1.5-4h11c-.5-1.7-2.5-3-4.9-3H10.5v3zm0 2v3h6.1c2.4 0 4.4-1.3 4.9-3H10.5z" fill="white"/>'],
+    ['LTC','','','litecoin'],
+    ['BCH','','','bitcoin-cash'],
+    ['XRP','','','xrp'],
+    ['ADA','','','cardano'],
+    ['TRX','','','tron'],
+    ['DOT','','','polkadot-new'],
+    ['LINK','','','chainlink'],
+    ['AVAX','','','avalanche'],
+    ['MATIC','','','polygon'],
+    ['DAI','','','multi-collateral-dai'],
   ];
   function coin(c) {
+    var ticker = c[0].toLowerCase();
+    // cryptologos.cc serves official coin logos as high-quality PNGs
+    var src = 'https://cryptologos.cc/logos/' + c[3] + '-' + ticker + '-logo.png?v=040';
     return '<div class="crypto-icon" title="' + c[0] + '">'
-      + '<svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="' + c[1] + '"/>' + c[2] + '</svg>'
+      + '<img src="' + src + '" alt="' + c[0] + '" width="28" height="28" style="border-radius:50%;object-fit:cover">'
       + '<span>' + c[0] + '</span></div>';
   }
   return '<footer class="site-footer">'
@@ -294,7 +297,18 @@ function initArticle() {
 
 // ── RESTRICTED COUNTRIES ──
 function getRestrictedHTML() {
-  var countries = 'Australia, Austria, Belgium, China, Cuba, Curacao, France, Germany, Iran, Lithuania, Macau, Malta, Myanmar, Netherlands, North Korea, Singapore, Spain, Syria, Ukraine (certain territories), United Kingdom, United States';
+  var list = [
+    ['au','Australia'],['at','Austria'],['be','Belgium'],['cn','China'],
+    ['cu','Cuba'],['cw','Curacao'],['fr','France'],['de','Germany'],
+    ['ir','Iran'],['lt','Lithuania'],['mo','Macau'],['mt','Malta'],
+    ['mm','Myanmar'],['nl','Netherlands'],['kp','North Korea'],
+    ['sg','Singapore'],['es','Spain'],['sy','Syria'],
+    ['ua','Ukraine (terr.)'],['gb','United Kingdom'],['us','United States'],
+  ];
+  var flags = list.map(function(c) {
+    return '<img class="r-flag" src="https://flagcdn.com/w80/' + c[0] + '.png" '
+      + 'title="' + c[1] + '" alt="' + c[1] + '" loading="lazy">';
+  }).join('');
   return '<div class="r-box" id="r-box">'
     + '<button class="r-close" onclick="document.getElementById(&quot;r-box&quot;).style.display=&quot;none&quot;" title="Dismiss">'
     + '<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 1l10 10M11 1L1 11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>'
@@ -303,6 +317,6 @@ function getRestrictedHTML() {
     + '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f87171" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>'
     + ' Cloudbet is restricted to players from:'
     + '</div>'
-    + '<div class="r-countries">' + countries + '</div>'
+    + '<div class="r-flags">' + flags + '</div>'
     + '</div>';
 }
