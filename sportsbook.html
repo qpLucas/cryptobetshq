@@ -24,22 +24,6 @@
       <p>Daily tips across football, esports, basketball, tennis and more. All bets placed through Cloudbet.</p>
     </div>
 
-    <!-- Filter bar -->
-    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;" id="filter-bar">
-      <button onclick="filterTips('all')" class="btn-gold" id="filter-all" style="font-size:12px;padding:7px 14px">All</button>
-      <button onclick="filterTips('football')" class="btn-outline" id="filter-football" style="font-size:12px;padding:7px 14px">Football</button>
-      <button onclick="filterTips('esports')" class="btn-outline" id="filter-esports" style="font-size:12px;padding:7px 14px">Esports</button>
-      <button onclick="filterTips('basketball')" class="btn-outline" id="filter-basketball" style="font-size:12px;padding:7px 14px">Basketball</button>
-      <button onclick="filterTips('tennis')" class="btn-outline" id="filter-tennis" style="font-size:12px;padding:7px 14px">Tennis</button>
-    </div>
-
-    <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:32px;">
-      <div class="tips-panel-header">
-        <h3><div class="live-dot"></div> All picks</h3>
-      </div>
-      <div class="tips-list" id="tips-list"></div>
-    </div>
-
     <div class="section-header"><h2 class="section-title">Sports articles</h2></div>
     <div class="articles-grid-full" id="sports-grid"></div>
   </div>
@@ -50,7 +34,6 @@ let currentFilter = 'all';
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('header-mount').innerHTML = getHeaderHTML('sportsbook');
   document.getElementById('footer-mount').innerHTML = getFooterHTML();
-  renderTips('all');
   const articles = (DB.get('articles') || []).filter(a => a.cat === 'sports');
   document.getElementById('sports-grid').innerHTML = articles.map(a => `
     <div class="article-card-full" onclick="location.href='article.html?id=${a.id}'">
@@ -63,38 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
     </div>`).join('') || '<p style="color:var(--text-sec)">No articles yet.</p>';
 });
-function filterTips(sport) {
-  currentFilter = sport;
-  document.querySelectorAll('#filter-bar button').forEach(b => {
-    b.className = b.id === 'filter-' + sport ? 'btn-gold' : 'btn-outline';
-    b.style.cssText = 'font-size:12px;padding:7px 14px';
-  });
-  renderTips(sport);
-}
-function renderTips(sport) {
-  var all = DB.get('tips') || [];
-  var tips = sport === 'all' ? all : all.filter(function(t){ return t.sport === sport; });
-  var list = document.getElementById('tips-list');
-  if (!tips.length) { list.innerHTML = '<div style="padding:24px;text-align:center;color:var(--text-dim)">No tips found.</div>'; return; }
-  list.innerHTML = '<div style="padding:24px;text-align:center;color:var(--text-dim);">Loading tips...</div>';
-  var rendered = {};
-  var total = tips.length;
-  var done = 0;
-
-  function tryFinish() {
-    done++;
-    if (done >= total * 2) {
-      list.innerHTML = tips.map(function(tip) {
-        return renderTipRow(tip, rendered[tip.id + '_home'], rendered[tip.id + '_away']);
-      }).join('');
-    }
-  }
-
-  tips.forEach(function(tip) {
-    getTeamLogo(tip.home, function(logo) { rendered[tip.id + '_home'] = logo; tryFinish(); });
-    getTeamLogo(tip.away, function(logo) { rendered[tip.id + '_away'] = logo; tryFinish(); });
-  });
-}
 </script>
 </body>
 </html>
