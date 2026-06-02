@@ -176,7 +176,6 @@ function getFooterHTML() {
     + ' &middot; ' + t('footer_age') + ' &middot; ' + t('footer_gamble')
     + '</div>'
     + '</div>'
-    + getRestrictedHTML()
     + '</footer>';
 }
 
@@ -253,6 +252,8 @@ document.addEventListener('DOMContentLoaded', function() {
   var fm = document.getElementById('footer-mount');
   if (hm) hm.innerHTML = getHeaderHTML(isAdmin ? '' : p);
   if (fm) fm.innerHTML = getFooterHTML();
+  var rm = document.getElementById('r-mount');
+  if (rm) rm.innerHTML = getRestrictedHTML();
   if      (p === 'index' || p === '') initIndex();
   else if (p === 'casino')            initCat('casino',     '#f0a500', t('cat_casino'));
   else if (p === 'sportsbook')        initCat('sports',     '#4ade80', t('cat_sports'));
@@ -261,8 +262,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function initIndex() {
-  var rm = document.getElementById('r-mount');
-  if (rm) rm.innerHTML = getRestrictedHTML();
   var grid = document.getElementById('articles-grid');
   if (!grid) return;
   var all = DB.get('articles') || [];
@@ -287,8 +286,6 @@ function initIndex() {
 }
 
 function initCat(catKey, catColor, catLabel) {
-  var rm = document.getElementById('r-mount');
-  if (rm) rm.innerHTML = getRestrictedHTML();
   var grid = document.getElementById('cat-grid');
   if (!grid) return;
   var items = (DB.get('articles') || []).filter(function(a) { return a.cat === catKey; });
@@ -298,8 +295,6 @@ function initCat(catKey, catColor, catLabel) {
 }
 
 function initArticle() {
-  var rm = document.getElementById('r-mount');
-  if (rm) rm.innerHTML = getRestrictedHTML();
   var el = document.getElementById('article-content');
   if (!el) return;
   var id = parseInt(new URLSearchParams(window.location.search).get('id'));
