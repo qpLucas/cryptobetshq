@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Crypto Bets HQ – Cloudbet Betting Tips & Casino Guide</title>
+  <meta name="description" content="Expert Cloudbet casino picks, sports analysis and crypto betting guides.">
+  <link rel="alternate" hreflang="en" href="https://cryptobetshq.vercel.app/">
+  <link rel="alternate" hreflang="x-default" href="https://cryptobetshq.vercel.app/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="header-mount"></div>
+<main>
+  <div class="site-main">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-content">
+        <div class="hero-badge" id="hero-badge"></div>
+        <h1 id="hero-h1"></h1>
+        <p id="hero-p"></p>
+        <div class="hero-btns" id="hero-btns"></div>
+      </div>
+    </section>
+
+    <!-- ARTICLES -->
+    <section class="articles-section">
+      <div class="section-title" id="latest-title"></div>
+      <div class="articles-columns" id="articles-grid"></div>
+    </section>
+
+  </div>
+</main>
+<div id="footer-mount"></div>
+<script src="app.js"></script>
+<script>
+document.getElementById('hero-badge').textContent = t('hero_badge');
+document.getElementById('hero-h1').innerHTML = t('hero_h1').replace('\n','<br>');
+document.getElementById('hero-p').textContent = t('hero_p');
+document.getElementById('latest-title').textContent = t('latest');
+document.getElementById('hero-btns').innerHTML =
+  '<a href="' + AFFILIATE_URL + '" target="_blank" rel="noopener" class="btn btn-green">' + t('hero_btn1') + '</a>' +
+  '<a href="how-to.html" class="btn btn-outline">' + t('hero_btn2') + '</a>';
+</script>
+</body>
+</html>
