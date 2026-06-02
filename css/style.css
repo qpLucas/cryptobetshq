@@ -1044,3 +1044,111 @@ button { cursor: pointer; font-family: inherit; }
 .logo-lockup, .logo-pill, .logo-wordmark,
 .lw-crypto, .lw-bets, .lw-hq,
 .logo-mark, .logo-text, .logo-text-wrap { display: none !important; }
+
+/* ── LOGO SIZE + HEADER BALANCE ── */
+
+/* Taller header to fit bigger logo */
+.site-header { height: 72px; }
+
+/* Desktop logo — bigger */
+.logo-img-desktop {
+  height: 68px;
+}
+
+/* Mobile logo — more readable */
+.logo-img-mobile {
+  height: 52px !important;
+}
+
+/* Nav links smaller/thinner to balance the big logo */
+.nav-link {
+  font-size: 12px;
+  padding: 5px 10px;
+  font-weight: 400;
+}
+.social-btn {
+  width: 28px;
+  height: 28px;
+}
+.crypto-icon svg { width: 18px; height: 18px; }
+.crypto-icon span { font-size: 9px; }
+.crypto-strip { gap: 14px; }
+
+/* Casino tip card — more compact */
+.casino-tip-card {
+  padding: 14px;
+  gap: 10px;
+}
+.casino-tip-card h2 {
+  font-size: 17px;
+  line-height: 1.2;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.casino-tip-card .game-img {
+  height: 110px;
+}
+.casino-tip-desc {
+  font-size: 12px;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.btn-gold, .btn-outline {
+  padding: 8px 14px;
+  font-size: 12px;
+}
+
+/* ── LOGO SIZE UPDATES ── */
+
+/* Desktop: bigger logo, thinner nav */
+.site-header {
+  height: 72px;
+}
+.header-inner {
+  padding: 0 24px;
+}
+.logo-img {
+  height: 64px;
+}
+.logo-img-desktop {
+  height: 64px;
+}
+
+/* Shrink nav links to feel lighter next to big logo */
+.nav-link {
+  font-size: 12px;
+  padding: 5px 10px;
+}
+.crypto-icon svg {
+  width: 18px;
+  height: 18px;
+}
+.crypto-icon span {
+  font-size: 9px;
+}
+.crypto-strip {
+  gap: 14px;
+}
+.social-btn {
+  width: 28px;
+  height: 28px;
+}
+.social-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Mobile: slightly bigger logo */
+@media (max-width: 768px) {
+  .site-header {
+    height: 62px;
+  }
+  .logo-img-mobile {
+    height: 52px;
+  }
+}
