@@ -114,11 +114,11 @@ function getHeaderHTML(activePage) {
     { label: 'Affiliates',     href: 'affiliates.html' },
     { label: 'Cloudbet Pulse', href: 'https://www.cloudbet.com/en/pulse', external: true },
   ];
-  const navHTML = navItems.map(item => {
-    const active = !item.external && activePage === item.href.replace('.html','') ? ' active' : '';
-    const ext = item.external ? ' target="_blank" rel="noopener"' : '';
-    const cls = item.cta ? ' cta' : '';
-    return \`<a href="\${item.href}" class="nav-link\${active}\${cls}"\${ext}>\${item.label}</a>\`;
+  const navHTML = navItems.map(function(item) {
+    var active = !item.external && activePage === item.href.replace('.html','') ? ' active' : '';
+    var ext = item.external ? ' target="_blank" rel="noopener"' : '';
+    var cls = item.cta ? ' cta' : '';
+    return '<a href="' + item.href + '" class="nav-link' + active + cls + '"' + ext + '>' + item.label + '</a>';
   }).join('');
 
   return `
