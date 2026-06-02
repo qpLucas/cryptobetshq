@@ -316,3 +316,34 @@ function initArticle() {
     + '<a href="' + AFFILIATE_URL + '" target="_blank" rel="noopener" class="btn btn-green">' + t('art_cta_btn') + '</a>'
     + '</div>';
 }
+
+// ── RESTRICTED COUNTRIES ──
+function getRestrictedHTML() {
+  // Compute flag emoji from 2-letter ISO code using regional indicator symbols
+  function flag(code) {
+    var offset = 127397; // 0x1F1A5
+    return String.fromCodePoint(code.charCodeAt(0) + offset)
+         + String.fromCodePoint(code.charCodeAt(1) + offset);
+  }
+  var countries = [
+    ['AU','Australia'],['AT','Austria'],['BE','Belgium'],['CN','China'],
+    ['CU','Cuba'],['CW','Curacao'],['FR','France'],['DE','Germany'],
+    ['IR','Iran'],['LT','Lithuania'],['MO','Macau'],['MT','Malta'],
+    ['MM','Myanmar'],['NL','Netherlands'],['KP','North Korea'],
+    ['SG','Singapore'],['ES','Spain'],['SY','Syria'],
+    ['UA','Ukraine (territories)'],['GB','United Kingdom'],['US','United States'],
+  ];
+  var flags = countries.map(function(c) {
+    return '<span class="r-flag" title="' + c[1] + '">' + flag(c[0]) + '</span>';
+  }).join('');
+  return '<div class="r-box" id="r-box">'
+    + '<div class="r-inner">'
+    + '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f87171" stroke-width="2.5" stroke-linecap="round" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>'
+    + '<span class="r-label">Cloudbet is restricted to players from:</span>'
+    + '<div class="r-flags">' + flags + '</div>'
+    + '</div>'
+    + '<button class="r-close" onclick="document.getElementById(&quot;r-box&quot;).style.display=&quot;none&quot;" title="Dismiss">'
+    + '<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 1l10 10M11 1L1 11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>'
+    + '</button>'
+    + '</div>';
+}

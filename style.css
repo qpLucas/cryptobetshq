@@ -443,3 +443,21 @@ button { cursor: pointer; font-family: inherit; }
   align-items: center;
 }
 .restricted-close:hover { opacity: 1; }
+
+/* ── RESTRICTED BAR ── */
+.r-box {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  background: rgba(239,68,68,0.06); border-top: 1px solid rgba(239,68,68,0.2);
+  padding: 8px 24px; flex-wrap: wrap;
+}
+.r-inner { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; flex: 1; }
+.r-label { font-size: 11px; font-weight: 600; color: #f87171; white-space: nowrap; flex-shrink: 0; }
+.r-flags { display: flex; flex-wrap: wrap; gap: 3px; align-items: center; }
+.r-flag { font-size: 18px; line-height: 1; cursor: default; opacity: 0.75; transition: opacity .15s; }
+.r-flag:hover { opacity: 1; }
+.r-close {
+  background: none; border: none; color: #f87171; opacity: 0.5;
+  cursor: pointer; padding: 4px; border-radius: 4px; flex-shrink: 0;
+  transition: opacity .2s; display: flex; align-items: center;
+}
+.r-close:hover { opacity: 1; }
