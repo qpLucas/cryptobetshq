@@ -261,6 +261,8 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function initIndex() {
+  var rm = document.getElementById('r-mount');
+  if (rm) rm.innerHTML = getRestrictedHTML();
   var grid = document.getElementById('articles-grid');
   if (!grid) return;
   var all = DB.get('articles') || [];
@@ -285,6 +287,8 @@ function initIndex() {
 }
 
 function initCat(catKey, catColor, catLabel) {
+  var rm = document.getElementById('r-mount');
+  if (rm) rm.innerHTML = getRestrictedHTML();
   var grid = document.getElementById('cat-grid');
   if (!grid) return;
   var items = (DB.get('articles') || []).filter(function(a) { return a.cat === catKey; });
@@ -294,6 +298,8 @@ function initCat(catKey, catColor, catLabel) {
 }
 
 function initArticle() {
+  var rm = document.getElementById('r-mount');
+  if (rm) rm.innerHTML = getRestrictedHTML();
   var el = document.getElementById('article-content');
   if (!el) return;
   var id = parseInt(new URLSearchParams(window.location.search).get('id'));
@@ -319,21 +325,19 @@ function initArticle() {
 
 // ── RESTRICTED COUNTRIES ──
 function getRestrictedHTML() {
-  // Compute flag emoji from 2-letter ISO code using regional indicator symbols
   function flag(code) {
-    var offset = 127397; // 0x1F1A5
-    return String.fromCodePoint(code.charCodeAt(0) + offset)
-         + String.fromCodePoint(code.charCodeAt(1) + offset);
+    return String.fromCodePoint(code.charCodeAt(0) + 127397)
+         + String.fromCodePoint(code.charCodeAt(1) + 127397);
   }
-  var countries = [
+  var list = [
     ['AU','Australia'],['AT','Austria'],['BE','Belgium'],['CN','China'],
     ['CU','Cuba'],['CW','Curacao'],['FR','France'],['DE','Germany'],
     ['IR','Iran'],['LT','Lithuania'],['MO','Macau'],['MT','Malta'],
     ['MM','Myanmar'],['NL','Netherlands'],['KP','North Korea'],
     ['SG','Singapore'],['ES','Spain'],['SY','Syria'],
-    ['UA','Ukraine (territories)'],['GB','United Kingdom'],['US','United States'],
+    ['UA','Ukraine (terr.)'],['GB','United Kingdom'],['US','United States'],
   ];
-  var flags = countries.map(function(c) {
+  var flags = list.map(function(c) {
     return '<span class="r-flag" title="' + c[1] + '">' + flag(c[0]) + '</span>';
   }).join('');
   return '<div class="r-box" id="r-box">'

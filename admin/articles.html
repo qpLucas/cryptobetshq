@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Articles – Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="admin-wrap">
+  <aside class="admin-side">
+    <div class="admin-logo"><img src="../logo-mobile.png" alt="CBHQ Admin"></div>
+    <div class="admin-sec-label">Content</div>
+    <a href="./index.html" class="admin-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      Dashboard
+    </a>
+    <a href="./articles.html" class="admin-link active">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      Articles
+    </a>
+    <div class="admin-sec-label">Site</div>
+    <a href="../index.html" class="admin-link" target="_blank">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      View site
+    </a>
+  </aside>
+  <div class="admin-content">
+    <div class="admin-title">Articles</div>
+
+    <!-- FORM -->
+    <div class="admin-card">
+      <h3 id="form-title">Add new article</h3>
+      <input type="hidden" id="edit-id">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Language</label>
+          <select class="form-select" id="art-lang">
+            <option value="en">English</option>
+            <option value="cs">Czech</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Category</label>
+          <select class="form-select" id="art-cat">
+            <option value="casino">Casino</option>
+            <option value="sports">Sports</option>
+            <option value="affiliates">Affiliates</option>
+            <option value="blog">Blog</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Publish date (e.g. 2 Jun 2026)</label>
+        <input type="text" class="form-input" id="art-date" placeholder="2 Jun 2026">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Title</label>
+        <input type="text" class="form-input" id="art-title" placeholder="Article headline">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Summary / Excerpt</label>
+        <textarea class="form-textarea" id="art-summary" style="min-height:70px" placeholder="Short intro shown on listing pages..."></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Full body content (supports HTML)</label>
+        <textarea class="form-textarea" id="art-body" placeholder="Full article text..." style="min-height:160px"></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Cover image URL</label>
+        <input type="text" class="form-input" id="art-img" placeholder="https://images.unsplash.com/...">
+      </div>
+      <div style="display:flex;gap:10px;margin-top:4px">
+        <button class="btn btn-green" onclick="saveArticle()">Save article</button>
+        <button class="btn btn-outline" onclick="resetForm()">Clear</button>
+      </div>
+      <div class="form-msg" id="form-msg"></div>
+    </div>
+
+    <!-- TABLE -->
+    <div class="admin-card">
+      <h3>All articles (<span id="art-count">0</span>)</h3>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px" id="cat-filters">
+        <button onclick="filterCat('all')" class="btn btn-green" id="fc-all" style="font-size:11px;padding:5px 12px">All</button>
+        <button onclick="filterCat('casino')" class="btn btn-outline" id="fc-casino" style="font-size:11px;padding:5px 12px">Casino</button>
+        <button onclick="filterCat('sports')" class="btn btn-outline" id="fc-sports" style="font-size:11px;padding:5px 12px">Sports</button>
+        <button onclick="filterCat('affiliates')" class="btn btn-outline" id="fc-affiliates" style="font-size:11px;padding:5px 12px">Affiliates</button>
+        <button onclick="filterCat('blog')" class="btn btn-outline" id="fc-blog" style="font-size:11px;padding:5px 12px">Blog</button>
+      </div>
+      <div style="overflow-x:auto">
+        <table class="tbl">
+          <thead><tr><th>Title</th><th>Cat</th><th>Lang</th><th>Date</th><th>Actions</th></tr></thead>
+          <tbody id="art-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../app.js"></script>
+<script>
+var currentCat = 'all';
+renderTable('all');
+
+function renderTable(cat) {
+  var all = DB.get('articles') || [];
+  var items = cat === 'all' ? all : all.filter(function(a) { return a.cat === cat; });
+  document.getElementById('art-count').textContent = all.length;
+  document.getElementById('art-tbody').innerHTML = items.map(function(a) {
+    return '<tr>'
+      + '<td style="color:var(--text);max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + a.title + '</td>'
+      + '<td><span class="badge badge-amber">' + a.cat + '</span></td>'
+      + '<td><span class="badge badge-blue">' + (a.lang||'en') + '</span></td>'
+      + '<td style="white-space:nowrap">' + a.date + '</td>'
+      + '<td style="white-space:nowrap">'
+      + '<button class="act-btn act-edit" onclick="editArticle(' + a.id + ')">Edit</button>'
+      + '<button class="act-btn act-del" onclick="delArticle(' + a.id + ')">Delete</button>'
+      + '</td></tr>';
+  }).join('') || '<tr><td colspan="5" style="text-align:center;color:var(--text-dim);padding:20px">No articles yet</td></tr>';
+}
+
+function filterCat(cat) {
+  currentCat = cat;
+  document.querySelectorAll('#cat-filters button').forEach(function(b) {
+    var isActive = b.id === 'fc-' + cat;
+    b.className = isActive ? 'btn btn-green' : 'btn btn-outline';
+    b.style.cssText = 'font-size:11px;padding:5px 12px';
+  });
+  renderTable(cat);
+}
+
+function saveArticle() {
+  var title   = document.getElementById('art-title').value.trim();
+  var summary = document.getElementById('art-summary').value.trim();
+  var body    = document.getElementById('art-body').value.trim();
+  var img     = document.getElementById('art-img').value.trim();
+  var cat     = document.getElementById('art-cat').value;
+  var lang    = document.getElementById('art-lang').value;
+  var date    = document.getElementById('art-date').value.trim() || new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+  if (!title) { showMsg('Title is required.', '#f87171'); return; }
+  var editId = parseInt(document.getElementById('edit-id').value);
+  if (editId) {
+    var arts = DB.get('articles') || [];
+    var idx = arts.findIndex(function(a) { return a.id === editId; });
+    if (idx !== -1) { arts[idx] = Object.assign(arts[idx], {title,summary,body,img,cat,lang,date}); DB.set('articles', arts); }
+  } else {
+    DB.push('articles', {title,summary,body,img,cat,lang,date});
+  }
+  showMsg('Saved!', '#34d399');
+  resetForm();
+  renderTable(currentCat);
+}
+
+function editArticle(id) {
+  var art = (DB.get('articles')||[]).find(function(a){ return a.id===id; });
+  if (!art) return;
+  document.getElementById('edit-id').value = id;
+  document.getElementById('form-title').textContent = 'Edit article';
+  document.getElementById('art-lang').value    = art.lang||'en';
+  document.getElementById('art-cat').value     = art.cat;
+  document.getElementById('art-date').value    = art.date;
+  document.getElementById('art-title').value   = art.title;
+  document.getElementById('art-summary').value = art.summary||'';
+  document.getElementById('art-body').value    = art.body||'';
+  document.getElementById('art-img').value     = art.img||'';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function delArticle(id) {
+  if (!confirm('Delete this article?')) return;
+  DB.del('articles', id);
+  renderTable(currentCat);
+}
+
+function resetForm() {
+  ['edit-id','art-title','art-summary','art-body','art-img','art-date'].forEach(function(id){document.getElementById(id).value='';});
+  document.getElementById('art-cat').value='casino';
+  document.getElementById('art-lang').value='en';
+  document.getElementById('form-title').textContent='Add new article';
+}
+
+function showMsg(txt, color) {
+  var el = document.getElementById('form-msg');
+  el.textContent=txt; el.style.display='block'; el.style.color=color;
+  setTimeout(function(){ el.style.display='none'; }, 3000);
+}
+</script>
+</body>
+</html>
