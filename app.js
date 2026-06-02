@@ -229,8 +229,6 @@ document.addEventListener('DOMContentLoaded', function() {
   var fm = document.getElementById('footer-mount');
   if (hm) hm.innerHTML = getHeaderHTML(isAdmin ? '' : p);
   if (fm) fm.innerHTML = getFooterHTML();
-  var rm = document.getElementById('r-mount');
-  if (rm) rm.innerHTML = getRestrictedHTML();
   if      (p === 'index' || p === '') initIndex();
   else if (p === 'casino')            initCat('casino',     '#f0a500', t('cat_casino'));
   else if (p === 'sportsbook')        initCat('sports',     '#4ade80', t('cat_sports'));
@@ -295,34 +293,103 @@ function initArticle() {
     + '</div>';
 }
 
-// ── RESTRICTED COUNTRIES ──
-function closeRestricted() {
-  var el = document.getElementById('r-box');
-  if (el) el.style.display = 'none';
-  localStorage.setItem('r-dismissed', '1');
+// ── ARTICLE HELPERS ──
+function artCardHTML(a, catColor) {
+  return '<div class="art-card" onclick="location.href=\'article.html?id=' + a.id + '\'">'
+    + '<div class="art-thumb"><img src="' + a.img + '" alt="" loading="lazy"></div>'
+    + '<div class="art-body">'
+    + '<div class="art-cat" style="color:' + catColor + '">' + a.cat.toUpperCase() + '</div>'
+    + '<div class="art-title">' + a.title + '</div>'
+    + '<div class="art-date">' + a.date + '</div>'
+    + '</div></div>';
 }
-function getRestrictedHTML() {
-  if (localStorage.getItem('r-dismissed')) return '';
-  var list = [
-    ['au','Australia'],['at','Austria'],['be','Belgium'],['cn','China'],
-    ['cu','Cuba'],['cw','Curacao'],['fr','France'],['de','Germany'],
-    ['ir','Iran'],['lt','Lithuania'],['mo','Macau'],['mt','Malta'],
-    ['mm','Myanmar'],['nl','Netherlands'],['kp','North Korea'],
-    ['sg','Singapore'],['es','Spain'],['sy','Syria'],
-    ['ua','Ukraine (terr.)'],['gb','United Kingdom'],['us','United States'],
+function artSmallHTML(a) {
+  return '<div class="art-small" onclick="location.href=\'article.html?id=' + a.id + '\'">'
+    + '<div class="art-small-thumb"><img src="' + a.img + '" alt="" loading="lazy"></div>'
+    + '<div class="art-small-info">'
+    + '<div class="art-small-title">' + a.title + '</div>'
+    + '<div class="art-small-date">' + a.date + '</div>'
+    + '</div></div>';
+}
+function artCardFullHTML(a, catColor, catLabel) {
+  return '<div class="art-card-full" onclick="location.href=\'article.html?id=' + a.id + '\'">'
+    + '<div class="art-thumb"><img src="' + a.img + '" alt="" loading="lazy"></div>'
+    + '<div class="art-body">'
+    + '<div class="art-cat" style="color:' + catColor + '">' + catLabel + '</div>'
+    + '<div class="art-title" style="font-size:16px">' + a.title + '</div>'
+    + '<div style="font-size:13px;color:var(--text-sec);margin-top:5px;line-height:1.5">' + (a.summary||'') + '</div>'
+    + '<div class="art-date" style="margin-top:7px">' + a.date + '</div>'
+    + '</div></div>';
+}
+
+// ── PAGE ROUTER ──
+document.addEventListener('DOMContentLoaded', function() {
+  var p = window.location.pathname.split('/').pop().replace('.html','') || 'index';
+  var isAdmin = window.location.pathname.indexOf('/admin') !== -1;
+  var hm = document.getElementById('header-mount');
+  var fm = document.getElementById('footer-mount');
+  if (hm) hm.innerHTML = getHeaderHTML(isAdmin ? '' : p);
+  if (fm) fm.innerHTML = getFooterHTML();
+  if      (p === 'index' || p === '') initIndex();
+  else if (p === 'casino')            initCat('casino',     '#f0a500', t('cat_casino'));
+  else if (p === 'sportsbook')        initCat('sports',     '#4ade80', t('cat_sports'));
+  else if (p === 'affiliates')        initCat('affiliates', '#60a5fa', t('cat_affiliates'));
+  else if (p === 'article')           initArticle();
+});
+
+function initIndex() {
+  var grid = document.getElementById('articles-grid');
+  if (!grid) return;
+  var all = DB.get('articles') || [];
+  var cats = [
+    { key:'casino',     color:'#f0a500', label:t('cat_casino')     },
+    { key:'sports',     color:'#4ade80', label:t('cat_sports')     },
+    { key:'affiliates', color:'#60a5fa', label:t('cat_affiliates') },
+    { key:'blog',       color:'#a78bfa', label:t('cat_blog')       },
   ];
-  var flags = list.map(function(c) {
-    return '<img class="r-flag" src="https://flagcdn.com/w80/' + c[0] + '.png" '
-      + 'title="' + c[1] + '" alt="' + c[1] + '" loading="lazy">';
+  grid.innerHTML = cats.map(function(cat) {
+    var items = all.filter(function(a) { return a.cat === cat.key; });
+    var featured = items[0];
+    var smalls = items.slice(1,4);
+    var href = cat.key === 'blog' ? 'blog.html' : cat.key + '.html';
+    return '<div class="article-column">'
+      + '<div class="col-header"><div class="col-dot" style="background:' + cat.color + '"></div><span class="col-label">' + cat.label + '</span></div>'
+      + (featured ? artCardHTML(featured, cat.color) : '')
+      + smalls.map(artSmallHTML).join('')
+      + '<a href="' + href + '" class="col-more">' + t('more') + ' ' + cat.label + ' \u2192</a>'
+      + '</div>';
   }).join('');
-  return '<div class="r-box" id="r-box">'
-    + '<div class="r-inner">'
-    + '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f87171" stroke-width="2.5" stroke-linecap="round" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>'
-    + '<span class="r-label">Cloudbet is restricted to players from:</span>'
-    + '<div class="r-flags">' + flags + '</div>'
-    + '</div>'
-    + '<button class="r-close" onclick="closeRestricted()" title="Dismiss">'
-    + '<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 1l10 10M11 1L1 11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>'
-    + '</button>'
+}
+
+function initCat(catKey, catColor, catLabel) {
+  var grid = document.getElementById('cat-grid');
+  if (!grid) return;
+  var items = (DB.get('articles') || []).filter(function(a) { return a.cat === catKey; });
+  grid.innerHTML = items.length
+    ? items.map(function(a) { return artCardFullHTML(a, catColor, catLabel); }).join('')
+    : '<p style="color:var(--text-sec)">' + t('no_articles') + '</p>';
+}
+
+function initArticle() {
+  var el = document.getElementById('article-content');
+  if (!el) return;
+  var id = parseInt(new URLSearchParams(window.location.search).get('id'));
+  var art = (DB.get('articles') || []).find(function(a) { return a.id === id; });
+  if (!art) { el.innerHTML = '<p style="color:var(--text-sec)">Article not found. <a href="index.html">\u2190 Home</a></p>'; return; }
+  var colors = { casino:'#f0a500', sports:'#4ade80', affiliates:'#60a5fa', blog:'#a78bfa' };
+  document.title = art.title + ' \u2013 Crypto Bets HQ';
+  el.innerHTML = '<div class="breadcrumb"><a href="index.html">' + t('bc_home') + '</a><span>\u203a</span>'
+    + '<a href="' + art.cat + '.html">' + art.cat.charAt(0).toUpperCase() + art.cat.slice(1) + '</a>'
+    + '<span>\u203a</span><span style="color:var(--text-sec)">' + art.title.slice(0,50) + '\u2026</span></div>'
+    + '<h1 style="font-family:\'Outfit\',sans-serif;font-size:32px;font-weight:800;margin:14px 0 8px;line-height:1.2">' + art.title + '</h1>'
+    + '<p style="color:var(--text-sec);font-size:15px;line-height:1.6;margin-bottom:10px">' + (art.summary||'') + '</p>'
+    + '<div style="font-size:12px;color:var(--text-dim);margin-bottom:20px">Published ' + art.date + '</div>'
+    + '<div style="border-radius:var(--radius-lg);overflow:hidden;margin-bottom:26px;height:340px;background:var(--panel)">'
+    + '<img src="' + (art.img||'') + '" alt="" style="width:100%;height:100%;object-fit:cover"></div>'
+    + '<div style="color:var(--text-sec);line-height:1.85;font-size:15px">' + (art.body || '<p>Full content coming soon.</p>') + '</div>'
+    + '<div style="margin-top:32px;padding:22px;background:var(--card);border:1px solid rgba(221,181,254,0.3);border-radius:var(--radius-lg);text-align:center">'
+    + '<div style="font-family:\'Outfit\',sans-serif;font-size:20px;font-weight:700;margin-bottom:8px">' + t('art_cta_title') + '</div>'
+    + '<div style="font-size:13px;color:var(--text-sec);margin-bottom:16px">' + t('art_cta_desc') + '</div>'
+    + '<a href="' + AFFILIATE_URL + '" target="_blank" rel="noopener" class="btn btn-green">' + t('art_cta_btn') + '</a>'
     + '</div>';
 }
