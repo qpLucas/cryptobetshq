@@ -1246,3 +1246,38 @@ button { cursor: pointer; font-family: inherit; }
   max-width: 600px;
 }
 .footer-crypto-icon svg { width: 24px; height: 24px; }
+
+/* ── FOOTER CRYPTO EXPAND ── */
+.footer-crypto-icons .footer-crypto-icon:nth-child(n+8) {
+  display: none;
+}
+.footer-crypto-icons.expanded .footer-crypto-icon {
+  display: flex;
+}
+.footer-crypto-expand {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: 1px solid rgba(221,181,254,0.25);
+  border-radius: 6px;
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: background .2s, border-color .2s;
+  white-space: nowrap;
+  align-self: center;
+}
+.footer-crypto-expand:hover {
+  background: var(--accent-dim);
+  border-color: rgba(221,181,254,0.5);
+}
+.footer-crypto-expand svg {
+  transition: transform .25s;
+}
+.footer-crypto-icons.expanded ~ * .footer-crypto-expand svg,
+.footer-crypto-expand.open svg {
+  transform: rotate(180deg);
+}

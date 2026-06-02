@@ -173,6 +173,10 @@ function getHeaderHTML(activePage) {
           <path d="M23 8h2.3l-5.8 5.8c-1.9 1.9-5 1.9-6.9 0L6.7 8H9l4.7 4.7c1.3 1.3 3.3 1.3 4.6 0L23 8zm-16.3 16H4.4l5.9-5.9c1.9-1.9 5-1.9 6.9 0l5.9 5.9H21l-4.8-4.8c-1.3-1.3-3.3-1.3-4.6 0L6.7 24z" fill="white"/>
         </svg>
         <span>XRP</span>
+        <button class="footer-crypto-expand" id="footer-expand-btn" onclick="toggleFooterCoins()" title="Show all">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          more
+        </button>
       </div>
     </div>
     <div class="header-right">
@@ -214,7 +218,7 @@ function getFooterHTML() {
   <div class="footer-inner">
     <div class="footer-crypto">
       <span class="footer-crypto-label">Accepted cryptocurrencies</span>
-      <div class="footer-crypto-icons">
+      <div class="footer-crypto-icons" id="footer-coins">
         <div class="footer-crypto-icon" title="Bitcoin"><svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#F7931A"/><path d="M22.5 14.2c.3-2-1.2-3-3.3-3.7l.7-2.7-1.6-.4-.6 2.6-1.3-.3.6-2.6-1.6-.4-.7 2.7-1-.3-2.2-.5-.5 1.7s1.2.3 1.2.3c.7.2.8.6.8 1l-.8 3.4c.1 0 .2.1.3.1l-.3-.1-1.2 4.7c-.1.2-.3.5-.7.4 0 0-1.2-.3-1.2-.3l-.8 1.8 2 .5 1.1.3-.7 2.7 1.6.4.7-2.7 1.3.3-.7 2.7 1.6.4.7-2.7c2.8.5 4.9.3 5.8-2.2.7-2-.1-3.2-1.5-3.9 1-.2 1.8-1 2-2.3zm-3.6 5c-.5 2-3.9 1-5 .7l.9-3.5c1.1.3 4.6.8 4.1 2.8zm.5-5c-.5 1.8-3.3 1-4.2.7l.8-3.2c.9.2 3.9.7 3.4 2.5z" fill="white"/></svg><span>BTC</span></div>
         <div class="footer-crypto-icon" title="Ethereum"><svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#627EEA"/><path d="M16.5 6v7.4l6.2 2.8L16.5 6z" fill="white" fill-opacity=".6"/><path d="M16.5 6L10.3 16.2l6.2-2.8V6z" fill="white"/><path d="M16.5 21.3v4.7l6.2-8.6-6.2 3.9z" fill="white" fill-opacity=".6"/><path d="M16.5 26V21.3l-6.2-3.9L16.5 26z" fill="white"/><path d="M16.5 20.2l6.2-3.9-6.2-2.8v6.7z" fill="white" fill-opacity=".2"/><path d="M10.3 16.3l6.2 3.9v-6.7l-6.2 2.8z" fill="white" fill-opacity=".6"/></svg><span>ETH</span></div>
         <div class="footer-crypto-icon" title="Tether"><svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#26A17B"/><path d="M17.9 17.3c-.1 0-.9.1-1.9.1s-1.7-.1-1.9-.1C11 17 8.9 16.3 8.9 15.5s2.1-1.5 5.2-1.8v1.2c.2 0 1 .1 1.9.1.9 0 1.7-.1 1.9-.1v-1.2c3.1.2 5.2 1 5.2 1.8 0 .8-2.1 1.5-5.2 1.8zm0-3.5v-1.1h4.2V10H9.9v2.7h4.2v1.1C10.6 14.1 8 15.2 8 16.5c0 1.3 2.6 2.4 6.1 2.7v5.8h3.8v-5.8c3.5-.3 6.1-1.4 6.1-2.7 0-1.3-2.6-2.4-6.1-2.7z" fill="white"/></svg><span>USDT</span></div>
@@ -272,4 +276,18 @@ function getTipPopupHTML() {
     </div>
   </div>
 </div>`;
+}
+
+// ── FOOTER COINS EXPAND ──
+function toggleFooterCoins() {
+  var el = document.getElementById('footer-coins');
+  var btn = document.getElementById('footer-expand-btn');
+  if (!el) return;
+  var expanded = el.classList.toggle('expanded');
+  btn.classList.toggle('open', expanded);
+  var arrow = btn.querySelector('svg');
+  arrow.style.transform = expanded ? 'rotate(180deg)' : '';
+  btn.innerHTML = (expanded
+    ? '<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> less'
+    : '<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> more');
 }
