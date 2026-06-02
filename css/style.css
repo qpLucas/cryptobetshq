@@ -1476,3 +1476,37 @@ a:hover { color: var(--cta-dim); }
 /* ── BREADCRUMB LINKS → GREEN ── */
 .breadcrumb a { color: var(--cta) !important; }
 .breadcrumb a:hover { color: var(--cta-dim) !important; }
+
+/* ── LANGUAGE SWITCHER ── */
+.lang-switcher {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding-right: 8px;
+  margin-right: 4px;
+  border-right: 1px solid var(--border);
+}
+.lang-btn {
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  color: var(--text-dim);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .05em;
+  padding: 3px 7px;
+  cursor: pointer;
+  transition: color .2s, border-color .2s, background .2s;
+}
+.lang-btn:hover {
+  color: var(--text-pri);
+  border-color: var(--border);
+}
+.lang-btn.active {
+  color: var(--accent);
+  border-color: rgba(221,181,254,0.3);
+  background: var(--accent-dim);
+}
+
+/* ── LANG SWITCHER: hidden until 2nd language is live ── */
+.lang-switcher { display: none !important; }
