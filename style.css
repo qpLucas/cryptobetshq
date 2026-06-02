@@ -518,3 +518,8 @@ button { cursor: pointer; font-family: inherit; }
   transition: opacity .15s;
 }
 .r-flag:hover { opacity: 1; }
+
+/* ── REMOVE GAP BETWEEN RESTRICTED BAR AND FOOTER ── */
+.site-footer { margin-top: 0 !important; }
+#r-mount { display: block; line-height: 0; }
+.r-box { margin-bottom: 0; }
