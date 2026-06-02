@@ -320,20 +320,17 @@ function initArticle() {
 
 // ── RESTRICTED COUNTRIES ──
 function getRestrictedHTML() {
-  function flag(code) {
-    return String.fromCodePoint(code.charCodeAt(0) + 127397)
-         + String.fromCodePoint(code.charCodeAt(1) + 127397);
-  }
   var list = [
-    ['AU','Australia'],['AT','Austria'],['BE','Belgium'],['CN','China'],
-    ['CU','Cuba'],['CW','Curacao'],['FR','France'],['DE','Germany'],
-    ['IR','Iran'],['LT','Lithuania'],['MO','Macau'],['MT','Malta'],
-    ['MM','Myanmar'],['NL','Netherlands'],['KP','North Korea'],
-    ['SG','Singapore'],['ES','Spain'],['SY','Syria'],
-    ['UA','Ukraine (terr.)'],['GB','United Kingdom'],['US','United States'],
+    ['au','Australia'],['at','Austria'],['be','Belgium'],['cn','China'],
+    ['cu','Cuba'],['cw','Curacao'],['fr','France'],['de','Germany'],
+    ['ir','Iran'],['lt','Lithuania'],['mo','Macau'],['mt','Malta'],
+    ['mm','Myanmar'],['nl','Netherlands'],['kp','North Korea'],
+    ['sg','Singapore'],['es','Spain'],['sy','Syria'],
+    ['ua','Ukraine (terr.)'],['gb','United Kingdom'],['us','United States'],
   ];
   var flags = list.map(function(c) {
-    return '<span class="r-flag" title="' + c[1] + '">' + flag(c[0]) + '</span>';
+    return '<img class="r-flag" src="https://flagcdn.com/w20/' + c[0] + '.png" '
+      + 'width="20" title="' + c[1] + '" alt="' + c[1] + '" loading="lazy">';
   }).join('');
   return '<div class="r-box" id="r-box">'
     + '<div class="r-inner">'

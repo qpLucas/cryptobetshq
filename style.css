@@ -461,3 +461,9 @@ button { cursor: pointer; font-family: inherit; }
   transition: opacity .2s; display: flex; align-items: center;
 }
 .r-close:hover { opacity: 1; }
+
+/* ── RESTRICTED BAR: stick to footer ── */
+#r-mount { margin: 0; padding: 0; }
+.r-box { margin: 0; }
+.r-flag { height: 14px; width: auto; border-radius: 2px; opacity: 0.75; transition: opacity .15s; vertical-align: middle; }
+.r-flag:hover { opacity: 1; }
