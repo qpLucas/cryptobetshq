@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Casino – Crypto Bets HQ</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+<div id="header-mount"></div>
+<main>
+  <div class="site-main">
+    <div class="page-hero">
+      <div class="breadcrumb"><a href="index.html">Home</a><span>›</span><span>Casino</span></div>
+      <h1>Casino guides & tips</h1>
+      <p>Game reviews, strategy breakdowns, and the best Cloudbet casino picks from our analysts.</p>
+    </div>
+    <div class="articles-grid-full" id="casino-grid"></div>
+  </div>
+</main>
+<div id="footer-mount"></div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('header-mount').innerHTML = getHeaderHTML('casino');
+  document.getElementById('footer-mount').innerHTML = getFooterHTML();
+  const articles = (DB.get('articles') || []).filter(a => a.cat === 'casino');
+  document.getElementById('casino-grid').innerHTML = articles.map(a => `
+    <div class="article-card-full" onclick="location.href='article.html?id=${a.id}'">
+      <div class="art-img"><img src="${a.img}" alt="${a.title}" loading="lazy"></div>
+      <div class="art-body">
+        <div class="art-cat" style="color:#f0a500">Casino</div>
+        <div class="art-title" style="font-size:17px">${a.title}</div>
+        <div style="font-size:13px;color:var(--text-sec);margin-top:6px;line-height:1.5">${a.summary}</div>
+        <div class="art-meta" style="margin-top:8px">${a.date}</div>
+      </div>
+    </div>`).join('') || '<p style="color:var(--text-sec)">No articles yet.</p>';
+});
+</script>
+</body>
+</html>

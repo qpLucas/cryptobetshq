@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sportsbook – Crypto Bets HQ</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+<div id="header-mount"></div>
+<main>
+  <div class="site-main">
+    <div class="page-hero">
+      <div class="breadcrumb"><a href="index.html">Home</a><span>›</span><span>Sportsbook</span></div>
+      <h1>Sports betting tips</h1>
+      <p>Daily tips across football, esports, basketball, tennis and more. All bets placed through Cloudbet.</p>
+    </div>
+
+    <!-- Filter bar -->
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;" id="filter-bar">
+      <button onclick="filterTips('all')" class="btn-gold" id="filter-all" style="font-size:12px;padding:7px 14px">All</button>
+      <button onclick="filterTips('football')" class="btn-outline" id="filter-football" style="font-size:12px;padding:7px 14px">Football</button>
+      <button onclick="filterTips('esports')" class="btn-outline" id="filter-esports" style="font-size:12px;padding:7px 14px">Esports</button>
+      <button onclick="filterTips('basketball')" class="btn-outline" id="filter-basketball" style="font-size:12px;padding:7px 14px">Basketball</button>
+      <button onclick="filterTips('tennis')" class="btn-outline" id="filter-tennis" style="font-size:12px;padding:7px 14px">Tennis</button>
+    </div>
+
+    <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:32px;">
+      <div class="tips-panel-header">
+        <h3><div class="live-dot"></div> All tips</h3>
+      </div>
+      <div class="tips-list" id="tips-list"></div>
+    </div>
+
+    <div class="section-header"><h2 class="section-title">Sports articles</h2></div>
+    <div class="articles-grid-full" id="sports-grid"></div>
+  </div>
+</main>
+<div id="footer-mount"></div>
+<div id="popup-mount"></div>
+<script>
+let currentFilter = 'all';
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('header-mount').innerHTML = getHeaderHTML('sportsbook');
+  document.getElementById('footer-mount').innerHTML = getFooterHTML();
+  document.getElementById('popup-mount').innerHTML = getTipPopupHTML();
+  renderTips('all');
+  const articles = (DB.get('articles') || []).filter(a => a.cat === 'sports');
+  document.getElementById('sports-grid').innerHTML = articles.map(a => `
+    <div class="article-card-full" onclick="location.href='article.html?id=${a.id}'">
+      <div class="art-img"><img src="${a.img}" alt="${a.title}" loading="lazy"></div>
+      <div class="art-body">
+        <div class="art-cat" style="color:#4ade80">Sports</div>
+        <div class="art-title" style="font-size:17px">${a.title}</div>
+        <div style="font-size:13px;color:var(--text-sec);margin-top:6px;line-height:1.5">${a.summary}</div>
+        <div class="art-meta" style="margin-top:8px">${a.date}</div>
+      </div>
+    </div>`).join('') || '<p style="color:var(--text-sec)">No articles yet.</p>';
+});
+function filterTips(sport) {
+  currentFilter = sport;
+  document.querySelectorAll('#filter-bar button').forEach(b => {
+    b.className = b.id === 'filter-' + sport ? 'btn-gold' : 'btn-outline';
+    b.style.cssText = 'font-size:12px;padding:7px 14px';
+  });
+  renderTips(sport);
+}
+function renderTips(sport) {
+  const all = DB.get('tips') || [];
+  const tips = sport === 'all' ? all : all.filter(t => t.sport === sport);
+  const list = document.getElementById('tips-list');
+  if (!tips.length) { list.innerHTML = '<div style="padding:24px;text-align:center;color:var(--text-dim)">No tips found.</div>'; return; }
+  list.innerHTML = tips.map(tip => {
+    const conf = Array.from({length:5}, (_,i) => `<div class="conf-dot ${i < tip.conf ? 'on':''}"></div>`).join('');
+    return `<div class="tip-row" onclick="openTipPopup(${tip.id})">
+      <div class="tip-time-block"><div class="tip-time">${tip.time}</div><div class="tip-date">${tip.date}</div></div>
+      <div class="tip-info">
+        <span class="tip-sport-badge ${tip.sport}">${tip.sport}</span>
+        <div class="tip-teams">${tip.home} vs ${tip.away}</div>
+        <div class="tip-pick-label">Pick: <strong>${tip.pick}</strong></div>
+      </div>
+      <div class="tip-odds-block"><div class="tip-odds">${tip.odds}</div><div class="conf-dots">${conf}</div></div>
+    </div>`;
+  }).join('');
+}
+</script>
+</body>
+</html>

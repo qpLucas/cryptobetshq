@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Affiliates – Crypto Bets HQ</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+<div id="header-mount"></div>
+<main>
+  <div class="site-main">
+    <div class="page-hero">
+      <div class="breadcrumb"><a href="index.html">Home</a><span>›</span><span>Affiliates</span></div>
+      <h1>Cloudbet affiliate program</h1>
+      <p>Everything you need to know about earning with Cloudbet — rev share, CPA, tracking and payouts.</p>
+    </div>
+
+    <!-- CTA banner -->
+    <div style="background:var(--bg-card);border:1px solid var(--border-gold);border-radius:var(--radius-lg);padding:28px 32px;margin-bottom:28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+      <div>
+        <div class="tip-label" style="margin-bottom:8px">Cloudbet affiliate program</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:700;margin-bottom:6px">Up to 50% revenue share</div>
+        <div style="font-size:14px;color:var(--text-sec)">Lifetime commissions · BTC/ETH payouts · Real-time reporting dashboard</div>
+      </div>
+      <a href="https://www.cloudbet.com/en/affiliates" target="_blank" rel="noopener" class="btn-gold" style="white-space:nowrap;padding:13px 24px;font-size:15px">Join Cloudbet Affiliates ↗</a>
+    </div>
+
+    <div class="articles-grid-full" id="aff-grid"></div>
+  </div>
+</main>
+<div id="footer-mount"></div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('header-mount').innerHTML = getHeaderHTML('affiliates');
+  document.getElementById('footer-mount').innerHTML = getFooterHTML();
+  const articles = (DB.get('articles') || []).filter(a => a.cat === 'affiliates');
+  document.getElementById('aff-grid').innerHTML = articles.map(a => `
+    <div class="article-card-full" onclick="location.href='article.html?id=${a.id}'">
+      <div class="art-img"><img src="${a.img}" alt="${a.title}" loading="lazy"></div>
+      <div class="art-body">
+        <div class="art-cat" style="color:#60a5fa">Affiliates</div>
+        <div class="art-title" style="font-size:17px">${a.title}</div>
+        <div style="font-size:13px;color:var(--text-sec);margin-top:6px;line-height:1.5">${a.summary}</div>
+        <div class="art-meta" style="margin-top:8px">${a.date}</div>
+      </div>
+    </div>`).join('') || '<p style="color:var(--text-sec)">No articles yet.</p>';
+});
+</script>
+</body>
+</html>

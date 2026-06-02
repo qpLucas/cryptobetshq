@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Article – Crypto Bets HQ</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+<div id="header-mount"></div>
+<main>
+  <div class="site-main">
+    <div id="article-content" style="max-width:760px;margin:0 auto;padding:32px 0 40px"></div>
+  </div>
+</main>
+<div id="footer-mount"></div>
+<script>
+const catColors = { casino:'#f0a500', sports:'#4ade80', affiliates:'#60a5fa', blog:'#a78bfa' };
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('header-mount').innerHTML = getHeaderHTML('');
+  document.getElementById('footer-mount').innerHTML = getFooterHTML();
+
+  const params = new URLSearchParams(window.location.search);
+  const id = parseInt(params.get('id'));
+  const articles = DB.get('articles') || [];
+  const art = articles.find(a => a.id === id);
+  const el = document.getElementById('article-content');
+
+  if (!art) {
+    el.innerHTML = '<p style="color:var(--text-sec)">Article not found. <a href="index.html" style="color:var(--gold)">← Back home</a></p>';
+    return;
+  }
+
+  const color = catColors[art.cat] || 'var(--gold)';
+  document.title = art.title + ' – Crypto Bets HQ';
+
+  // Generate filler body paragraphs
+  const body = `
+    <p>The world of crypto gambling continues to evolve rapidly, and ${art.title.toLowerCase()} is one topic that's generating significant discussion among serious bettors and casual players alike.</p>
+    <p>When it comes to Cloudbet specifically, the platform's long-standing reputation for fast BTC and ETH payouts means that any strategy discussion needs to factor in the unique advantages crypto brings to the table. Settlement speed, borderless access, and privacy are all part of the equation.</p>
+    <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:700;margin:24px 0 12px;">Key considerations</h2>
+    <p>There are several factors to weigh before committing real funds. Understanding the variance in volatility, the specific rules of each game or market, and how bonuses interact with wagering requirements can significantly impact your expected value over a session.</p>
+    <p>Cloudbet's interface makes it easy to filter by game type, live vs pre-match, and cryptocurrency denomination. For high-stakes players, the VIP program also adds meaningful edge through cashback and personalised service.</p>
+    <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:700;margin:24px 0 12px;">Our recommendation</h2>
+    <p>Start with smaller stakes while learning the mechanics. Track your results honestly. Use Cloudbet's responsible gambling tools — deposit limits and session reminders — as part of your strategy, not just compliance checkboxes.</p>
+    <p>If you have not yet signed up to Cloudbet, the welcome bonus offers up to 5 BTC in matched deposits, which provides a meaningful bankroll boost when used correctly.</p>
+  `;
+
+  el.innerHTML = `
+    <div class="breadcrumb"><a href="index.html">Home</a><span>›</span><a href="${art.cat}.html" style="color:var(--gold)">${art.cat.charAt(0).toUpperCase()+art.cat.slice(1)}</a><span>›</span><span style="color:var(--text-sec)">${art.title.slice(0,40)}…</span></div>
+    <div style="margin-top:20px">
+      <span class="art-cat" style="color:${color};font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase">${art.cat}</span>
+      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:34px;font-weight:800;margin:10px 0 8px;line-height:1.2">${art.title}</h1>
+      <p style="font-size:15px;color:var(--text-sec);margin-bottom:20px;line-height:1.6">${art.summary}</p>
+      <div style="font-size:12px;color:var(--text-dim);margin-bottom:20px">Published ${art.date}</div>
+    </div>
+    <div style="border-radius:var(--radius-lg);overflow:hidden;margin-bottom:28px;height:360px;background:var(--bg-panel)">
+      <img src="${art.img}" alt="${art.title}" style="width:100%;height:100%;object-fit:cover">
+    </div>
+    <div style="color:var(--text-sec);line-height:1.85;font-size:15px">${body}</div>
+    <div style="margin-top:32px;padding:20px;background:var(--bg-card);border:1px solid var(--border-gold);border-radius:var(--radius-lg);text-align:center">
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;margin-bottom:8px">Ready to play on Cloudbet?</div>
+      <div style="font-size:13px;color:var(--text-sec);margin-bottom:16px">Get up to 5 BTC welcome bonus — instant BTC/ETH deposits.</div>
+      <a href="https://www.cloudbet.com" target="_blank" rel="noopener" class="btn-gold" style="display:inline-flex">Sign up at Cloudbet ↗</a>
+    </div>
+  `;
+});
+</script>
+</body>
+</html>
