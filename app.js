@@ -38,14 +38,9 @@ var TRANSLATIONS = {
   },
 };
 
-// Auto-detect language on first visit
-(function() {
-  if (localStorage.getItem('lang')) return;
-  var b = (navigator.language || 'en').toLowerCase();
-  var supported = Object.keys(TRANSLATIONS);
-  var match = supported.find(function(l) { return b === l || b.startsWith(l + '-'); }) || 'en';
-  localStorage.setItem('lang', match);
-})();
+// Language locked to English — multi-language inactive
+// To re-enable: replace this with the auto-detect block and show .lang-switcher in CSS
+localStorage.setItem('lang', 'en');
 
 function getLang() { return localStorage.getItem('lang') || 'en'; }
 function t(k) { var d = TRANSLATIONS[getLang()] || TRANSLATIONS.en; return d[k] || TRANSLATIONS.en[k] || k; }
