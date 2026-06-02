@@ -176,6 +176,7 @@ function getFooterHTML() {
     + ' &middot; ' + t('footer_age') + ' &middot; ' + t('footer_gamble')
     + '</div>'
     + '</div>'
+    + getRestrictedHTML()
     + '</footer>';
 }
 
@@ -197,20 +198,21 @@ function getRestrictedHTML() {
     ['IR','Iran'],['LT','Lithuania'],['MO','Macau'],['MT','Malta'],
     ['MM','Myanmar'],['NL','Netherlands'],['KP','North Korea'],
     ['SG','Singapore'],['ES','Spain'],['SY','Syria'],
-    ['UA','Ukraine (territories)'],['GB','United Kingdom'],['US','United States'],
+    ['UA','Ukraine (certain territories)'],['GB','United Kingdom'],['US','United States'],
   ];
   var flags = countries.map(function(c) {
-    return '<div class="restricted-flag" title="' + c[1] + '">'
-      + '<img src="https://flagcdn.com/32x24/' + c[0].toLowerCase() + '.png" alt="' + c[1] + '" width="32" height="24">'
-      + '<span>' + c[1] + '</span>'
-      + '</div>';
+    return '<img src="https://flagcdn.com/20x15/' + c[0].toLowerCase() + '.png" '
+      + 'alt="' + c[1] + '" title="' + c[1] + '" width="20" height="15" class="restricted-flag">';
   }).join('');
-  return '<div class="restricted-box">'
-    + '<div class="restricted-header">'
-    + '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>'
-    + ' Cloudbet is restricted to players from:'
-    + '</div>'
+  return '<div class="restricted-box" id="restricted-box">'
+    + '<div class="restricted-inner">'
+    + '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>'
+    + '<span class="restricted-label">Cloudbet is restricted to players from:</span>'
     + '<div class="restricted-flags">' + flags + '</div>'
+    + '</div>'
+    + '<button class="restricted-close" onclick="var b=document.getElementById(\'restricted-box\');if(b)b.style.display=\'none\'" title="Dismiss">'
+    + '<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 1l10 10M11 1L1 11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>'
+    + '</button>'
     + '</div>';
 }
 
@@ -259,8 +261,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function initIndex() {
-  var rm = document.getElementById('restricted-mount');
-  if (rm) rm.innerHTML = getRestrictedHTML();
   var grid = document.getElementById('articles-grid');
   if (!grid) return;
   var all = DB.get('articles') || [];
