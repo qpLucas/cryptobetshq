@@ -877,3 +877,11 @@ button { cursor: pointer; font-family: inherit; }
 .btn-gold:hover { background: var(--cta-dim) !important; }
 .btn-outline { color: var(--cta) !important; border-color: rgba(106,199,137,0.4) !important; }
 .btn-outline:hover { background: var(--cta-glow) !important; }
+
+/* ── SPORT EMOJI BADGE ── */
+.tip-sport-emoji {
+  font-size: 20px;
+  line-height: 1;
+  display: inline-block;
+  margin-bottom: 4px;
+}

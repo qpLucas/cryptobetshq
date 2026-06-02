@@ -44,6 +44,27 @@ const DB = {
   }
 })();
 
+
+// ── SPORT EMOJI MAP ──
+const SPORT_EMOJI = {
+  football:   '⚽',
+  esports:    '🎮',
+  basketball: '🏀',
+  tennis:     '🎾',
+  baseball:   '⚾',
+  hockey:     '🏒',
+  boxing:     '🥊',
+  mma:        '🥋',
+  golf:       '⛳',
+  rugby:      '🏉',
+  volleyball: '🏐',
+  cricket:    '🏏',
+  other:      '🏆',
+};
+function sportEmoji(sport) {
+  return SPORT_EMOJI[sport] || '🏆';
+}
+
 // ── TIP POPUP ──
 function openTipPopup(tipId) {
   const tips = DB.get('tips') || [];
@@ -52,7 +73,7 @@ function openTipPopup(tipId) {
   const sportColors = { football: '#4ade80', esports: '#a78bfa', basketball: '#fb923c', tennis: '#facc15' };
   const color = sportColors[tip.sport] || '#9998b0';
   const confDots = Array.from({length:5}, (_,i) => `<div class="conf-dot ${i < tip.conf ? 'on' : ''}"></div>`).join('');
-  document.getElementById('popup-sport').innerHTML = `<span class="tip-sport-badge ${tip.sport}">${tip.sport.toUpperCase()}</span>`;
+  document.getElementById('popup-sport').innerHTML = `<span class="tip-sport-emoji" style="font-size:28px">${sportEmoji(tip.sport)}</span> <span class="tip-sport-badge ${tip.sport}">${tip.sport.toUpperCase()}</span>`;
   document.getElementById('popup-teams').textContent = `${tip.home} vs ${tip.away}`;
   document.getElementById('popup-pick').textContent = tip.pick;
   document.getElementById('popup-pick').style.color = color;

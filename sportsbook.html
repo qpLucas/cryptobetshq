@@ -76,7 +76,7 @@ function renderTips(sport) {
     return `<div class="tip-row" onclick="openTipPopup(${tip.id})">
       <div class="tip-time-block"><div class="tip-time">${tip.time}</div><div class="tip-date">${tip.date}</div></div>
       <div class="tip-info">
-        <span class="tip-sport-badge ${tip.sport}">${tip.sport}</span>
+        <span class="tip-sport-emoji">${sportEmoji(tip.sport)}</span>
         <div class="tip-teams">${tip.home} vs ${tip.away}</div>
         <div class="tip-pick-label">Pick: <strong>${tip.pick}</strong></div>
       </div>
