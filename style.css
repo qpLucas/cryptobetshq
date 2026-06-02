@@ -320,3 +320,12 @@ button { cursor: pointer; font-family: inherit; }
   .articles-columns { grid-template-columns: 1fr; }
   .site-main { padding: 0 16px; }
 }
+
+/* ── NAV: move page links to right beside socials ── */
+.header-inner { justify-content: space-between; }
+.nav { order: 2; margin-left: auto; }
+.header-right { order: 3; }
+
+/* ── NAV inside header-right ── */
+.header-right { display: flex; align-items: center; gap: 6px; margin-left: auto; }
+.header-right .nav { display: flex; }
