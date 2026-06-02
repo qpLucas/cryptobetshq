@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const el = document.getElementById('article-content');
 
   if (!art) {
-    el.innerHTML = '<p style="color:var(--text-sec)">Article not found. <a href="index.html" style="color:var(--gold)">← Back home</a></p>';
+    el.innerHTML = '<p style="color:var(--text-sec)">Article not found. <a href="index.html" style="color:var(--accent)">← Back home</a></p>';
     return;
   }
 
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
   `;
 
   el.innerHTML = `
-    <div class="breadcrumb"><a href="index.html">Home</a><span>›</span><a href="${art.cat}.html" style="color:var(--gold)">${art.cat.charAt(0).toUpperCase()+art.cat.slice(1)}</a><span>›</span><span style="color:var(--text-sec)">${art.title.slice(0,40)}…</span></div>
+    <div class="breadcrumb"><a href="index.html">Home</a><span>›</span><a href="${art.cat}.html" style="color:var(--accent)">${art.cat.charAt(0).toUpperCase()+art.cat.slice(1)}</a><span>›</span><span style="color:var(--text-sec)">${art.title.slice(0,40)}…</span></div>
     <div style="margin-top:20px">
       <span class="art-cat" style="color:${color};font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase">${art.cat}</span>
       <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:34px;font-weight:800;margin:10px 0 8px;line-height:1.2">${art.title}</h1>
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <img src="${art.img}" alt="${art.title}" style="width:100%;height:100%;object-fit:cover">
     </div>
     <div style="color:var(--text-sec);line-height:1.85;font-size:15px">${body}</div>
-    <div style="margin-top:32px;padding:20px;background:var(--bg-card);border:1px solid var(--border-gold);border-radius:var(--radius-lg);text-align:center">
+    <div style="margin-top:32px;padding:20px;background:var(--bg-card);border:1px solid rgba(221,181,254,0.35);border-radius:var(--radius-lg);text-align:center">
       <div style="font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;margin-bottom:8px">Ready to play on Cloudbet?</div>
       <div style="font-size:13px;color:var(--text-sec);margin-bottom:16px">Get up to 5 BTC welcome bonus — instant BTC/ETH deposits.</div>
       <a href="https://www.cloudbet.com" target="_blank" rel="noopener" class="btn-gold" style="display:inline-flex">Sign up at Cloudbet ↗</a>
