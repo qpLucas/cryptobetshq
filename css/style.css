@@ -1363,3 +1363,67 @@ button { cursor: pointer; font-family: inherit; }
 
 /* Hide old confidence elements */
 .conf-dots, .tip-conf, .conf-dot { display: none !important; }
+
+/* ── PICKS ROW LAYOUT FIX ── */
+.tip-row {
+  display: grid !important;
+  grid-template-columns: 60px 34px 1fr auto !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
+
+.tip-sport-icon-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.tip-info {
+  min-width: 0;
+  flex: 1;
+}
+
+.tip-teams-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: nowrap;
+  margin-bottom: 3px;
+  min-width: 0;
+}
+
+.tip-team-wrap {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+}
+
+.tip-team-name {
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 160px;
+}
+
+.tip-pick-label {
+  font-size: 12px;
+  color: var(--text-sec);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tip-odds-block {
+  flex-shrink: 0;
+  text-align: right;
+}
+
+/* Remove old tip-time from grid — keep it as its own block */
+.tip-time-block {
+  text-align: center;
+  flex-shrink: 0;
+}
