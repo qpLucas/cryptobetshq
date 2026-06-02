@@ -1347,3 +1347,19 @@ button { cursor: pointer; font-family: inherit; }
   font-weight: 500;
   flex-shrink: 0;
 }
+
+/* ── PICKS LAYOUT: time | sport icon | teams | odds ── */
+.tip-row {
+  grid-template-columns: 52px 36px 1fr auto !important;
+}
+.tip-sport-icon-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tip-sport-icon-col .tip-sport-icon {
+  margin-bottom: 0;
+}
+
+/* Hide old confidence elements */
+.conf-dots, .tip-conf, .conf-dot { display: none !important; }

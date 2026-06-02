@@ -47,31 +47,44 @@ const DB = {
 
 // ── SPORT SVG ICON MAP ──
 const SPORT_SVG = {
-  football: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9.5" stroke="currentColor" stroke-width="1.2"/><path d="M12 2.5c0 0-2.5 3-2.5 5s1 4 2.5 4 2.5-2 2.5-4-2.5-5-2.5-5z" stroke="currentColor" stroke-width="1.1" fill="none"/><path d="M2.5 12h4M17.5 12h4M6.5 6.5l2.5 2.5M15 9l2.5-2.5M6.5 17.5l2.5-2.5M15 15l2.5 2.5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/><circle cx="12" cy="12" r="2.5" stroke="currentColor" stroke-width="1.1" fill="none"/></svg>`,
+  // Football: classic soccer ball with pentagons
+  football: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9.5" stroke="currentColor" stroke-width="1.3"/><polygon points="12,5 14.5,9 12,11 9.5,9" stroke="currentColor" stroke-width="1" fill="none" stroke-linejoin="round"/><polygon points="5,10 8,9.5 9.5,12 7.5,14.5" stroke="currentColor" stroke-width="1" fill="none" stroke-linejoin="round"/><polygon points="19,10 16,9.5 14.5,12 16.5,14.5" stroke="currentColor" stroke-width="1" fill="none" stroke-linejoin="round"/><polygon points="8,19 9,16 12,15 15,16 16,19" stroke="currentColor" stroke-width="1" fill="none" stroke-linejoin="round"/></svg>`,
 
-  esports: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2.5" y="7" width="19" height="11" rx="3.5" stroke="currentColor" stroke-width="1.2"/><path d="M8 11v4M6 13h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><circle cx="16" cy="12" r="0.8" fill="currentColor"/><circle cx="14" cy="14" r="0.8" fill="currentColor"/></svg>`,
+  // Esports: controller with buttons
+  esports: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 9h12l2 7-3-1H7l-3 1z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><path d="M9 11.5v3M7.5 13h3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><circle cx="15.5" cy="12" r="0.8" fill="currentColor"/><circle cx="17" cy="13.5" r="0.8" fill="currentColor"/></svg>`,
 
-  basketball: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9.5" stroke="currentColor" stroke-width="1.2"/><path d="M12 2.5v19M2.5 12h19" stroke="currentColor" stroke-width="1.1"/><path d="M5 5.5c2 2 2 5 2 6.5s0 4.5-2 6.5" stroke="currentColor" stroke-width="1.1" fill="none"/><path d="M19 5.5c-2 2-2 5-2 6.5s0 4.5 2 6.5" stroke="currentColor" stroke-width="1.1" fill="none"/></svg>`,
+  // Basketball: ball with court lines
+  basketball: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9.5" stroke="currentColor" stroke-width="1.3"/><path d="M12 2.5v19M2.5 12h19" stroke="currentColor" stroke-width="1.1"/><path d="M6 4.5C8.5 7 9 9.5 9 12s-.5 5-3 7.5" stroke="currentColor" stroke-width="1.1" fill="none"/><path d="M18 4.5C15.5 7 15 9.5 15 12s.5 5 3 7.5" stroke="currentColor" stroke-width="1.1" fill="none"/></svg>`,
 
-  tennis: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9.5" stroke="currentColor" stroke-width="1.2"/><path d="M4 7.5c2.5 1.5 3.5 3 3.5 4.5s-1 3-3.5 4.5" stroke="currentColor" stroke-width="1.1" fill="none"/><path d="M20 7.5c-2.5 1.5-3.5 3-3.5 4.5s1 3 3.5 4.5" stroke="currentColor" stroke-width="1.1" fill="none"/></svg>`,
+  // Tennis: ball with curved seam lines
+  tennis: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 6.5C7.5 9 8.5 10.5 8.5 12S7.5 15 5 17.5" stroke="currentColor" stroke-width="1.2" fill="none"/><path d="M19 6.5C16.5 9 15.5 10.5 15.5 12s1 3 3.5 5.5" stroke="currentColor" stroke-width="1.2" fill="none"/></svg>`,
 
-  baseball: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9.5" stroke="currentColor" stroke-width="1.2"/><path d="M8.5 4.5c1 2.5 1 5 1 7.5s0 5-1 7.5" stroke="currentColor" stroke-width="1.1" fill="none"/><path d="M15.5 4.5c-1 2.5-1 5-1 7.5s0 5 1 7.5" stroke="currentColor" stroke-width="1.1" fill="none"/><path d="M8.5 8.5l1.5 0.5M8.5 12l1.5 0M8.5 15.5l1.5-0.5M13.5 8.5l1.5-0.5M13.5 12l1.5 0M13.5 15.5l1.5 0.5" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/></svg>`,
+  // Baseball: ball with stitching
+  baseball: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9.5" stroke="currentColor" stroke-width="1.3"/><path d="M9 4.5C10 7 10 9.5 10 12s0 5-1 7.5" stroke="currentColor" stroke-width="1.1" fill="none"/><path d="M15 4.5C14 7 14 9.5 14 12s0 5 1 7.5" stroke="currentColor" stroke-width="1.1" fill="none"/><path d="M9.5 8l1 1M9.5 12l1 0.3M9.5 16l1-1M14.5 8l-1 1M14.5 12l-1 0.3M14.5 16l-1-1" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/></svg>`,
 
-  hockey: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 4l4 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M10 16c0 0 1.5 2.5 4.5 2.5s4.5-1.5 4.5-2.5-1.5-1.5-4.5-1.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><circle cx="7.5" cy="19.5" r="1.5" stroke="currentColor" stroke-width="1.1" fill="none"/></svg>`,
+  // Ice hockey: stick and puck
+  hockey: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 4l3 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M10 14h5c1.5 0 2.5.8 2.5 2s-1 2-2.5 2H9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><ellipse cx="9" cy="20" rx="2" ry="1" stroke="currentColor" stroke-width="1.1"/></svg>`,
 
-  boxing: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="7" y="5" width="8" height="9" rx="3" stroke="currentColor" stroke-width="1.2"/><path d="M7 10h8" stroke="currentColor" stroke-width="1"/><path d="M9 14v3M13 14v3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><path d="M7 17h8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>`,
+  // Boxing: two gloves facing each other
+  boxing: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 14c0-2.5 1.5-5 3-5h2.5c1 0 1.5.8 1.5 2v4c0 1-.5 2-1.5 2H6C4.5 17 4 15.5 4 14z" stroke="currentColor" stroke-width="1.2"/><path d="M9.5 11V9c0-.8.5-1.5 1.5-1.5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/><path d="M20 14c0-2.5-1.5-5-3-5h-2.5c-1 0-1.5.8-1.5 2v4c0 1 .5 2 1.5 2H18c1.5 0 2-1.5 2-3z" stroke="currentColor" stroke-width="1.2"/><path d="M14.5 11V9c0-.8-.5-1.5-1.5-1.5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg>`,
 
-  mma: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 6c0 0-3 2-3 6s3 6 3 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><path d="M16 6c0 0 3 2 3 6s-3 6-3 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><rect x="9" y="8" width="6" height="8" rx="2" stroke="currentColor" stroke-width="1.2"/><path d="M12 8v8" stroke="currentColor" stroke-width="0.9"/></svg>`,
+  // MMA: octagon
+  mma: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><polygon points="9,3 15,3 21,9 21,15 15,21 9,21 3,15 3,9" stroke="currentColor" stroke-width="1.3" fill="none" stroke-linejoin="round"/><path d="M9 12h6M12 9v6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>`,
 
-  golf: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 3v14" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M12 3l5 3-5 3" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" fill="none"/><ellipse cx="12" cy="19" rx="4" ry="1.5" stroke="currentColor" stroke-width="1.1"/><circle cx="12" cy="17" r="1.2" stroke="currentColor" stroke-width="1.1" fill="none"/></svg>`,
+  // Golf: flag on hole with ball
+  golf: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 20V5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M8 5l7 3-7 3" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" fill="none"/><ellipse cx="8" cy="20" rx="5" ry="1.5" stroke="currentColor" stroke-width="1.1"/><circle cx="15" cy="17" r="2" stroke="currentColor" stroke-width="1.1"/></svg>`,
 
-  rugby: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="12" cy="12" rx="8" ry="5.5" stroke="currentColor" stroke-width="1.2" transform="rotate(-35 12 12)"/><path d="M7.5 7.5l9 9" stroke="currentColor" stroke-width="1"/><path d="M10 8.5l1 1M12 7l1 1M8.5 10l1 1M13 15.5l1 1M15 14l1 1M13.5 16.5l1 1" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/></svg>`,
+  // Rugby: oval ball with seam
+  rugby: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="12" cy="12" rx="9" ry="5.5" stroke="currentColor" stroke-width="1.3"/><path d="M3.5 12h17" stroke="currentColor" stroke-width="1"/><path d="M6 7.5C8 9 9.5 10.5 9.5 12S8 15 6 16.5" stroke="currentColor" stroke-width="1" fill="none"/><path d="M18 7.5C16 9 14.5 10.5 14.5 12s1.5 3 3.5 4.5" stroke="currentColor" stroke-width="1" fill="none"/></svg>`,
 
-  volleyball: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9.5" stroke="currentColor" stroke-width="1.2"/><path d="M3 10c3 0 5 1 6 3" stroke="currentColor" stroke-width="1.1" fill="none"/><path d="M9 13c1 3 1 5 3 8.5" stroke="currentColor" stroke-width="1.1" fill="none"/><path d="M21 10c-2.5 0.5-4 2-5 4" stroke="currentColor" stroke-width="1.1" fill="none"/><path d="M16 14c-2 2-2 5-4 7.5" stroke="currentColor" stroke-width="1.1" fill="none"/><path d="M7.5 3c0.5 3 2 4.5 4.5 5" stroke="currentColor" stroke-width="1.1" fill="none"/></svg>`,
+  // Volleyball: ball with sections
+  volleyball: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9.5" stroke="currentColor" stroke-width="1.3"/><path d="M12 2.5C9 5 7.5 8.5 7.5 12" stroke="currentColor" stroke-width="1.1" fill="none"/><path d="M7.5 12C5 13.5 3.5 16 3 18.5" stroke="currentColor" stroke-width="1.1" fill="none"/><path d="M12 2.5C15 5 16.5 8.5 16.5 12" stroke="currentColor" stroke-width="1.1" fill="none"/><path d="M16.5 12C19 13.5 20.5 16 21 18.5" stroke="currentColor" stroke-width="1.1" fill="none"/><path d="M7.5 12h9" stroke="currentColor" stroke-width="1.1"/></svg>`,
 
-  cricket: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17 4L7 20" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M14 4l3 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="6" cy="18.5" r="2" stroke="currentColor" stroke-width="1.1" fill="none"/></svg>`,
+  // Cricket: bat and ball
+  cricket: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 4L8 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M13.5 4h3" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><circle cx="6.5" cy="19" r="2.5" stroke="currentColor" stroke-width="1.2"/></svg>`,
 
-  other: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>`,
+  // Other: trophy cup
+  other: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 3h8v8a4 4 0 0 1-8 0V3z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M8 6H5c0 3 1.5 5 3 5.5M16 6h3c0 3-1.5 5-3 5.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><path d="M12 15v4M9 19h6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>`,
 };
 
 function sportEmoji(sport) {
@@ -86,13 +99,13 @@ function getTeamLogo(teamName, callback) {
   if (!teamName) { callback(null); return; }
   var key = teamName.toLowerCase().trim();
   if (logoCache[key] !== undefined) { callback(logoCache[key]); return; }
-  var url = 'https://www.thesportsdb.com/api/v1/json/3/searchteams.php?t=' + encodeURIComponent(teamName);
+  var url = 'https://www.thesportsdb.com/api/v1/json/1/searchteams.php?t=' + encodeURIComponent(teamName);
   fetch(url)
     .then(function(r) { return r.json(); })
     .then(function(data) {
       var logo = null;
       if (data && data.teams && data.teams[0]) {
-        logo = data.teams[0].strTeamBadge || data.teams[0].strTeamLogo || null;
+        logo = data.teams[0].strTeamBadge || data.teams[0].strBadge || data.teams[0].strTeamLogo || null;
       }
       logoCache[key] = logo;
       callback(logo);
@@ -101,17 +114,17 @@ function getTeamLogo(teamName, callback) {
 }
 
 function renderTipRow(tip, logoHome, logoAway) {
-  var conf = Array.from({length:5}, function(_,i) {
-    return '<div class="conf-dot ' + (i < tip.conf ? 'on' : '') + '"></div>';
-  }).join('');
-
-  var homeLogo = logoHome ? '<img src="' + logoHome + '" class="team-logo" alt="">' : '<span class="team-logo-fallback">' + (tip.home||'').charAt(0) + '</span>';
-  var awayLogo = logoAway ? '<img src="' + logoAway + '" class="team-logo" alt="">' : '<span class="team-logo-fallback">' + (tip.away||'').charAt(0) + '</span>';
+  var homeLogo = logoHome
+    ? '<img src="' + logoHome + '/tiny" class="team-logo" alt="">'
+    : '<span class="team-logo-fallback">' + (tip.home||'').charAt(0) + '</span>';
+  var awayLogo = logoAway
+    ? '<img src="' + logoAway + '/tiny" class="team-logo" alt="">'
+    : '<span class="team-logo-fallback">' + (tip.away||'').charAt(0) + '</span>';
 
   return '<div class="tip-row" onclick="openTipPopup(' + tip.id + ')">'
     + '<div class="tip-time-block"><div class="tip-time">' + tip.time + '</div><div class="tip-date">' + tip.date + '</div></div>'
+    + '<div class="tip-sport-icon-col">' + sportEmoji(tip.sport) + '</div>'
     + '<div class="tip-info">'
-    + '<span class="tip-sport-icon">' + sportEmoji(tip.sport) + '</span>'
     + '<div class="tip-teams-row">'
     + '<span class="tip-team-wrap">' + homeLogo + '<span class="tip-team-name">' + tip.home + '</span></span>'
     + '<span class="tip-vs">vs</span>'
@@ -119,7 +132,7 @@ function renderTipRow(tip, logoHome, logoAway) {
     + '</div>'
     + '<div class="tip-pick-label">Pick: <strong>' + tip.pick + '</strong></div>'
     + '</div>'
-    + '<div class="tip-odds-block"><div class="tip-odds">' + tip.odds + '</div><div class="conf-dots">' + conf + '</div></div>'
+    + '<div class="tip-odds-block"><div class="tip-odds">' + tip.odds + '</div></div>'
     + '</div>';
 }
 
@@ -137,7 +150,7 @@ function openTipPopup(tipId) {
   document.getElementById('popup-pick').style.color = color;
   document.getElementById('popup-odds').textContent = tip.odds;
   document.getElementById('popup-time').textContent = `${tip.date} · ${tip.time}`;
-  document.getElementById('popup-conf-dots').innerHTML = confDots;
+  
   document.getElementById('popup-analysis').textContent = tip.analysis;
   document.getElementById('tip-popup').classList.add('open');
 }
@@ -267,13 +280,13 @@ function getTeamLogo(teamName, callback) {
   if (!teamName) { callback(null); return; }
   var key = teamName.toLowerCase().trim();
   if (logoCache[key] !== undefined) { callback(logoCache[key]); return; }
-  var url = 'https://www.thesportsdb.com/api/v1/json/3/searchteams.php?t=' + encodeURIComponent(teamName);
+  var url = 'https://www.thesportsdb.com/api/v1/json/1/searchteams.php?t=' + encodeURIComponent(teamName);
   fetch(url)
     .then(function(r) { return r.json(); })
     .then(function(data) {
       var logo = null;
       if (data && data.teams && data.teams[0]) {
-        logo = data.teams[0].strTeamBadge || data.teams[0].strTeamLogo || null;
+        logo = data.teams[0].strTeamBadge || data.teams[0].strBadge || data.teams[0].strTeamLogo || null;
       }
       logoCache[key] = logo;
       callback(logo);
@@ -282,17 +295,17 @@ function getTeamLogo(teamName, callback) {
 }
 
 function renderTipRow(tip, logoHome, logoAway) {
-  var conf = Array.from({length:5}, function(_,i) {
-    return '<div class="conf-dot ' + (i < tip.conf ? 'on' : '') + '"></div>';
-  }).join('');
-
-  var homeLogo = logoHome ? '<img src="' + logoHome + '" class="team-logo" alt="">' : '<span class="team-logo-fallback">' + (tip.home||'').charAt(0) + '</span>';
-  var awayLogo = logoAway ? '<img src="' + logoAway + '" class="team-logo" alt="">' : '<span class="team-logo-fallback">' + (tip.away||'').charAt(0) + '</span>';
+  var homeLogo = logoHome
+    ? '<img src="' + logoHome + '/tiny" class="team-logo" alt="">'
+    : '<span class="team-logo-fallback">' + (tip.home||'').charAt(0) + '</span>';
+  var awayLogo = logoAway
+    ? '<img src="' + logoAway + '/tiny" class="team-logo" alt="">'
+    : '<span class="team-logo-fallback">' + (tip.away||'').charAt(0) + '</span>';
 
   return '<div class="tip-row" onclick="openTipPopup(' + tip.id + ')">'
     + '<div class="tip-time-block"><div class="tip-time">' + tip.time + '</div><div class="tip-date">' + tip.date + '</div></div>'
+    + '<div class="tip-sport-icon-col">' + sportEmoji(tip.sport) + '</div>'
     + '<div class="tip-info">'
-    + '<span class="tip-sport-icon">' + sportEmoji(tip.sport) + '</span>'
     + '<div class="tip-teams-row">'
     + '<span class="tip-team-wrap">' + homeLogo + '<span class="tip-team-name">' + tip.home + '</span></span>'
     + '<span class="tip-vs">vs</span>'
@@ -300,7 +313,7 @@ function renderTipRow(tip, logoHome, logoAway) {
     + '</div>'
     + '<div class="tip-pick-label">Pick: <strong>' + tip.pick + '</strong></div>'
     + '</div>'
-    + '<div class="tip-odds-block"><div class="tip-odds">' + tip.odds + '</div><div class="conf-dots">' + conf + '</div></div>'
+    + '<div class="tip-odds-block"><div class="tip-odds">' + tip.odds + '</div></div>'
     + '</div>';
 }
 
@@ -318,7 +331,7 @@ function openTipPopup(tipId) {
   document.getElementById('popup-pick').style.color = color;
   document.getElementById('popup-odds').textContent = tip.odds;
   document.getElementById('popup-time').textContent = `${tip.date} · ${tip.time}`;
-  document.getElementById('popup-conf-dots').innerHTML = confDots;
+  
   document.getElementById('popup-analysis').textContent = tip.analysis;
   document.getElementById('tip-popup').classList.add('open');
 }
@@ -507,10 +520,7 @@ function getTipPopupHTML() {
         <div class="popup-stat-label">Kick-off</div>
         <div class="popup-stat-val" style="font-size:16px;" id="popup-time"></div>
       </div>
-      <div class="popup-stat">
-        <div class="popup-stat-label">Confidence</div>
-        <div class="conf-dots" id="popup-conf-dots"></div>
-      </div>
+
     </div>
     <div class="popup-analysis" id="popup-analysis"></div>
     <div style="margin-top:16px;">
