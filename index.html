@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- hreflang: add alternate URLs when additional language versions go live -->
+  <link rel="alternate" hreflang="en" href="https://cryptobetshq.vercel.app/">
+  <link rel="alternate" hreflang="cs" href="https://cryptobetshq.vercel.app/cs/">
+  <link rel="alternate" hreflang="x-default" href="https://cryptobetshq.vercel.app/">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Crypto Bets HQ – Cloudbet Betting Picks & Casino Guide</title>
@@ -18,42 +22,7 @@
 <main>
   <div class="site-main">
 
-    <!-- ── HERO ── -->
-    <section class="hero" id="hero">
-
-      <!-- Left: Casino tip 1/3 -->
-      <div class="casino-tip-card">
-        <div class="tip-label">Casino pick of the day</div>
-        <h2>Sweet Bonanza Xmas — High Volatility, Max Win ×21,100</h2>
-        <div class="game-img">
-          <img src="https://images.unsplash.com/photo-1596838132731-3301c3fd4317?w=800&q=80" alt="Sweet Bonanza slot game" loading="lazy">
-        </div>
-        <p class="casino-tip-desc">
-          Pragmatic Play's scatter-pays mechanic rewards patience. Play on Cloudbet where BTC deposits settle instantly. Target 10–20× base bet spins during the bonus round for best EV.
-        </p>
-        <div style="display:flex;gap:8px;flex-direction:column;">
-          <a href="https://www.cloudbet.com" target="_blank" rel="noopener" class="btn-gold">Play on Cloudbet ↗</a>
-          <a href="casino.html" class="btn-outline">More casino tips</a>
-        </div>
-      </div>
-
-      <!-- Right: Picks of the day 2/3 -->
-      <div class="tips-panel" id="tips-panel">
-        <div class="tips-panel-header">
-          <h3>
-            <div class="live-dot"></div>
-            Picks of the day
-          </h3>
-          <a href="sportsbook.html" class="section-more">View all →</a>
-        </div>
-        <div class="tips-list" id="tips-list">
-          <!-- Rendered by JS -->
-        </div>
-      </div>
-
-    </section>
-
-    <!-- ── ARTICLES ── -->
+        <!-- ── ARTICLES ── -->
     <section class="articles-section">
       <div class="section-header">
         <h2 class="section-title">Latest articles</h2>
@@ -68,41 +37,15 @@
 </main>
 
 <div id="footer-mount"></div>
-<div id="popup-mount"></div>
+
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('header-mount').innerHTML = getHeaderHTML('');
   document.getElementById('footer-mount').innerHTML = getFooterHTML();
   document.getElementById('popup-mount').innerHTML = getTipPopupHTML();
-  renderTips();
   renderArticles();
 });
-
-function renderTips() {
-  var tips = DB.get('tips') || [];
-  var list = document.getElementById('tips-list');
-  if (!tips.length) {
-    list.innerHTML = '<div style="padding:24px;text-align:center;color:var(--text-dim);">No picks posted yet.</div>';
-    return;
-  }
-  list.innerHTML = '<div style="padding:20px;text-align:center;color:var(--text-dim);">Loading...</div>';
-  var rendered = {};
-  var total = tips.length;
-  var done = 0;
-  function tryFinish() {
-    done++;
-    if (done >= total * 2) {
-      list.innerHTML = tips.map(function(tip) {
-        return renderTipRow(tip, rendered[tip.id + '_home'], rendered[tip.id + '_away']);
-      }).join('');
-    }
-  }
-  tips.forEach(function(tip) {
-    getTeamLogo(tip.home, function(logo) { rendered[tip.id + '_home'] = logo; tryFinish(); });
-    getTeamLogo(tip.away, function(logo) { rendered[tip.id + '_away'] = logo; tryFinish(); });
-  });
-}
 
 function renderArticles() {
   const articles = DB.get('articles') || [];

@@ -1510,3 +1510,6 @@ a:hover { color: var(--cta-dim); }
 
 /* ── LANG SWITCHER: hidden until 2nd language is live ── */
 .lang-switcher { display: none !important; }
+
+/* Hero/picks removed */
+.hero, .tips-panel, .tips-list, .tip-row, .casino-tip-card, .tip-popup, .popup-overlay { display: none !important; }
