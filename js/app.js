@@ -361,3 +361,151 @@ function toggleFooterCoins() {
     ? '<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 9l4-4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> less'
     : '<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> more';
 }
+
+// ── PAGE INIT — runs on every page automatically ──
+document.addEventListener('DOMContentLoaded', function() {
+  var path = window.location.pathname;
+  var page = path.split('/').pop().replace('.html','') || 'index';
+
+  // Mount header and footer on every page
+  var hm = document.getElementById('header-mount');
+  var fm = document.getElementById('footer-mount');
+  if (hm) hm.innerHTML = getHeaderHTML(page);
+  if (fm) fm.innerHTML = getFooterHTML();
+
+  // Page-specific logic
+  if (page === 'index' || page === '') { initIndexPage(); }
+  else if (page === 'casino')          { initCasinoPage(); }
+  else if (page === 'sportsbook')      { initSportsbookPage(); }
+  else if (page === 'affiliates')      { initAffiliatesPage(); }
+  else if (page === 'article')         { initArticlePage(); }
+});
+
+function initIndexPage() {
+  var grid = document.getElementById('articles-grid');
+  if (!grid) return;
+
+  var articles = DB.get('articles') || [];
+  var cats = [
+    { key: 'casino',     label: 'Casino',     color: '#f0a500' },
+    { key: 'sports',     label: 'Sports',     color: '#4ade80' },
+    { key: 'affiliates', label: 'Affiliates', color: '#60a5fa' },
+    { key: 'blog',       label: 'Blog',       color: '#a78bfa' },
+  ];
+
+  grid.innerHTML = cats.map(function(cat) {
+    var catArticles = articles.filter(function(a) { return a.cat === cat.key; });
+    var featured = catArticles[0];
+    var smalls = catArticles.slice(1, 4);
+
+    var featuredHTML = featured
+      ? '<div class="article-featured" onclick="location.href=\'article.html?id=' + featured.id + '\'">'
+        + '<div class="art-img"><img src="' + featured.img + '" alt="" loading="lazy"></div>'
+        + '<div class="art-body">'
+        + '<div class="art-cat" style="color:' + cat.color + '">' + cat.label + '</div>'
+        + '<div class="art-title">' + featured.title + '</div>'
+        + '<div class="art-meta">' + featured.date + '</div>'
+        + '</div></div>'
+      : '';
+
+    var smallsHTML = smalls.map(function(a) {
+      return '<div class="article-small" onclick="location.href=\'article.html?id=' + a.id + '\'">'
+        + '<div class="art-small-img"><img src="' + a.img + '" alt="" loading="lazy"></div>'
+        + '<div class="art-small-info">'
+        + '<div class="art-small-title">' + a.title + '</div>'
+        + '<div class="art-small-meta">' + a.date + '</div>'
+        + '</div></div>';
+    }).join('');
+
+    var moreHref = cat.key === 'blog' ? 'blog.html' : cat.key + '.html';
+
+    return '<div class="article-column">'
+      + '<div class="column-header">'
+      + '<div class="column-cat-dot" style="background:' + cat.color + '"></div>'
+      + '<span class="column-cat">' + cat.label + '</span>'
+      + '</div>'
+      + featuredHTML
+      + smallsHTML
+      + '<div style="margin-top:10px"><a href="' + moreHref + '" class="section-more" style="font-size:12px">More ' + cat.label + ' \u2192</a></div>'
+      + '</div>';
+  }).join('');
+}
+
+// ── CASINO PAGE ──
+function initCasinoPage() {
+  var grid = document.getElementById('casino-grid');
+  if (!grid) return;
+  var articles = (DB.get('articles') || []).filter(function(a) { return a.cat === 'casino'; });
+  grid.innerHTML = articles.map(function(a) {
+    return '<div class="article-card-full" onclick="location.href=\'article.html?id=' + a.id + '\'">'
+      + '<div class="art-img"><img src="' + a.img + '" alt="" loading="lazy"></div>'
+      + '<div class="art-body"><div class="art-cat" style="color:#f0a500">Casino</div>'
+      + '<div class="art-title" style="font-size:17px">' + a.title + '</div>'
+      + '<div style="font-size:13px;color:var(--text-sec);margin-top:6px;line-height:1.5">' + (a.summary||'') + '</div>'
+      + '<div class="art-meta" style="margin-top:8px">' + a.date + '</div>'
+      + '</div></div>';
+  }).join('') || '<p style="color:var(--text-sec)">No articles yet.</p>';
+}
+
+// ── SPORTSBOOK PAGE ──
+function initSportsbookPage() {
+  var grid = document.getElementById('sports-grid');
+  if (!grid) return;
+  var articles = (DB.get('articles') || []).filter(function(a) { return a.cat === 'sports'; });
+  grid.innerHTML = articles.map(function(a) {
+    return '<div class="article-card-full" onclick="location.href=\'article.html?id=' + a.id + '\'">'
+      + '<div class="art-img"><img src="' + a.img + '" alt="" loading="lazy"></div>'
+      + '<div class="art-body"><div class="art-cat" style="color:#4ade80">Sports</div>'
+      + '<div class="art-title" style="font-size:17px">' + a.title + '</div>'
+      + '<div style="font-size:13px;color:var(--text-sec);margin-top:6px;line-height:1.5">' + (a.summary||'') + '</div>'
+      + '<div class="art-meta" style="margin-top:8px">' + a.date + '</div>'
+      + '</div></div>';
+  }).join('') || '<p style="color:var(--text-sec)">No articles yet.</p>';
+}
+
+// ── AFFILIATES PAGE ──
+function initAffiliatesPage() {
+  var grid = document.getElementById('aff-grid');
+  if (!grid) return;
+  var articles = (DB.get('articles') || []).filter(function(a) { return a.cat === 'affiliates'; });
+  grid.innerHTML = articles.map(function(a) {
+    return '<div class="article-card-full" onclick="location.href=\'article.html?id=' + a.id + '\'">'
+      + '<div class="art-img"><img src="' + a.img + '" alt="" loading="lazy"></div>'
+      + '<div class="art-body"><div class="art-cat" style="color:#60a5fa">Affiliates</div>'
+      + '<div class="art-title" style="font-size:17px">' + a.title + '</div>'
+      + '<div style="font-size:13px;color:var(--text-sec);margin-top:6px;line-height:1.5">' + (a.summary||'') + '</div>'
+      + '<div class="art-meta" style="margin-top:8px">' + a.date + '</div>'
+      + '</div></div>';
+  }).join('') || '<p style="color:var(--text-sec)">No articles yet.</p>';
+}
+
+// ── ARTICLE PAGE ──
+function initArticlePage() {
+  var el = document.getElementById('article-content');
+  if (!el) return;
+  var params = new URLSearchParams(window.location.search);
+  var id = parseInt(params.get('id'));
+  var articles = DB.get('articles') || [];
+  var art = articles.find(function(a) { return a.id === id; });
+  var catColors = { casino:'#f0a500', sports:'#4ade80', affiliates:'#60a5fa', blog:'#a78bfa' };
+  if (!art) { el.innerHTML = '<p style="color:var(--text-sec)">Article not found. <a href="index.html">← Back home</a></p>'; return; }
+  var color = catColors[art.cat] || 'var(--cta)';
+  document.title = art.title + ' – Crypto Bets HQ';
+  var body = art.body
+    ? '<div style="color:var(--text-sec);line-height:1.85;font-size:15px">' + art.body + '</div>'
+    : '<div style="color:var(--text-sec);line-height:1.85;font-size:15px"><p>Full article content coming soon.</p></div>';
+  el.innerHTML = '<div class="breadcrumb"><a href="index.html">Home</a><span>›</span><a href="' + art.cat + '.html">' + art.cat.charAt(0).toUpperCase() + art.cat.slice(1) + '</a><span>›</span><span style="color:var(--text-sec)">' + art.title.slice(0,40) + '…</span></div>'
+    + '<div style="margin-top:20px"><span class="art-cat" style="color:' + color + ';font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em">' + art.cat + '</span>'
+    + '<h1 style="font-family:\'Outfit\',sans-serif;font-size:34px;font-weight:800;margin:10px 0 8px;line-height:1.2">' + art.title + '</h1>'
+    + '<p style="font-size:15px;color:var(--text-sec);margin-bottom:20px;line-height:1.6">' + (art.summary||'') + '</p>'
+    + '<div style="font-size:12px;color:var(--text-dim);margin-bottom:20px">Published ' + art.date + '</div></div>'
+    + '<div style="border-radius:var(--radius-lg);overflow:hidden;margin-bottom:28px;height:360px;background:var(--bg-panel)"><img src="' + (art.img||'') + '" alt="" style="width:100%;height:100%;object-fit:cover"></div>'
+    + body
+    + '<div style="margin-top:32px;padding:20px;background:var(--bg-card);border:1px solid rgba(221,181,254,0.3);border-radius:var(--radius-lg);text-align:center">'
+    + '<div style="font-family:\'Outfit\',sans-serif;font-size:20px;font-weight:700;margin-bottom:8px">Ready to play on Cloudbet?</div>'
+    + '<div style="font-size:13px;color:var(--text-sec);margin-bottom:16px">Get up to 5 BTC welcome bonus.</div>'
+    + '<a href="https://cldbt.cloud/go/en/auth/sign-up?af_token=98f8cd6cce4dc6a600e699ee62740188&aftm_campaign=join-cloudbet&aftm_source=website&aftm_medium=links&aftm_cid=join-cloudbet" target="_blank" rel="noopener" class="btn-gold" style="display:inline-flex">Join Cloudbet ↗</a>'
+    + '</div>';
+}
+
+// ── Update DOMContentLoaded to handle all pages ──

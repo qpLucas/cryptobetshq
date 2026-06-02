@@ -38,22 +38,5 @@
   </div>
 </main>
 <div id="footer-mount"></div>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('header-mount').innerHTML = getHeaderHTML('affiliates');
-  document.getElementById('footer-mount').innerHTML = getFooterHTML();
-  const articles = (DB.get('articles') || []).filter(a => a.cat === 'affiliates');
-  document.getElementById('aff-grid').innerHTML = articles.map(a => `
-    <div class="article-card-full" onclick="location.href='article.html?id=${a.id}'">
-      <div class="art-img"><img src="${a.img}" alt="${a.title}" loading="lazy"></div>
-      <div class="art-body">
-        <div class="art-cat" style="color:#60a5fa">Affiliates</div>
-        <div class="art-title" style="font-size:17px">${a.title}</div>
-        <div style="font-size:13px;color:var(--text-sec);margin-top:6px;line-height:1.5">${a.summary}</div>
-        <div class="art-meta" style="margin-top:8px">${a.date}</div>
-      </div>
-    </div>`).join('') || '<p style="color:var(--text-sec)">No articles yet.</p>';
-});
-</script>
 </body>
 </html>
