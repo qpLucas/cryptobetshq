@@ -1427,3 +1427,36 @@ button { cursor: pointer; font-family: inherit; }
   text-align: center;
   flex-shrink: 0;
 }
+
+/* ── COLOR SWAP: buttons=purple, links=green ── */
+
+/* All buttons/CTAs → purple */
+.btn-gold { background: var(--accent) !important; color: #0e0e14 !important; }
+.btn-gold:hover { background: #c49ee8 !important; }
+
+.btn-outline { color: var(--accent) !important; border-color: rgba(221,181,254,0.4) !important; }
+.btn-outline:hover { background: var(--accent-dim) !important; }
+
+.nav-link.cta { background: var(--accent) !important; color: #0e0e14 !important; }
+.nav-link.cta:hover { background: #c49ee8 !important; color: #0e0e14 !important; }
+
+.action-btn.edit { background: rgba(221,181,254,0.15) !important; color: var(--accent) !important; }
+
+/* All links → green */
+a { color: var(--cta); }
+a:hover { color: var(--cta-dim); }
+
+/* Nav links stay neutral (not green) */
+.nav-link { color: var(--text-sec) !important; }
+.nav-link:hover, .nav-link.active { color: var(--text-pri) !important; background: var(--bg-panel) !important; }
+.nav-link.cta { color: #0e0e14 !important; }
+
+/* Footer links → green */
+.footer-copy a { color: var(--cta) !important; }
+.section-more { color: var(--cta) !important; }
+.section-more:hover { color: var(--cta-dim) !important; }
+
+/* Admin links */
+.admin-nav-link { color: var(--text-sec) !important; }
+.admin-nav-link:hover { color: var(--text-pri) !important; }
+.admin-nav-link.active { color: var(--accent) !important; border-left-color: var(--accent) !important; background: var(--accent-dim) !important; }
