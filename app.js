@@ -296,7 +296,13 @@ function initArticle() {
 }
 
 // ── RESTRICTED COUNTRIES ──
+function closeRestricted() {
+  var el = document.getElementById('r-box');
+  if (el) el.style.display = 'none';
+  localStorage.setItem('r-dismissed', '1');
+}
 function getRestrictedHTML() {
+  if (localStorage.getItem('r-dismissed')) return '';
   var list = [
     ['au','Australia'],['at','Austria'],['be','Belgium'],['cn','China'],
     ['cu','Cuba'],['cw','Curacao'],['fr','France'],['de','Germany'],
@@ -310,13 +316,13 @@ function getRestrictedHTML() {
       + 'title="' + c[1] + '" alt="' + c[1] + '" loading="lazy">';
   }).join('');
   return '<div class="r-box" id="r-box">'
-    + '<button class="r-close" onclick="document.getElementById(&quot;r-box&quot;).style.display=&quot;none&quot;" title="Dismiss">'
+    + '<div class="r-inner">'
+    + '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f87171" stroke-width="2.5" stroke-linecap="round" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>'
+    + '<span class="r-label">Cloudbet is restricted to players from:</span>'
+    + '<div class="r-flags">' + flags + '</div>'
+    + '</div>'
+    + '<button class="r-close" onclick="closeRestricted()" title="Dismiss">'
     + '<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 1l10 10M11 1L1 11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>'
     + '</button>'
-    + '<div class="r-title">'
-    + '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f87171" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>'
-    + ' Cloudbet is restricted to players from:'
-    + '</div>'
-    + '<div class="r-flags">' + flags + '</div>'
     + '</div>';
 }

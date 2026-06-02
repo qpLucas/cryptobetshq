@@ -523,3 +523,53 @@ button { cursor: pointer; font-family: inherit; }
 .site-footer { margin-top: 0 !important; }
 #r-mount { display: block; line-height: 0; }
 .r-box { margin-bottom: 0; }
+
+/* ── RESTRICTED BAR: single row, aligned, spaced flags ── */
+.r-box {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0 !important;
+  padding: 8px 44px !important;
+  position: relative !important;
+}
+.r-inner {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  flex-wrap: wrap !important;
+}
+.r-label {
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  color: #f87171 !important;
+  text-transform: uppercase !important;
+  letter-spacing: .06em !important;
+  white-space: nowrap !important;
+  line-height: 1 !important;
+}
+.r-flags {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 6px !important;
+}
+.r-flag {
+  height: 13px !important;
+  width: auto !important;
+  border-radius: 2px !important;
+  opacity: 0.8 !important;
+  vertical-align: middle !important;
+  display: block !important;
+}
+.r-flag:hover { opacity: 1 !important; }
+.r-close {
+  position: absolute !important;
+  right: 14px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+}
+/* Remove old r-title (replaced by r-label inside r-inner) */
+.r-title { display: none !important; }
+.r-countries { display: none !important; }
