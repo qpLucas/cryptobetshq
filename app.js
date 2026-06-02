@@ -179,7 +179,7 @@ function getFooterHTML() {
     + '</div>'
     + '</div>'
     + '<div class="footer-copy">'
-    + 'Proud partner of <a href="https://www.cloudbet.com" target="_blank" rel="noopener">Cloudbet.com</a> affiliate program'
+    + 'Proud member of <a href="https://www.cloudbet.com" target="_blank" rel="noopener">Cloudbet.com</a> affiliate program'
     + ' &middot; &copy; ' + new Date().getFullYear() + ' ' + t('footer_rights') + ' &middot; ' + t('footer_age') + ' &middot; ' + t('footer_gamble')
     + '</div>'
     + '</div>'
