@@ -474,3 +474,27 @@ button { cursor: pointer; font-family: inherit; }
 .r-flag { height: 14px; width: auto; border-radius: 2px; opacity: 0.8; }
 .r-close { position: absolute; right: 16px; }
 .r-box { position: relative; }
+
+/* ── RESTRICTED BAR v3: text only ── */
+.r-box {
+  position: relative;
+  background: rgba(239,68,68,0.06);
+  border-top: 1px solid rgba(239,68,68,0.2);
+  padding: 10px 44px 10px 24px;
+  text-align: center;
+}
+.r-title {
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .07em; color: #f87171; margin-bottom: 4px;
+}
+.r-countries {
+  font-size: 12px; color: rgba(248,113,113,0.7); line-height: 1.5;
+}
+.r-close {
+  position: absolute; top: 50%; right: 14px; transform: translateY(-50%);
+  background: none; border: none; color: #f87171; opacity: 0.5;
+  cursor: pointer; padding: 4px; border-radius: 4px;
+  transition: opacity .2s; display: flex; align-items: center;
+}
+.r-close:hover { opacity: 1; }
