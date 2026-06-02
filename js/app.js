@@ -189,74 +189,7 @@ const DB = {
 })();
 
 
-// ── SPORT SVG ICON MAP ──
-const SPORT_SVG = {
-  // Football: classic soccer ball with pentagons
-  football: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9.5" stroke="currentColor" stroke-width="1.3"/><polygon points="12,5 14.5,9 12,11 9.5,9" stroke="currentColor" stroke-width="1" fill="none" stroke-linejoin="round"/><polygon points="5,10 8,9.5 9.5,12 7.5,14.5" stroke="currentColor" stroke-width="1" fill="none" stroke-linejoin="round"/><polygon points="19,10 16,9.5 14.5,12 16.5,14.5" stroke="currentColor" stroke-width="1" fill="none" stroke-linejoin="round"/><polygon points="8,19 9,16 12,15 15,16 16,19" stroke="currentColor" stroke-width="1" fill="none" stroke-linejoin="round"/></svg>`,
 
-  // Esports: controller with buttons
-  esports: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 9h12l2 7-3-1H7l-3 1z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><path d="M9 11.5v3M7.5 13h3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><circle cx="15.5" cy="12" r="0.8" fill="currentColor"/><circle cx="17" cy="13.5" r="0.8" fill="currentColor"/></svg>`,
-
-  // Basketball: ball with court lines
-  basketball: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9.5" stroke="currentColor" stroke-width="1.3"/><path d="M12 2.5v19M2.5 12h19" stroke="currentColor" stroke-width="1.1"/><path d="M6 4.5C8.5 7 9 9.5 9 12s-.5 5-3 7.5" stroke="currentColor" stroke-width="1.1" fill="none"/><path d="M18 4.5C15.5 7 15 9.5 15 12s.5 5 3 7.5" stroke="currentColor" stroke-width="1.1" fill="none"/></svg>`,
-
-  // Tennis: ball with curved seam lines
-  tennis: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 6.5C7.5 9 8.5 10.5 8.5 12S7.5 15 5 17.5" stroke="currentColor" stroke-width="1.2" fill="none"/><path d="M19 6.5C16.5 9 15.5 10.5 15.5 12s1 3 3.5 5.5" stroke="currentColor" stroke-width="1.2" fill="none"/></svg>`,
-
-  // Baseball: ball with stitching
-  baseball: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9.5" stroke="currentColor" stroke-width="1.3"/><path d="M9 4.5C10 7 10 9.5 10 12s0 5-1 7.5" stroke="currentColor" stroke-width="1.1" fill="none"/><path d="M15 4.5C14 7 14 9.5 14 12s0 5 1 7.5" stroke="currentColor" stroke-width="1.1" fill="none"/><path d="M9.5 8l1 1M9.5 12l1 0.3M9.5 16l1-1M14.5 8l-1 1M14.5 12l-1 0.3M14.5 16l-1-1" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/></svg>`,
-
-  // Ice hockey: stick and puck
-  hockey: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 4l3 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M10 14h5c1.5 0 2.5.8 2.5 2s-1 2-2.5 2H9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><ellipse cx="9" cy="20" rx="2" ry="1" stroke="currentColor" stroke-width="1.1"/></svg>`,
-
-  // Boxing: two gloves facing each other
-  boxing: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 14c0-2.5 1.5-5 3-5h2.5c1 0 1.5.8 1.5 2v4c0 1-.5 2-1.5 2H6C4.5 17 4 15.5 4 14z" stroke="currentColor" stroke-width="1.2"/><path d="M9.5 11V9c0-.8.5-1.5 1.5-1.5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/><path d="M20 14c0-2.5-1.5-5-3-5h-2.5c-1 0-1.5.8-1.5 2v4c0 1 .5 2 1.5 2H18c1.5 0 2-1.5 2-3z" stroke="currentColor" stroke-width="1.2"/><path d="M14.5 11V9c0-.8-.5-1.5-1.5-1.5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg>`,
-
-  // MMA: octagon
-  mma: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><polygon points="9,3 15,3 21,9 21,15 15,21 9,21 3,15 3,9" stroke="currentColor" stroke-width="1.3" fill="none" stroke-linejoin="round"/><path d="M9 12h6M12 9v6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>`,
-
-  // Golf: flag on hole with ball
-  golf: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 20V5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M8 5l7 3-7 3" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" fill="none"/><ellipse cx="8" cy="20" rx="5" ry="1.5" stroke="currentColor" stroke-width="1.1"/><circle cx="15" cy="17" r="2" stroke="currentColor" stroke-width="1.1"/></svg>`,
-
-  // Rugby: oval ball with seam
-  rugby: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="12" cy="12" rx="9" ry="5.5" stroke="currentColor" stroke-width="1.3"/><path d="M3.5 12h17" stroke="currentColor" stroke-width="1"/><path d="M6 7.5C8 9 9.5 10.5 9.5 12S8 15 6 16.5" stroke="currentColor" stroke-width="1" fill="none"/><path d="M18 7.5C16 9 14.5 10.5 14.5 12s1.5 3 3.5 4.5" stroke="currentColor" stroke-width="1" fill="none"/></svg>`,
-
-  // Volleyball: ball with sections
-  volleyball: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9.5" stroke="currentColor" stroke-width="1.3"/><path d="M12 2.5C9 5 7.5 8.5 7.5 12" stroke="currentColor" stroke-width="1.1" fill="none"/><path d="M7.5 12C5 13.5 3.5 16 3 18.5" stroke="currentColor" stroke-width="1.1" fill="none"/><path d="M12 2.5C15 5 16.5 8.5 16.5 12" stroke="currentColor" stroke-width="1.1" fill="none"/><path d="M16.5 12C19 13.5 20.5 16 21 18.5" stroke="currentColor" stroke-width="1.1" fill="none"/><path d="M7.5 12h9" stroke="currentColor" stroke-width="1.1"/></svg>`,
-
-  // Cricket: bat and ball
-  cricket: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 4L8 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M13.5 4h3" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><circle cx="6.5" cy="19" r="2.5" stroke="currentColor" stroke-width="1.2"/></svg>`,
-
-  // Other: trophy cup
-  other: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 3h8v8a4 4 0 0 1-8 0V3z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M8 6H5c0 3 1.5 5 3 5.5M16 6h3c0 3-1.5 5-3 5.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><path d="M12 15v4M9 19h6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>`,
-};
-
-function sportEmoji(sport) {
-  return SPORT_SVG[sport] || SPORT_SVG.other;
-}
-
-
-// ── TIP POPUP ──
-function openTipPopup(tipId) {
-  const tips = DB.get('tips') || [];
-  const tip = tips.find(t => t.id == tipId);
-  if (!tip) return;
-  const sportColors = { football: '#4ade80', esports: '#a78bfa', basketball: '#fb923c', tennis: '#facc15' };
-  const color = sportColors[tip.sport] || '#9998b0';
-  const confDots = Array.from({length:5}, (_,i) => `<div class="conf-dot ${i < tip.conf ? 'on' : ''}"></div>`).join('');
-  document.getElementById('popup-sport').innerHTML = `<span class="tip-sport-icon tip-sport-icon-lg">${sportEmoji(tip.sport)}</span> <span class="tip-sport-badge ${tip.sport}">${tip.sport.toUpperCase()}</span>`;
-  document.getElementById('popup-teams').textContent = `${tip.home} vs ${tip.away}`;
-  document.getElementById('popup-pick').textContent = tip.pick;
-  document.getElementById('popup-pick').style.color = color;
-  document.getElementById('popup-odds').textContent = tip.odds;
-  document.getElementById('popup-time').textContent = `${tip.date} · ${tip.time}`;
-  
-  document.getElementById('popup-analysis').textContent = tip.analysis;
-  document.getElementById('tip-popup').classList.add('open');
-}
-function closeTipPopup() {
-  document.getElementById('tip-popup').classList.remove('open');
-}
 
 // ── MOBILE NAV ──
 function toggleMobileNav() {
