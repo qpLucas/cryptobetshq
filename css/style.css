@@ -932,3 +932,95 @@ button { cursor: pointer; font-family: inherit; }
   color: var(--accent);
   position: relative;
 }
+
+/* ══════════════════════════════════════
+   LOGO v3 — CSS-only, no font dependency
+   ══════════════════════════════════════ */
+
+/* Remove old logo styles */
+.logo-mark { display: none !important; }
+.logo-text { display: none !important; }
+.logo-text-wrap { display: none !important; }
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  text-decoration: none;
+}
+
+.logo-lockup {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  user-select: none;
+}
+
+/* The pill badge — "CBHQ" with split styling */
+.logo-pill {
+  display: inline-flex;
+  align-items: center;
+  height: 34px;
+  padding: 0 10px;
+  border-radius: 10px;
+  background: var(--accent);
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-weight: 900;
+  font-size: 15px;
+  letter-spacing: -.02em;
+  color: #0e0e14;
+  white-space: nowrap;
+  position: relative;
+  flex-shrink: 0;
+}
+.logo-pill em {
+  font-style: normal;
+  color: rgba(14,14,20,0.45);
+  margin-left: 1px;
+  font-size: 13px;
+  letter-spacing: -.01em;
+}
+
+/* The wordmark next to the pill */
+.logo-wordmark {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  line-height: 1;
+}
+
+.lw-crypto {
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  color: var(--text-pri);
+  letter-spacing: -.025em;
+}
+
+.lw-bets {
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  color: var(--text-sec);
+  letter-spacing: -.01em;
+}
+
+.lw-hq {
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-weight: 900;
+  font-size: 13px;
+  color: var(--accent);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border: 1px solid rgba(221,181,254,0.3);
+  border-radius: 4px;
+  line-height: 1.4;
+  margin-left: 2px;
+}
+
+@media (max-width: 900px) {
+  .logo-full { display: none !important; }
+  .logo-short { display: inline-flex !important; }
+  .lw-hq { display: none !important; }
+}
