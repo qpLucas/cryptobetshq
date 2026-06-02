@@ -329,3 +329,8 @@ button { cursor: pointer; font-family: inherit; }
 /* ── NAV inside header-right ── */
 .header-right { display: flex; align-items: center; gap: 6px; margin-left: auto; }
 .header-right .nav { display: flex; }
+
+/* ── FINAL HEADER LAYOUT: logo | nav | socials ── */
+.header-inner { display: flex; align-items: center; gap: 12px; justify-content: space-between; }
+.header-inner .nav { flex: 1; justify-content: flex-end; margin-left: 16px; }
+.header-right { flex-shrink: 0; margin-left: 0; }
