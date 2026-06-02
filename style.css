@@ -467,3 +467,10 @@ button { cursor: pointer; font-family: inherit; }
 .r-box { margin: 0; }
 .r-flag { height: 14px; width: auto; border-radius: 2px; opacity: 0.75; transition: opacity .15s; vertical-align: middle; }
 .r-flag:hover { opacity: 1; }
+
+/* ── RESTRICTED BAR: centered + sharper flags ── */
+.r-box { justify-content: center; text-align: center; }
+.r-inner { justify-content: center; }
+.r-flag { height: 14px; width: auto; border-radius: 2px; opacity: 0.8; }
+.r-close { position: absolute; right: 16px; }
+.r-box { position: relative; }
