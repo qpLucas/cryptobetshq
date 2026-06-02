@@ -1281,3 +1281,19 @@ button { cursor: pointer; font-family: inherit; }
 .footer-crypto-expand.open svg {
   transform: rotate(180deg);
 }
+
+/* ── FOOTER EXPAND FIX ── */
+/* Remove old nth-child rule */
+.footer-crypto-icons .footer-crypto-icon:nth-child(n+8) { display: flex; }
+
+.footer-coins-extra {
+  display: none;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.footer-coins-extra.open {
+  display: flex;
+}
+.footer-crypto-expand {
+  display: inline-flex !important;
+}
