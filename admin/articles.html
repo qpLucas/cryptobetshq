@@ -280,15 +280,10 @@ async function runAiWriter() {
     + 'Return ONLY the JSON, no markdown fences, no extra text.';
 
   try {
-    var response = await fetch('https://api.anthropic.com/v1/messages', {
+    var response = await fetch('/api/generate', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        system: systemPrompt,
-        messages: [{ role: 'user', content: prompt }]
-      })
+      body: JSON.stringify({ system: systemPrompt, prompt: prompt })
     });
 
     var data = await response.json();

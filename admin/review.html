@@ -180,15 +180,10 @@ async function runAiReview() {
   var userMsg = 'Write a full Cloudbet review for our affiliate site.' + (extra ? ' Additional notes: ' + extra : '');
 
   try {
-    var response = await fetch('https://api.anthropic.com/v1/messages', {
+    var response = await fetch('/api/generate', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        system: systemPrompt,
-        messages: [{ role: 'user', content: userMsg }]
-      })
+      body: JSON.stringify({ system: systemPrompt, prompt: userMsg })
     });
 
     var data = await response.json();
