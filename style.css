@@ -917,3 +917,18 @@ button { cursor: pointer; font-family: inherit; }
   text-decoration: none !important;
   flex-shrink: 0;
 }
+
+/* ── LOGO FONT: Russo One — bold, wide, punchy ── */
+@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
+
+.tl-we, .tl-crypto, .tl-dot {
+  font-family: 'Russo One', system-ui, sans-serif !important;
+}
+.tl-we    { font-size: 28px !important; font-weight: 400 !important; }
+.tl-crypto { font-size: 28px !important; font-weight: 400 !important; }
+.tl-dot   { font-size: 14px !important; font-weight: 400 !important; opacity: 0.5; }
+
+@media (max-width: 768px) {
+  .tl-we, .tl-crypto { font-size: 22px !important; }
+  .tl-dot { font-size: 12px !important; }
+}
