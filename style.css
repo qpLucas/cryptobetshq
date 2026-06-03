@@ -1167,3 +1167,6 @@ button { cursor: pointer; font-family: inherit; }
   gap: 16px !important;
   max-width: 1000px !important;
 }
+
+/* ── ARTICLE LAYOUT: gap 32px ── */
+.article-layout { gap: 32px !important; }
