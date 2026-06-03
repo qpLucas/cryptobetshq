@@ -1105,3 +1105,29 @@ button { cursor: pointer; font-family: inherit; }
 @media (max-width: 600px) {
   .hero-grid { grid-template-columns: 1fr; }
 }
+
+/* ── REVIEW: XX/10 format ── */
+.hc-score-label {
+  font-family: 'Outfit', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-dim);
+  align-self: flex-end;
+  padding-bottom: 4px;
+}
+
+/* Affiliate card: smaller number for "Lifetime" text */
+.hc-aff-num {
+  font-size: 18px !important;
+}
+.hc-aff-desc {
+  font-size: 10px !important;
+}
+
+/* Affiliate sub text: wrap nicely */
+.hero-card-aff .hc-sub {
+  font-size: 11px;
+  color: var(--text-sec);
+  line-height: 1.6;
+  flex: 1;
+}
