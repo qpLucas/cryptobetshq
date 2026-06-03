@@ -1131,3 +1131,12 @@ button { cursor: pointer; font-family: inherit; }
   line-height: 1.6;
   flex: 1;
 }
+
+/* ── HERO CARD TOP BORDERS: green for bonus, purple for rest ── */
+.hero-card-review::before,
+.hero-card-faq::before,
+.hero-card-aff::before { background: var(--accent) !important; }
+.hero-card-bonus::before { background: var(--cta) !important; }
+
+/* ── AFFILIATE CARD: purple numbers ── */
+.hero-card-aff .hc-aff-num { color: var(--accent) !important; }
