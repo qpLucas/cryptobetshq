@@ -623,3 +623,87 @@ button { cursor: pointer; font-family: inherit; }
     align-items: center;
   }
 }
+
+/* ── MOBILE FOOTER: more button below icons ── */
+@media (max-width: 768px) {
+  .crypto-icons {
+    flex-direction: column;
+  }
+  .crypto-icons > .crypto-icon,
+  .coins-extra {
+    /* keep grid for icons only */
+  }
+  #footer-coins {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 10px !important;
+  }
+  #footer-coins .crypto-icons-row {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+  }
+  .expand-btn {
+    align-self: flex-start !important;
+    margin-top: 2px !important;
+  }
+}
+
+/* ── MOBILE NAV BUTTONS: cleaner highlight style ── */
+.mobile-nav .mob-cta {
+  background: var(--cta) !important;
+  color: #0e0e14 !important;
+  border-radius: 8px !important;
+  font-weight: 700 !important;
+  padding: 13px 16px !important;
+  border-bottom: 1px solid rgba(106,199,137,0.2) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+.mobile-nav .mob-cta::after { content: '↗'; font-size: 14px; opacity: 0.7; }
+
+.mobile-nav .mob-bonus {
+  background: transparent !important;
+  color: var(--cta) !important;
+  border: none !important;
+  border-bottom: 1px solid var(--border) !important;
+  border-radius: 0 !important;
+  font-weight: 600 !important;
+  padding: 13px 0 !important;
+  position: relative !important;
+}
+.mobile-nav .mob-bonus::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 50%; transform: translateY(-50%);
+  width: 3px; height: 18px;
+  background: var(--cta);
+  border-radius: 2px;
+}
+.mobile-nav .mob-bonus { padding-left: 12px !important; }
+
+/* ── COINS ROW GRID ── */
+.coins-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+@media (max-width: 768px) {
+  .crypto-icons {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+  }
+  .coins-row {
+    display: grid !important;
+    grid-template-columns: repeat(8, 1fr) !important;
+    gap: 8px !important;
+    width: 100% !important;
+  }
+  .expand-btn {
+    margin-top: 4px !important;
+  }
+}

@@ -171,8 +171,8 @@ function getFooterHTML() {
     + '<div>'
     + '<span class="footer-crypto-label">' + t('footer_coins') + '</span>'
     + '<div class="crypto-icons" id="footer-coins">'
-    + c7.map(coin).join('')
-    + '<div class="coins-extra" id="coins-extra">' + cExtra.map(coin).join('') + '</div>'
+    + '<div class="coins-row">' + c7.map(coin).join('') + '</div>'
+    + '<div class="coins-extra" id="coins-extra"><div class="coins-row">' + cExtra.map(coin).join('') + '</div></div>'
     + '<button class="expand-btn" id="expand-btn" onclick="toggleCoins()">'
     + '<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>'
     + ' more</button>'
