@@ -117,6 +117,7 @@ var scoreEl = document.getElementById('hero-score');
 var starsEl = document.getElementById('hero-stars');
 var verdictEl = document.getElementById('hero-verdict');
 if (scoreEl && rv.rating) scoreEl.textContent = rv.rating;
+var ltEl = document.getElementById('latest-title'); if (ltEl) ltEl.textContent = t('latest');
 if (verdictEl && rv.verdict) verdictEl.textContent = rv.verdict;
 if (starsEl) {
   var score = rv.rating || 8.7;
@@ -130,7 +131,7 @@ if (starsEl) {
 document.getElementById('hero-badge').textContent = t('hero_badge');
 document.getElementById('hero-h1').innerHTML = t('hero_h1').replace('\n','<br>');
 document.getElementById('hero-p').textContent = t('hero_p');
-document.getElementById('latest-title').textContent = t('latest');
+
 document.getElementById('hero-btns').innerHTML =
   '<a href="' + AFFILIATE_URL + '" target="_blank" rel="noopener" class="btn btn-green">' + t('hero_btn1') + '</a>' +
   '<a href="/how-to"" class="btn btn-outline">' + t('hero_btn2') + '</a>';
