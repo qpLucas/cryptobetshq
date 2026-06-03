@@ -16,7 +16,7 @@ var TRANSLATIONS = {
     footer_coins:'Accepted on Cloudbet',
     footer_rights:'All rights reserved',footer_age:'18+',footer_gamble:'Gamble responsibly',
     bc_home:'Home',
-    art_cta_title:'Ready to play?',art_cta_desc:'Get up to 5 BTC welcome bonus.',
+    art_cta_title:'Ready to play?',art_cta_desc:'Up to $2500 Welcome Bonus + Reward Program.',
     art_cta_btn:'Join Cloudbet \u2197',no_articles:'No articles yet.',
   },
   cs: {
@@ -42,6 +42,12 @@ localStorage.setItem('lang', 'en');
 function getLang() { return localStorage.getItem('lang') || 'en'; }
 function t(k) { var d = TRANSLATIONS[getLang()] || TRANSLATIONS.en; return d[k] || TRANSLATIONS.en[k] || k; }
 function setLang(l) { localStorage.setItem('lang', l); location.reload(); }
+
+
+// ── URL SLUG ──
+function slugify(text) {
+  return text.toString().toLowerCase().replace(/[^a-z0-9\s-]/g,'').replace(/\s+/g,'-').replace(/-+/g,'-').trim().slice(0,80);
+}
 
 // ── DATA STORE ──
 var DB = {
@@ -81,15 +87,15 @@ var AFFILIATE_URL = 'https://cldbt.cloud/go/en/auth/sign-up?af_token=98f8cd6cce4
 function getHeaderHTML(active) {
   var nav = [
     { label:t('nav_join'),       href:AFFILIATE_URL,                              ext:true, cta:true },
-    { label:t('nav_bonus'),      href:'bonus-details.html', bonus:true },
-    { label:t('nav_review'),     href:'review.html' },
-    { label:t('nav_howto'),      href:'how-to.html' },
-    { label:t('nav_casino'),     href:'casino.html' },
-    { label:t('nav_sports'),     href:'sportsbook.html' },
-    { label:t('nav_affiliates'), href:'affiliates.html' },
+    { label:t('nav_bonus'),      href:'/bonus-details', bonus:true },
+    { label:t('nav_review'),     href:'/review' },
+    { label:t('nav_howto'),      href:'/how-to' },
+    { label:t('nav_casino'),     href:'/casino' },
+    { label:t('nav_sports'),     href:'/sportsbook' },
+    { label:t('nav_affiliates'), href:'/affiliates' },
   ];
   var navHTML = nav.map(function(n) {
-    var cls = 'nav-link' + (n.cta ? ' nav-cta' : '') + (n.bonus ? ' nav-bonus' : '') + (!n.ext && active === n.href.replace('.html','') ? ' active' : '');
+    var cls = 'nav-link' + (n.cta ? ' nav-cta' : '') + (n.bonus ? ' nav-bonus' : '') + (!n.ext && ('/' + active) === n.href ? ' active' : '');
     var ext = n.ext ? ' target="_blank" rel="noopener"' : '';
     return '<a href="' + n.href + '" class="' + cls + '"' + ext + '>' + n.label + '</a>';
   }).join('');
@@ -97,7 +103,7 @@ function getHeaderHTML(active) {
   var p = isAdmin ? '../' : '';
   return '<header class="site-header">'
     + '<div class="header-inner">'
-    + '<a href="' + p + 'index.html" style="display:flex;align-items:center">'
+    + '<a href="' + (p ? p : '/') + '" style="display:flex;align-items:center">'
     + '<img src="' + p + 'logo-desktop.png" class="logo-img logo-desktop" alt="Crypto Bets HQ">'
     + '<img src="' + p + 'logo-mobile.png"  class="logo-img logo-mobile"  alt="Crypto Bets HQ">'
     + '</a>'
@@ -124,15 +130,15 @@ function getHeaderHTML(active) {
     + '<img src="' + p + 'logo-mobile.png" style="height:44px;width:auto" alt="Crypto Bets HQ">'
     + '<button class="close-btn" onclick="document.getElementById(\'mob-nav\').classList.remove(\'open\')">&#10005;</button>'
     + '</div>'
-    + '<a href="' + p + 'index.html">Home</a>'
+    + '<a href="/">Home</a>'
     + '<a href="' + AFFILIATE_URL + '" target="_blank" rel="noopener" class="mob-cta">' + t('nav_join') + '</a>'
-    + '<a href="' + p + 'bonus-details.html" class="mob-bonus">' + t('nav_bonus') + '</a>'
-    + '<a href="' + p + 'review.html">' + t('nav_review') + '</a>'
-    + '<a href="' + p + 'how-to.html">' + t('nav_howto') + '</a>'
-    + '<a href="' + p + 'casino.html">' + t('nav_casino') + '</a>'
-    + '<a href="' + p + 'sportsbook.html">' + t('nav_sports') + '</a>'
-    + '<a href="' + p + 'affiliates.html">' + t('nav_affiliates') + '</a>'
-    + '<a href="' + p + 'review.html">' + t('nav_review') + '</a>'
+    + '<a href="/bonus-details" class="mob-bonus">' + t('nav_bonus') + '</a>'
+    + '<a href=\"/review\">' + t('nav_review') + '</a>'
+    + '<a href=\"/how-to\">' + t('nav_howto') + '</a>'
+    + '<a href=\"/casino\">' + t('nav_casino') + '</a>'
+    + '<a href=\"/sportsbook\">' + t('nav_sports') + '</a>'
+    + '<a href=\"/affiliates\">' + t('nav_affiliates') + '</a>'
+    + '<a href=\"/review\">' + t('nav_review') + '</a>'
     + '</nav>';
 }
 
@@ -200,7 +206,7 @@ function toggleCoins() {
 
 // ── ARTICLE HELPERS ──
 function artCardHTML(a, catColor) {
-  return '<div class="art-card" onclick="location.href=\'article.html?id=' + a.id + '\'">'
+  return '<div class="art-card" onclick="location.href=\'/article?id=' + a.id + '\'">'
     + '<div class="art-thumb"><img src="' + a.img + '" alt="" loading="lazy"></div>'
     + '<div class="art-body">'
     + '<div class="art-cat" style="color:' + catColor + '">' + a.cat.toUpperCase() + '</div>'
@@ -209,7 +215,7 @@ function artCardHTML(a, catColor) {
     + '</div></div>';
 }
 function artSmallHTML(a) {
-  return '<div class="art-small" onclick="location.href=\'article.html?id=' + a.id + '\'">'
+  return '<div class="art-small" onclick="location.href=\'/article?id=' + a.id + '\'">'
     + '<div class="art-small-thumb"><img src="' + a.img + '" alt="" loading="lazy"></div>'
     + '<div class="art-small-info">'
     + '<div class="art-small-title">' + a.title + '</div>'
@@ -217,7 +223,7 @@ function artSmallHTML(a) {
     + '</div></div>';
 }
 function artCardFullHTML(a, catColor, catLabel) {
-  return '<div class="art-card-full" onclick="location.href=\'article.html?id=' + a.id + '\'">'
+  return '<div class="art-card-full" onclick="location.href=\'/article?id=' + a.id + '\'">'
     + '<div class="art-thumb"><img src="' + a.img + '" alt="" loading="lazy"></div>'
     + '<div class="art-body">'
     + '<div class="art-cat" style="color:' + catColor + '">' + catLabel + '</div>'
@@ -256,9 +262,9 @@ function initIndex() {
   grid.innerHTML = cats.map(function(cat) {
     var items = all.filter(function(a) { return a.cat === cat.key; });
     var featured = items[0];
-    var smalls = items.slice(1,4);
-    var catUrls = { casino:'casino.html', sports:'sportsbook.html', affiliates:'affiliates.html', blog:'blog.html' };
-    var href = catUrls[cat.key] || cat.key + '.html';
+    var smalls = items.slice(1,3);
+    var catUrls = { casino:'/casino', sports:'/sportsbook', affiliates:'/affiliates', blog:'/blog' };
+    var href = catUrls[cat.key] || '/' + cat.key;
     return '<div class="article-column">'
       + '<div class="col-header"><div class="col-dot" style="background:' + cat.color + '"></div><span class="col-label">' + cat.label + '</span></div>'
       + (featured ? artCardHTML(featured, cat.color) : '')
@@ -277,23 +283,45 @@ function initCat(catKey, catColor, catLabel) {
     : '<p style="color:var(--text-sec)">' + t('no_articles') + '</p>';
 }
 
+
+function injectMobileCta(html, ctaHtml) {
+  // Find the midpoint paragraph break and insert CTA there
+  var paras = html.split('</p>');
+  if (paras.length < 3) return html + ctaHtml;
+  var mid = Math.floor(paras.length / 2);
+  return paras.slice(0, mid).join('</p>') + '</p>' + ctaHtml + paras.slice(mid).join('</p>');
+}
+
 function initArticle() {
   var el = document.getElementById('article-content');
   if (!el) return;
-  var id = parseInt(new URLSearchParams(window.location.search).get('id'));
+  var id;
+  var qs = window.location.search;
+  var pn = window.location.pathname;
+  if (qs && qs.includes('id=')) {
+    id = parseInt(new URLSearchParams(qs).get('id'));
+  } else {
+    var segs = pn.split('--');
+    id = parseInt(segs[segs.length - 1]);
+  }
   var art = (DB.get('articles') || []).find(function(a) { return a.id === id; });
-  if (!art) { el.innerHTML = '<p style="color:var(--text-sec)">Article not found. <a href="index.html">\u2190 Home</a></p>'; return; }
+  if (!art) { el.innerHTML = '<p style="color:var(--text-sec)">Article not found. <a href="/">\u2190 Home</a></p>'; return; }
   var colors = { casino:'#f0a500', sports:'#4ade80', affiliates:'#60a5fa', blog:'#a78bfa' };
   document.title = art.title + ' \u2013 Crypto Bets HQ';
-  el.innerHTML = '<div class="breadcrumb"><a href="index.html">' + t('bc_home') + '</a><span>\u203a</span>'
-    + '<a href="' + (art.cat === 'sports' ? 'sportsbook' : art.cat) + '.html">' + art.cat.charAt(0).toUpperCase() + art.cat.slice(1) + '</a>'
+  el.innerHTML = '<div class="breadcrumb"><a href="/">' + t('bc_home') + '</a><span>\u203a</span>'
+    + '<a href="' + (art.cat === 'sports' ? 'sportsbook' : art.cat) + '">' + art.cat.charAt(0).toUpperCase() + art.cat.slice(1) + '</a>'
     + '<span>\u203a</span><span style="color:var(--text-sec)">' + art.title.slice(0,50) + '\u2026</span></div>'
     + '<h1 style="font-family:\'Outfit\',sans-serif;font-size:32px;font-weight:800;margin:14px 0 8px;line-height:1.2">' + art.title + '</h1>'
     + '<p style="color:var(--text-sec);font-size:15px;line-height:1.6;margin-bottom:10px">' + (art.summary||'') + '</p>'
     + '<div style="font-size:12px;color:var(--text-dim);margin-bottom:20px">Published ' + art.date + '</div>'
     + '<div style="border-radius:var(--radius-lg);overflow:hidden;margin-bottom:26px;height:340px;background:var(--panel)">'
     + '<img src="' + (art.img||'') + '" alt="" style="width:100%;height:100%;object-fit:cover"></div>'
-    + '<div style="color:var(--text-sec);line-height:1.85;font-size:15px">' + (art.body || '<p>Full content coming soon.</p>') + '</div>'
+    + '<div style="color:var(--text-sec);line-height:1.85;font-size:15px">' + injectMobileCta(art.body || '<p>Full content coming soon.</p>', '<div class="art-mobile-cta">'
+      + '<div class="art-sidebar-badge">Exclusive offer</div>'
+      + '<div style="font-family:\'Outfit\',sans-serif;font-size:22px;font-weight:800;color:var(--cta);margin:8px 0 4px">Up to $2500</div>'
+      + '<div style="font-size:13px;color:var(--text-sec);margin-bottom:14px">Welcome Bonus + Reward Program</div>'
+      + '<a href="' + AFFILIATE_URL + '" target="_blank" rel="noopener" class="btn btn-green" style="width:100%;padding:12px">Claim bonus &#x2197;</a>'
+      + '</div>') + '</div>'
     + '<div style="margin-top:32px;padding:22px;background:var(--card);border:1px solid rgba(221,181,254,0.3);border-radius:var(--radius-lg);text-align:center">'
     + '<div style="font-family:\'Outfit\',sans-serif;font-size:20px;font-weight:700;margin-bottom:8px">' + t('art_cta_title') + '</div>'
     + '<div style="font-size:13px;color:var(--text-sec);margin-bottom:16px">' + t('art_cta_desc') + '</div>'
@@ -303,7 +331,7 @@ function initArticle() {
 
 // ── ARTICLE HELPERS ──
 function artCardHTML(a, catColor) {
-  return '<div class="art-card" onclick="location.href=\'article.html?id=' + a.id + '\'">'
+  return '<div class="art-card" onclick="location.href=\'/article?id=' + a.id + '\'">'
     + '<div class="art-thumb"><img src="' + a.img + '" alt="" loading="lazy"></div>'
     + '<div class="art-body">'
     + '<div class="art-cat" style="color:' + catColor + '">' + a.cat.toUpperCase() + '</div>'
@@ -312,7 +340,7 @@ function artCardHTML(a, catColor) {
     + '</div></div>';
 }
 function artSmallHTML(a) {
-  return '<div class="art-small" onclick="location.href=\'article.html?id=' + a.id + '\'">'
+  return '<div class="art-small" onclick="location.href=\'/article?id=' + a.id + '\'">'
     + '<div class="art-small-thumb"><img src="' + a.img + '" alt="" loading="lazy"></div>'
     + '<div class="art-small-info">'
     + '<div class="art-small-title">' + a.title + '</div>'
@@ -320,7 +348,7 @@ function artSmallHTML(a) {
     + '</div></div>';
 }
 function artCardFullHTML(a, catColor, catLabel) {
-  return '<div class="art-card-full" onclick="location.href=\'article.html?id=' + a.id + '\'">'
+  return '<div class="art-card-full" onclick="location.href=\'/article?id=' + a.id + '\'">'
     + '<div class="art-thumb"><img src="' + a.img + '" alt="" loading="lazy"></div>'
     + '<div class="art-body">'
     + '<div class="art-cat" style="color:' + catColor + '">' + catLabel + '</div>'
@@ -359,9 +387,9 @@ function initIndex() {
   grid.innerHTML = cats.map(function(cat) {
     var items = all.filter(function(a) { return a.cat === cat.key; });
     var featured = items[0];
-    var smalls = items.slice(1,4);
-    var catUrls = { casino:'casino.html', sports:'sportsbook.html', affiliates:'affiliates.html', blog:'blog.html' };
-    var href = catUrls[cat.key] || cat.key + '.html';
+    var smalls = items.slice(1,3);
+    var catUrls = { casino:'/casino', sports:'/sportsbook', affiliates:'/affiliates', blog:'/blog' };
+    var href = catUrls[cat.key] || '/' + cat.key;
     return '<div class="article-column">'
       + '<div class="col-header"><div class="col-dot" style="background:' + cat.color + '"></div><span class="col-label">' + cat.label + '</span></div>'
       + (featured ? artCardHTML(featured, cat.color) : '')
@@ -380,26 +408,61 @@ function initCat(catKey, catColor, catLabel) {
     : '<p style="color:var(--text-sec)">' + t('no_articles') + '</p>';
 }
 
+
+function injectMobileCta(html, ctaHtml) {
+  // Find the midpoint paragraph break and insert CTA there
+  var paras = html.split('</p>');
+  if (paras.length < 3) return html + ctaHtml;
+  var mid = Math.floor(paras.length / 2);
+  return paras.slice(0, mid).join('</p>') + '</p>' + ctaHtml + paras.slice(mid).join('</p>');
+}
+
 function initArticle() {
   var el = document.getElementById('article-content');
   if (!el) return;
-  var id = parseInt(new URLSearchParams(window.location.search).get('id'));
+  var id;
+  var qs = window.location.search;
+  var pn = window.location.pathname;
+  if (qs && qs.includes('id=')) {
+    id = parseInt(new URLSearchParams(qs).get('id'));
+  } else {
+    var segs = pn.split('--');
+    id = parseInt(segs[segs.length - 1]);
+  }
   var art = (DB.get('articles') || []).find(function(a) { return a.id === id; });
-  if (!art) { el.innerHTML = '<p style="color:var(--text-sec)">Article not found. <a href="index.html">\u2190 Home</a></p>'; return; }
+  if (!art) { el.innerHTML = '<p style="color:var(--text-sec)">Article not found. <a href="/">\u2190 Home</a></p>'; return; }
   var colors = { casino:'#f0a500', sports:'#4ade80', affiliates:'#60a5fa', blog:'#a78bfa' };
   document.title = art.title + ' \u2013 Crypto Bets HQ';
-  el.innerHTML = '<div class="breadcrumb"><a href="index.html">' + t('bc_home') + '</a><span>\u203a</span>'
-    + '<a href="' + (art.cat === 'sports' ? 'sportsbook' : art.cat) + '.html">' + art.cat.charAt(0).toUpperCase() + art.cat.slice(1) + '</a>'
+  el.innerHTML = '<div class="breadcrumb"><a href="/">' + t('bc_home') + '</a><span>\u203a</span>'
+    + '<a href="' + (art.cat === 'sports' ? 'sportsbook' : art.cat) + '">' + art.cat.charAt(0).toUpperCase() + art.cat.slice(1) + '</a>'
     + '<span>\u203a</span><span style="color:var(--text-sec)">' + art.title.slice(0,50) + '\u2026</span></div>'
     + '<h1 style="font-family:\'Outfit\',sans-serif;font-size:32px;font-weight:800;margin:14px 0 8px;line-height:1.2">' + art.title + '</h1>'
     + '<p style="color:var(--text-sec);font-size:15px;line-height:1.6;margin-bottom:10px">' + (art.summary||'') + '</p>'
     + '<div style="font-size:12px;color:var(--text-dim);margin-bottom:20px">Published ' + art.date + '</div>'
     + '<div style="border-radius:var(--radius-lg);overflow:hidden;margin-bottom:26px;height:340px;background:var(--panel)">'
     + '<img src="' + (art.img||'') + '" alt="" style="width:100%;height:100%;object-fit:cover"></div>'
-    + '<div style="color:var(--text-sec);line-height:1.85;font-size:15px">' + (art.body || '<p>Full content coming soon.</p>') + '</div>'
+    + '<div style="color:var(--text-sec);line-height:1.85;font-size:15px">' + injectMobileCta(art.body || '<p>Full content coming soon.</p>', '<div class="art-mobile-cta">'
+      + '<div class="art-sidebar-badge">Exclusive offer</div>'
+      + '<div style="font-family:\'Outfit\',sans-serif;font-size:22px;font-weight:800;color:var(--cta);margin:8px 0 4px">Up to $2500</div>'
+      + '<div style="font-size:13px;color:var(--text-sec);margin-bottom:14px">Welcome Bonus + Reward Program</div>'
+      + '<a href="' + AFFILIATE_URL + '" target="_blank" rel="noopener" class="btn btn-green" style="width:100%;padding:12px">Claim bonus &#x2197;</a>'
+      + '</div>') + '</div>'
     + '<div style="margin-top:32px;padding:22px;background:var(--card);border:1px solid rgba(221,181,254,0.3);border-radius:var(--radius-lg);text-align:center">'
     + '<div style="font-family:\'Outfit\',sans-serif;font-size:20px;font-weight:700;margin-bottom:8px">' + t('art_cta_title') + '</div>'
     + '<div style="font-size:13px;color:var(--text-sec);margin-bottom:16px">' + t('art_cta_desc') + '</div>'
     + '<a href="' + AFFILIATE_URL + '" target="_blank" rel="noopener" class="btn btn-green">' + t('art_cta_btn') + '</a>'
     + '</div>';
+
+  // Inject floating sidebar
+  var sb = document.getElementById('article-sidebar');
+  if (sb) {
+    sb.innerHTML = '<div class="art-sidebar-cta">'
+      + '<div class="art-sidebar-badge">Exclusive offer</div>'
+      + '<div class="art-sidebar-title">Join Cloudbet</div>'
+      + '<div class="art-sidebar-bonus">Up to $2500<br><span>Welcome Bonus</span></div>'
+      + '<div class="art-sidebar-sub">+ Reward Program</div>'
+      + '<a href="' + AFFILIATE_URL + '" target="_blank" rel="noopener" class="btn btn-green" style="width:100%;margin-top:16px;padding:12px">Claim bonus &#x2197;</a>'
+      + '<div style="font-size:11px;color:var(--text-dim);margin-top:10px;text-align:center">18+ &#xb7; T&Cs apply &#xb7; Gamble responsibly</div>'
+      + '</div>';
+  }
 }

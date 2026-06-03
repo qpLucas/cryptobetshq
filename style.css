@@ -755,3 +755,85 @@ button { cursor: pointer; font-family: inherit; }
 #article-content ul, #article-content ol,
 #review-body ul, #review-body ol { margin: 0 0 14px 20px; color: var(--text-sec); line-height: 1.8; }
 #article-content li, #review-body li { margin-bottom: 6px; }
+
+/* ── ARTICLE LAYOUT: content + floating sidebar ── */
+.article-layout {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 32px;
+  align-items: start;
+  padding: 0 0 48px;
+}
+.article-main { min-width: 0; max-width: 760px; }
+.article-sidebar {
+  position: sticky;
+  top: 104px; /* below header */
+}
+
+/* Sidebar CTA card */
+.art-sidebar-cta {
+  background: var(--card);
+  border: 1px solid rgba(221,181,254,0.3);
+  border-radius: var(--radius-lg);
+  padding: 22px;
+  text-align: center;
+}
+.art-sidebar-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--accent);
+  background: rgba(221,181,254,0.1);
+  border: 1px solid rgba(221,181,254,0.25);
+  border-radius: 20px;
+  padding: 3px 10px;
+  margin-bottom: 12px;
+}
+.art-sidebar-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+.art-sidebar-bonus {
+  font-family: 'Outfit', sans-serif;
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--cta);
+  line-height: 1.15;
+  margin-bottom: 4px;
+}
+.art-sidebar-bonus span {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-sec);
+}
+.art-sidebar-sub {
+  font-size: 13px;
+  color: var(--text-sec);
+  margin-bottom: 4px;
+}
+
+/* Mobile: hide sidebar, show inline CTA in middle of article */
+@media (max-width: 900px) {
+  .article-layout {
+    grid-template-columns: 1fr !important;
+  }
+  .article-sidebar { display: none !important; }
+}
+
+/* ── MOBILE INLINE CTA ── */
+.art-mobile-cta {
+  display: none;
+  background: var(--card);
+  border: 1px solid rgba(221,181,254,0.3);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  text-align: center;
+  margin: 28px 0;
+}
+@media (max-width: 900px) {
+  .art-mobile-cta { display: block; }
+}
