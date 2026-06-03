@@ -125,12 +125,13 @@ function getHeaderHTML(active) {
     + '<button class="close-btn" onclick="document.getElementById(\'mob-nav\').classList.remove(\'open\')">&#10005;</button>'
     + '</div>'
     + '<a href="' + p + 'index.html">Home</a>'
-    + '<a href="' + AFFILIATE_URL + '" target="_blank" rel="noopener">' + t('nav_join') + '</a>'
+    + '<a href="' + AFFILIATE_URL + '" target="_blank" rel="noopener" class="mob-cta">' + t('nav_join') + '</a>'
+    + '<a href="' + p + 'bonus-details.html" class="mob-bonus">' + t('nav_bonus') + '</a>'
     + '<a href="' + p + 'how-to.html">' + t('nav_howto') + '</a>'
     + '<a href="' + p + 'casino.html">' + t('nav_casino') + '</a>'
     + '<a href="' + p + 'sportsbook.html">' + t('nav_sports') + '</a>'
     + '<a href="' + p + 'affiliates.html">' + t('nav_affiliates') + '</a>'
-    + '<a href="' + p + 'bonus-details.html">' + t('nav_bonus') + '</a>'
+    + '<a href="https://www.cloudbet.com/en/pulse" target="_blank" rel="noopener">' + t('nav_pulse') + '</a>'
     + '</nav>';
 }
 
