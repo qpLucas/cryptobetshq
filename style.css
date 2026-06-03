@@ -707,3 +707,32 @@ button { cursor: pointer; font-family: inherit; }
     margin-top: 4px !important;
   }
 }
+
+/* ── MOBILE: 9 crypto icons per row ── */
+@media (max-width: 768px) {
+  .coins-row {
+    grid-template-columns: repeat(9, 1fr) !important;
+  }
+}
+
+/* ── MOBILE NAV: Join Cloudbet same style as Bonus ── */
+.mobile-nav .mob-cta {
+  background: transparent !important;
+  color: var(--cta) !important;
+  border: none !important;
+  border-bottom: 1px solid var(--border) !important;
+  border-radius: 0 !important;
+  font-weight: 600 !important;
+  padding: 13px 0 13px 12px !important;
+  justify-content: flex-start !important;
+  position: relative !important;
+}
+.mobile-nav .mob-cta::after { content: none !important; }
+.mobile-nav .mob-cta::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 50%; transform: translateY(-50%);
+  width: 3px; height: 18px;
+  background: var(--cta);
+  border-radius: 2px;
+}
