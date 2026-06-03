@@ -170,7 +170,7 @@ async function runAiReview() {
   status.style.display = 'block';
   status.innerHTML = '<div style="display:flex;align-items:center;gap:10px"><div class="ai-spinner"></div> Claude is writing your review...</div>';
 
-  var systemPrompt = 'You are an expert crypto gambling affiliate writer for Crypto Bets HQ, a Cloudbet affiliate site. '
+  var systemPrompt = 'You are an expert crypto gambling affiliate writer for WeWinCrypto.com, a Cloudbet affiliate site. '
     + 'Write a professional, detailed review of Cloudbet covering 6 key sections. '
     + 'Return ONLY a JSON object with these fields: '
     + '{"verdict": "one compelling sentence", "summary": "2-3 sentence overview", "rating": 8.7, "sections": [{"title":"...", "icon":"emoji", "content":"detailed HTML paragraph using <p> tags"}]}. '

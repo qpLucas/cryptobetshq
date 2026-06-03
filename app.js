@@ -105,8 +105,8 @@ function getHeaderHTML(active) {
   return '<header class="site-header">'
     + '<div class="header-inner">'
     + '<a href="' + (p ? p : '/') + '" style="display:flex;align-items:center">'
-    + '<img src="' + p + 'logo-desktop.png" class="logo-img logo-desktop" alt="Crypto Bets HQ">'
-    + '<img src="' + p + 'logo-mobile.png"  class="logo-img logo-mobile"  alt="Crypto Bets HQ">'
+    + '<img src="' + p + 'logo-desktop.png" class="logo-img logo-desktop" alt="WeWinCrypto.com">'
+    + '<img src="' + p + 'logo-mobile.png"  class="logo-img logo-mobile"  alt="WeWinCrypto.com">'
     + '</a>'
     + '<nav class="nav">' + navHTML + '</nav>'
     + '<div class="header-right">'
@@ -128,7 +128,7 @@ function getHeaderHTML(active) {
     + '</div></div></header>'
     + '<nav class="mobile-nav" id="mob-nav">'
     + '<div class="mobile-nav-top">'
-    + '<img src="' + p + 'logo-mobile.png" style="height:44px;width:auto" alt="Crypto Bets HQ">'
+    + '<img src="' + p + 'logo-mobile.png" style="height:44px;width:auto" alt="WeWinCrypto.com">'
     + '<button class="close-btn" onclick="document.getElementById(\'mob-nav\').classList.remove(\'open\')">&#10005;</button>'
     + '</div>'
     + '<a href="/">Home</a>'
@@ -308,7 +308,7 @@ function initArticle() {
   var art = (DB.get('articles') || []).find(function(a) { return a.id === id; });
   if (!art) { el.innerHTML = '<p style="color:var(--text-sec)">Article not found. <a href="/">\u2190 Home</a></p>'; return; }
   var colors = { casino:'#f0a500', sports:'#4ade80', affiliates:'#60a5fa', blog:'#a78bfa' };
-  document.title = art.title + ' \u2013 Crypto Bets HQ';
+  document.title = art.title + ' \u2013 WeWinCrypto.com';
   el.innerHTML = '<div class="breadcrumb"><a href="/">' + t('bc_home') + '</a><span>\u203a</span>'
     + '<a href="' + (art.cat === 'sports' ? 'sportsbook' : art.cat) + '">' + art.cat.charAt(0).toUpperCase() + art.cat.slice(1) + '</a>'
     + '<span>\u203a</span><span style="color:var(--text-sec)">' + art.title.slice(0,50) + '\u2026</span></div>'
@@ -326,11 +326,6 @@ function initArticle() {
       + '<a href="' + ARTICLE_CTA_URL + '" target="_blank" rel="noopener" class="btn btn-green" style="width:100%;padding:12px">Claim bonus &#x2197;</a>'
       + '<div style="font-size:11px;color:var(--text-dim);margin-top:10px;text-align:center">18+ &#xb7; T&Cs apply &#xb7; Gamble responsibly</div>'
       + '</div>') + '</div>'
-    + '<div style="margin-top:32px;padding:22px;background:var(--card);border:1px solid rgba(221,181,254,0.3);border-radius:var(--radius-lg);text-align:center">'
-    + '<div style="font-family:\'Outfit\',sans-serif;font-size:20px;font-weight:700;margin-bottom:8px">' + t('art_cta_title') + '</div>'
-    + '<div style="font-size:13px;color:var(--text-sec);margin-bottom:16px">' + t('art_cta_desc') + '</div>'
-    + '<a href="' + AFFILIATE_URL + '" target="_blank" rel="noopener" class="btn btn-green">' + t('art_cta_btn') + '</a>'
-    + '</div>';
 }
 
 // ── ARTICLE HELPERS ──
@@ -436,7 +431,7 @@ function initArticle() {
   var art = (DB.get('articles') || []).find(function(a) { return a.id === id; });
   if (!art) { el.innerHTML = '<p style="color:var(--text-sec)">Article not found. <a href="/">\u2190 Home</a></p>'; return; }
   var colors = { casino:'#f0a500', sports:'#4ade80', affiliates:'#60a5fa', blog:'#a78bfa' };
-  document.title = art.title + ' \u2013 Crypto Bets HQ';
+  document.title = art.title + ' \u2013 WeWinCrypto.com';
   el.innerHTML = '<div class="breadcrumb"><a href="/">' + t('bc_home') + '</a><span>\u203a</span>'
     + '<a href="' + (art.cat === 'sports' ? 'sportsbook' : art.cat) + '">' + art.cat.charAt(0).toUpperCase() + art.cat.slice(1) + '</a>'
     + '<span>\u203a</span><span style="color:var(--text-sec)">' + art.title.slice(0,50) + '\u2026</span></div>'
@@ -454,11 +449,6 @@ function initArticle() {
       + '<a href="' + ARTICLE_CTA_URL + '" target="_blank" rel="noopener" class="btn btn-green" style="width:100%;padding:12px">Claim bonus &#x2197;</a>'
       + '<div style="font-size:11px;color:var(--text-dim);margin-top:10px;text-align:center">18+ &#xb7; T&Cs apply &#xb7; Gamble responsibly</div>'
       + '</div>') + '</div>'
-    + '<div style="margin-top:32px;padding:22px;background:var(--card);border:1px solid rgba(221,181,254,0.3);border-radius:var(--radius-lg);text-align:center">'
-    + '<div style="font-family:\'Outfit\',sans-serif;font-size:20px;font-weight:700;margin-bottom:8px">' + t('art_cta_title') + '</div>'
-    + '<div style="font-size:13px;color:var(--text-sec);margin-bottom:16px">' + t('art_cta_desc') + '</div>'
-    + '<a href="' + AFFILIATE_URL + '" target="_blank" rel="noopener" class="btn btn-green">' + t('art_cta_btn') + '</a>'
-    + '</div>';
 
   // Inject floating sidebar
   var sb = document.getElementById('article-sidebar');

@@ -300,7 +300,7 @@ async function runAiWriter() {
   var lengthEl = document.querySelector('input[name="ai-length"]:checked');
   var length = lengthEl ? lengthEl.value : 'medium';
   var lengthGuide = { short: '300-500 words', medium: '700-1000 words', long: '1500-2000 words' }[length];
-  var systemPrompt = 'You are an expert crypto gambling affiliate writer for Crypto Bets HQ, a Cloudbet affiliate site. '
+  var systemPrompt = 'You are an expert crypto gambling affiliate writer for WeWinCrypto.com, a Cloudbet affiliate site. '
     + 'Write in a ' + tone + ' tone. '
     + 'The article category is: ' + cat + '. '
     + 'Target article body length: ' + lengthGuide + '. '

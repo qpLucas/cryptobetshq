@@ -837,3 +837,45 @@ button { cursor: pointer; font-family: inherit; }
 @media (max-width: 900px) {
   .art-mobile-cta { display: block; }
 }
+
+/* ── TEXT LOGO: WeWinCrypto.com ── */
+.text-logo {
+  display: flex;
+  align-items: baseline;
+  gap: 0;
+  line-height: 1;
+  text-decoration: none;
+}
+.tl-we {
+  font-family: 'Outfit', system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 22px;
+  color: var(--accent);
+  letter-spacing: -.03em;
+}
+.tl-crypto {
+  font-family: 'Outfit', system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 22px;
+  color: var(--cta);
+  letter-spacing: -.03em;
+}
+.tl-dot {
+  font-family: 'Outfit', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--text-dim);
+  letter-spacing: -.01em;
+  margin-left: 1px;
+}
+.text-logo-sm .tl-we,
+.text-logo-sm .tl-crypto { font-size: 20px; }
+.text-logo-sm .tl-dot { font-size: 12px; }
+
+/* Hide old logo images */
+.logo-img { display: none !important; }
+
+@media (max-width: 768px) {
+  .tl-we, .tl-crypto { font-size: 19px; }
+  .tl-dot { font-size: 12px; }
+}
