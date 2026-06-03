@@ -187,7 +187,9 @@ async function runAiReview() {
     });
 
     var data = await response.json();
+    if (!response.ok) throw new Error(data.error || 'API error ' + response.status);
     var text = (data.content && data.content[0] ? data.content[0].text : '').replace(/```json|```/g, '').trim();
+    if (!text) throw new Error('Empty response from Claude');
     var result = JSON.parse(text);
 
     if (result.verdict)  document.getElementById('rv-verdict').value  = result.verdict;
