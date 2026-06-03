@@ -582,3 +582,8 @@ button { cursor: pointer; font-family: inherit; }
   font-weight: 600 !important;
 }
 .nav-bonus:hover { background: var(--cta-glow) !important; color: var(--cta) !important; }
+
+/* ── EVEN GAP BETWEEN ALL NAV BUTTONS ── */
+.nav { gap: 4px !important; }
+.nav-bonus { margin: 0 !important; }
+.nav-cta { margin: 0 !important; }
