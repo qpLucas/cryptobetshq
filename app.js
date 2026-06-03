@@ -239,6 +239,7 @@ document.addEventListener('DOMContentLoaded', function() {
   else if (p === 'casino')            initCat('casino',     '#f0a500', t('cat_casino'));
   else if (p === 'sportsbook')        initCat('sports',     '#4ade80', t('cat_sports'));
   else if (p === 'affiliates')        initCat('affiliates', '#60a5fa', t('cat_affiliates'));
+  else if (p === 'blog')              initCat('blog',       '#a78bfa', t('cat_blog'));
   else if (p === 'article')           initArticle();
 });
 
@@ -256,7 +257,8 @@ function initIndex() {
     var items = all.filter(function(a) { return a.cat === cat.key; });
     var featured = items[0];
     var smalls = items.slice(1,4);
-    var href = cat.key === 'blog' ? 'blog.html' : cat.key + '.html';
+    var catUrls = { casino:'casino.html', sports:'sportsbook.html', affiliates:'affiliates.html', blog:'blog.html' };
+    var href = catUrls[cat.key] || cat.key + '.html';
     return '<div class="article-column">'
       + '<div class="col-header"><div class="col-dot" style="background:' + cat.color + '"></div><span class="col-label">' + cat.label + '</span></div>'
       + (featured ? artCardHTML(featured, cat.color) : '')
@@ -284,7 +286,7 @@ function initArticle() {
   var colors = { casino:'#f0a500', sports:'#4ade80', affiliates:'#60a5fa', blog:'#a78bfa' };
   document.title = art.title + ' \u2013 Crypto Bets HQ';
   el.innerHTML = '<div class="breadcrumb"><a href="index.html">' + t('bc_home') + '</a><span>\u203a</span>'
-    + '<a href="' + art.cat + '.html">' + art.cat.charAt(0).toUpperCase() + art.cat.slice(1) + '</a>'
+    + '<a href="' + (art.cat === 'sports' ? 'sportsbook' : art.cat) + '.html">' + art.cat.charAt(0).toUpperCase() + art.cat.slice(1) + '</a>'
     + '<span>\u203a</span><span style="color:var(--text-sec)">' + art.title.slice(0,50) + '\u2026</span></div>'
     + '<h1 style="font-family:\'Outfit\',sans-serif;font-size:32px;font-weight:800;margin:14px 0 8px;line-height:1.2">' + art.title + '</h1>'
     + '<p style="color:var(--text-sec);font-size:15px;line-height:1.6;margin-bottom:10px">' + (art.summary||'') + '</p>'
@@ -340,6 +342,7 @@ document.addEventListener('DOMContentLoaded', function() {
   else if (p === 'casino')            initCat('casino',     '#f0a500', t('cat_casino'));
   else if (p === 'sportsbook')        initCat('sports',     '#4ade80', t('cat_sports'));
   else if (p === 'affiliates')        initCat('affiliates', '#60a5fa', t('cat_affiliates'));
+  else if (p === 'blog')              initCat('blog',       '#a78bfa', t('cat_blog'));
   else if (p === 'article')           initArticle();
 });
 
@@ -357,7 +360,8 @@ function initIndex() {
     var items = all.filter(function(a) { return a.cat === cat.key; });
     var featured = items[0];
     var smalls = items.slice(1,4);
-    var href = cat.key === 'blog' ? 'blog.html' : cat.key + '.html';
+    var catUrls = { casino:'casino.html', sports:'sportsbook.html', affiliates:'affiliates.html', blog:'blog.html' };
+    var href = catUrls[cat.key] || cat.key + '.html';
     return '<div class="article-column">'
       + '<div class="col-header"><div class="col-dot" style="background:' + cat.color + '"></div><span class="col-label">' + cat.label + '</span></div>'
       + (featured ? artCardHTML(featured, cat.color) : '')
@@ -385,7 +389,7 @@ function initArticle() {
   var colors = { casino:'#f0a500', sports:'#4ade80', affiliates:'#60a5fa', blog:'#a78bfa' };
   document.title = art.title + ' \u2013 Crypto Bets HQ';
   el.innerHTML = '<div class="breadcrumb"><a href="index.html">' + t('bc_home') + '</a><span>\u203a</span>'
-    + '<a href="' + art.cat + '.html">' + art.cat.charAt(0).toUpperCase() + art.cat.slice(1) + '</a>'
+    + '<a href="' + (art.cat === 'sports' ? 'sportsbook' : art.cat) + '.html">' + art.cat.charAt(0).toUpperCase() + art.cat.slice(1) + '</a>'
     + '<span>\u203a</span><span style="color:var(--text-sec)">' + art.title.slice(0,50) + '\u2026</span></div>'
     + '<h1 style="font-family:\'Outfit\',sans-serif;font-size:32px;font-weight:800;margin:14px 0 8px;line-height:1.2">' + art.title + '</h1>'
     + '<p style="color:var(--text-sec);font-size:15px;line-height:1.6;margin-bottom:10px">' + (art.summary||'') + '</p>'
