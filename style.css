@@ -1149,3 +1149,14 @@ button { cursor: pointer; font-family: inherit; }
   text-align: center !important;
   width: 100% !important;
 }
+
+/* ── ARTICLE: reduce gap between content and sidebar ── */
+.article-layout {
+  gap: 20px !important;
+}
+
+/* ── ARTICLE: breadcrumb top padding ── */
+.article-main .breadcrumb,
+#article-content .breadcrumb {
+  padding-top: 28px;
+}
