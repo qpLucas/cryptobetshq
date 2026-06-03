@@ -573,3 +573,12 @@ button { cursor: pointer; font-family: inherit; }
 /* Remove old r-title (replaced by r-label inside r-inner) */
 .r-title { display: none !important; }
 .r-countries { display: none !important; }
+
+/* ── BONUS NAV BUTTON ── */
+.nav-bonus {
+  color: var(--cta) !important;
+  border: 1px solid rgba(106,199,137,0.35) !important;
+  border-radius: 7px !important;
+  font-weight: 600 !important;
+}
+.nav-bonus:hover { background: var(--cta-glow) !important; color: var(--cta) !important; }

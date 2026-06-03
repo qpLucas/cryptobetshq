@@ -84,9 +84,10 @@ function getHeaderHTML(active) {
     { label:t('nav_sports'),     href:'sportsbook.html' },
     { label:t('nav_affiliates'), href:'affiliates.html' },
     { label:t('nav_pulse'),      href:'https://www.cloudbet.com/en/pulse', ext:true },
+    { label:t('nav_bonus'),      href:'bonus-details.html', bonus:true },
   ];
   var navHTML = nav.map(function(n) {
-    var cls = 'nav-link' + (n.cta ? ' nav-cta' : '') + (!n.ext && active === n.href.replace('.html','') ? ' active' : '');
+    var cls = 'nav-link' + (n.cta ? ' nav-cta' : '') + (n.bonus ? ' nav-bonus' : '') + (!n.ext && active === n.href.replace('.html','') ? ' active' : '');
     var ext = n.ext ? ' target="_blank" rel="noopener"' : '';
     return '<a href="' + n.href + '" class="' + cls + '"' + ext + '>' + n.label + '</a>';
   }).join('');
@@ -127,6 +128,7 @@ function getHeaderHTML(active) {
     + '<a href="' + p + 'casino.html">' + t('nav_casino') + '</a>'
     + '<a href="' + p + 'sportsbook.html">' + t('nav_sports') + '</a>'
     + '<a href="' + p + 'affiliates.html">' + t('nav_affiliates') + '</a>'
+    + '<a href="' + p + 'bonus-details.html">' + t('nav_bonus') + '</a>'
     + '</nav>';
 }
 
@@ -140,10 +142,10 @@ function getFooterHTML() {
     ['SOL','','','solana'],
     ['BNB','','','bnb'],
     ['DOGE','','','dogecoin'],
-  ];
-  var cExtra = [
     ['LTC','','','litecoin'],
     ['BCH','','','bitcoin-cash'],
+  ];
+  var cExtra = [
     ['XRP','','','xrp'],
     ['ADA','','','cardano'],
     ['TRX','','','tron'],
