@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Review – Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="admin-wrap">
+  <aside class="admin-side">
+    <div class="admin-logo"><img src="../logo-mobile.png" alt="CBHQ Admin"></div>
+    <div class="admin-sec-label">Content</div>
+    <a href="./index.html" class="admin-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      Dashboard
+    </a>
+    <a href="./articles.html" class="admin-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      Articles
+    </a>
+    <a href="./review.html" class="admin-link active">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      Review
+    </a>
+    <div class="admin-sec-label">Site</div>
+    <a href="../index.html" class="admin-link" target="_blank">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      View site
+    </a>
+    <a href="../review.html" class="admin-link" target="_blank">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+      View review
+    </a>
+  </aside>
+
+  <div class="admin-content">
+    <div class="admin-title">Cloudbet Review</div>
+
+    <!-- Overview -->
+    <div class="admin-card">
+      <h3>Overview</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Overall rating (e.g. 8.5)</label>
+          <input type="number" class="form-input" id="rv-rating" min="0" max="10" step="0.1" placeholder="8.5">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Last updated date</label>
+          <input type="text" class="form-input" id="rv-date" placeholder="3 Jun 2026">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">One-line verdict</label>
+        <input type="text" class="form-input" id="rv-verdict" placeholder="One of the best crypto betting platforms available">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Summary paragraph</label>
+        <textarea class="form-textarea" id="rv-summary" style="min-height:80px" placeholder="Short overview shown under the rating..."></textarea>
+      </div>
+    </div>
+
+    <!-- Sections -->
+    <div class="admin-card">
+      <h3>Review sections</h3>
+      <div id="sections-list"></div>
+      <button class="btn btn-outline" onclick="addSection()" style="margin-top:8px">+ Add section</button>
+    </div>
+
+    <div style="display:flex;gap:10px;margin-bottom:32px">
+      <button class="btn btn-green" onclick="saveReview()">Save review</button>
+      <a href="../review.html" target="_blank" class="btn btn-outline">Preview ↗</a>
+    </div>
+    <div class="form-msg" id="form-msg"></div>
+  </div>
+</div>
+<script src="../app.js"></script>
+<script>
+var sections = [];
+
+document.addEventListener('DOMContentLoaded', function() {
+  var data = DB.get('review') || {};
+  document.getElementById('rv-rating').value  = data.rating  || '8.5';
+  document.getElementById('rv-date').value    = data.date    || '';
+  document.getElementById('rv-verdict').value = data.verdict || '';
+  document.getElementById('rv-summary').value = data.summary || '';
+  sections = data.sections || [
+    { title:'Casino',               icon:'🎰', content:'Cloudbet\'s casino features thousands of slots, live dealer tables, and exclusive crypto games.' },
+    { title:'Sportsbook',           icon:'⚽', content:'Over 30 sports covered with competitive odds. Football, basketball, esports, tennis and more.' },
+    { title:'Bonuses & Promotions', icon:'🎁', content:'New players receive a 100% deposit match up to $2,500.' },
+    { title:'Deposits & Withdrawals',icon:'💸',content:'Instant deposits in BTC, ETH, USDT and more. Withdrawals processed within minutes.' },
+    { title:'Security & Licensing', icon:'🔒', content:'Licensed under Curaçao eGaming. SSL encrypted. Operating since 2013.' },
+    { title:'Customer Support',     icon:'💬', content:'24/7 live chat and email support available.' },
+  ];
+  renderSections();
+});
+
+function renderSections() {
+  document.getElementById('sections-list').innerHTML = sections.map(function(s, i) {
+    return '<div style="background:var(--panel);border-radius:var(--radius);padding:14px;margin-bottom:10px">'
+      + '<div class="form-row" style="margin-bottom:10px">'
+      + '<div class="form-group" style="margin:0"><label class="form-label">Icon (emoji)</label>'
+      + '<input class="form-input" value="' + s.icon + '" oninput="sections[' + i + '].icon=this.value" style="font-size:18px;width:70px"></div>'
+      + '<div class="form-group" style="margin:0;flex:1"><label class="form-label">Section title</label>'
+      + '<input class="form-input" value="' + s.title + '" oninput="sections[' + i + '].title=this.value"></div>'
+      + '<button class="act-btn act-del" onclick="removeSection(' + i + ')" style="align-self:flex-end;margin-bottom:0">Remove</button>'
+      + '</div>'
+      + '<div class="form-group" style="margin:0"><label class="form-label">Content</label>'
+      + '<textarea class="form-textarea" style="min-height:70px" oninput="sections[' + i + '].content=this.value">' + s.content + '</textarea></div>'
+      + '</div>';
+  }).join('');
+}
+
+function addSection() {
+  sections.push({ title:'New section', icon:'⭐', content:'' });
+  renderSections();
+}
+
+function removeSection(i) {
+  sections.splice(i, 1);
+  renderSections();
+}
+
+function saveReview() {
+  var data = {
+    rating:   parseFloat(document.getElementById('rv-rating').value) || 8.5,
+    date:     document.getElementById('rv-date').value.trim() || new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'}),
+    verdict:  document.getElementById('rv-verdict').value.trim(),
+    summary:  document.getElementById('rv-summary').value.trim(),
+    sections: sections,
+  };
+  DB.set('review', data);
+  var msg = document.getElementById('form-msg');
+  msg.textContent = 'Review saved!'; msg.style.color='#34d399'; msg.style.display='block';
+  setTimeout(function(){ msg.style.display='none'; }, 3000);
+}
+</script>
+</body>
+</html>

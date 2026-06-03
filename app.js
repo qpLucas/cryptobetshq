@@ -6,7 +6,7 @@
 var TRANSLATIONS = {
   en: {
     nav_join:'Join Cloudbet',nav_howto:'How to',nav_casino:'Casino',
-    nav_sports:'Sportsbook',nav_affiliates:'Affiliates',nav_pulse:'Cloudbet Pulse',
+    nav_sports:'Sportsbook',nav_affiliates:'Affiliates',nav_review:'Review',
     nav_bonus:'Bonus',
     hero_badge:'Cloudbet Affiliate',hero_h1:'Your Edge in\nCrypto Betting',
     hero_p:'Expert casino picks, sports analysis and Cloudbet guides — all in one place.',
@@ -21,7 +21,7 @@ var TRANSLATIONS = {
   },
   cs: {
     nav_join:'P\u0159idat se na Cloudbet',nav_howto:'Jak za\u010d\u00edt',nav_casino:'Kasino',
-    nav_sports:'S\u00e1zky',nav_affiliates:'Affiliate',nav_pulse:'Cloudbet Pulse',
+    nav_sports:'S\u00e1zky',nav_affiliates:'Affiliate',nav_review:'Review',
     nav_bonus:'Bonus',
     hero_badge:'Cloudbet Affiliate',hero_h1:'V\u00e1\u0161 n\u00e1skok\nv krypto s\u00e1zk\u00e1ch',
     hero_p:'Odborn\u00e9 tipy na kasino, sportovn\u00ed anal\u00fdzy a pr\u016fvodce Cloudbet.',
@@ -82,11 +82,11 @@ function getHeaderHTML(active) {
   var nav = [
     { label:t('nav_join'),       href:AFFILIATE_URL,                              ext:true, cta:true },
     { label:t('nav_bonus'),      href:'bonus-details.html', bonus:true },
+    { label:t('nav_review'),     href:'review.html' },
     { label:t('nav_howto'),      href:'how-to.html' },
     { label:t('nav_casino'),     href:'casino.html' },
     { label:t('nav_sports'),     href:'sportsbook.html' },
     { label:t('nav_affiliates'), href:'affiliates.html' },
-    { label:t('nav_pulse'),      href:'https://www.cloudbet.com/en/pulse', ext:true },
   ];
   var navHTML = nav.map(function(n) {
     var cls = 'nav-link' + (n.cta ? ' nav-cta' : '') + (n.bonus ? ' nav-bonus' : '') + (!n.ext && active === n.href.replace('.html','') ? ' active' : '');
@@ -127,11 +127,12 @@ function getHeaderHTML(active) {
     + '<a href="' + p + 'index.html">Home</a>'
     + '<a href="' + AFFILIATE_URL + '" target="_blank" rel="noopener" class="mob-cta">' + t('nav_join') + '</a>'
     + '<a href="' + p + 'bonus-details.html" class="mob-bonus">' + t('nav_bonus') + '</a>'
+    + '<a href="' + p + 'review.html">' + t('nav_review') + '</a>'
     + '<a href="' + p + 'how-to.html">' + t('nav_howto') + '</a>'
     + '<a href="' + p + 'casino.html">' + t('nav_casino') + '</a>'
     + '<a href="' + p + 'sportsbook.html">' + t('nav_sports') + '</a>'
     + '<a href="' + p + 'affiliates.html">' + t('nav_affiliates') + '</a>'
-    + '<a href="https://www.cloudbet.com/en/pulse" target="_blank" rel="noopener">' + t('nav_pulse') + '</a>'
+    + '<a href="' + p + 'review.html">' + t('nav_review') + '</a>'
     + '</nav>';
 }
 

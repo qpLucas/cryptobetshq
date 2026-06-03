@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Cloudbet Crypto Casino and Sportsbook Review – Crypto Bets HQ</title>
+  <meta name="description" content="In-depth Cloudbet review covering casino games, sports betting, bonuses, deposits and withdrawals. Updated 2026.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="header-mount"></div>
+<main>
+  <div class="site-main">
+
+    <div class="page-hero">
+      <div class="breadcrumb"><a href="index.html">Home</a><span>›</span><span>Review</span></div>
+      <h1 id="review-title">Cloudbet Crypto Casino and Sportsbook Review</h1>
+      <p id="review-subtitle">Last updated: <span id="review-date"></span></p>
+    </div>
+
+    <!-- Overall rating bar -->
+    <div id="review-rating-bar"></div>
+
+    <!-- Review sections — rendered from admin data -->
+    <div id="review-body" style="max-width:860px"></div>
+
+    <!-- CTA -->
+    <div style="max-width:860px;margin:32px 0 48px">
+      <div style="background:var(--card);border:1px solid rgba(221,181,254,0.3);border-radius:var(--radius-lg);padding:28px;text-align:center">
+        <div style="font-family:'Outfit',sans-serif;font-size:22px;font-weight:700;margin-bottom:8px">Ready to join Cloudbet?</div>
+        <div style="font-size:14px;color:var(--text-sec);margin-bottom:20px">Get up to $2,500 welcome bonus on your first deposit.</div>
+        <a href="https://cldbt.cloud/go/en/auth/sign-up?af_token=98f8cd6cce4dc6a600e699ee62740188&aftm_campaign=join-cloudbet&aftm_source=website&aftm_medium=links&aftm_cid=join-cloudbet" target="_blank" rel="noopener" class="btn btn-green" style="font-size:15px;padding:13px 28px">Join Cloudbet ↗</a>
+      </div>
+    </div>
+
+  </div>
+</main>
+<div id="r-mount"></div>
+<div id="footer-mount"></div>
+<script src="app.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var data = DB.get('review') || {};
+
+  // Date
+  var dateEl = document.getElementById('review-date');
+  if (dateEl) dateEl.textContent = data.date || new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+
+  // Rating bar
+  var rating = data.rating || 8.5;
+  var ratingBar = document.getElementById('review-rating-bar');
+  if (ratingBar) {
+    ratingBar.innerHTML = '<div style="display:flex;align-items:center;gap:20px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px 24px;margin-bottom:28px;max-width:860px">'
+      + '<div style="text-align:center;flex-shrink:0">'
+      + '<div style="font-family:\'Outfit\',sans-serif;font-size:48px;font-weight:800;color:var(--accent);line-height:1">' + rating + '</div>'
+      + '<div style="font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.06em;margin-top:4px">out of 10</div>'
+      + '</div>'
+      + '<div style="flex:1;border-left:1px solid var(--border);padding-left:20px">'
+      + '<div style="font-family:\'Outfit\',sans-serif;font-size:18px;font-weight:700;margin-bottom:6px">' + (data.verdict || 'One of the best crypto betting platforms available') + '</div>'
+      + '<div style="font-size:13px;color:var(--text-sec);line-height:1.6">' + (data.summary || 'Cloudbet has operated since 2013, offering a full sportsbook and casino with instant crypto deposits and withdrawals, no KYC at signup, and one of the largest welcome bonuses in the industry.') + '</div>'
+      + '</div></div>';
+  }
+
+  // Sections
+  var sections = data.sections || [
+    { title: 'Casino', icon: '🎰', content: 'Cloudbet\'s casino features thousands of slots, live dealer tables, and exclusive crypto games. The live casino runs 24/7 with real dealers and accepts BTC, ETH, USDT and more.' },
+    { title: 'Sportsbook', icon: '⚽', content: 'Over 30 sports covered with competitive odds. Football, basketball, esports, tennis and more. Live betting is available with real-time odds updates.' },
+    { title: 'Bonuses & Promotions', icon: '🎁', content: 'New players receive a 100% deposit match up to $2,500. Regular reload bonuses and sports cashback offers are available for existing players.' },
+    { title: 'Deposits & Withdrawals', icon: '💸', content: 'Instant deposits in BTC, ETH, USDT, USDC, SOL, BNB, DOGE and many more. Withdrawals are processed within minutes. No fees on crypto transactions.' },
+    { title: 'Security & Licensing', icon: '🔒', content: 'Licensed under Curaçao eGaming. SSL encrypted. Operating since 2013 with no major security incidents. Provably fair games available.' },
+    { title: 'Customer Support', icon: '💬', content: '24/7 live chat support. Email support available. Comprehensive FAQ section covering deposits, withdrawals, bonuses and account management.' },
+  ];
+
+  var body = document.getElementById('review-body');
+  if (body) {
+    body.innerHTML = sections.map(function(s) {
+      return '<div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:22px;margin-bottom:14px">'
+        + '<div style="font-family:\'Outfit\',sans-serif;font-size:18px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:10px">'
+        + '<span>' + s.icon + '</span><span>' + s.title + '</span></div>'
+        + '<div style="color:var(--text-sec);line-height:1.8;font-size:14px">' + s.content + '</div>'
+        + '</div>';
+    }).join('');
+  }
+});
+</script>
+</body>
+</html>
