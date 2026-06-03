@@ -8,6 +8,7 @@ var TRANSLATIONS = {
     nav_join:'Join Cloudbet',nav_howto:'How to',nav_casino:'Casino',
     nav_sports:'Sportsbook',nav_affiliates:'Affiliates',nav_review:'Review',
     nav_bonus:'Bonus',
+    nav_rewards:'Rewards',
     hero_badge:'Cloudbet Affiliate',hero_h1:'Your Edge in\nCrypto Betting',
     hero_p:'Expert casino picks, sports analysis and Cloudbet guides — all in one place.',
     hero_btn1:'Join Cloudbet \u2197',hero_btn2:'How to get started',
@@ -23,6 +24,7 @@ var TRANSLATIONS = {
     nav_join:'P\u0159idat se na Cloudbet',nav_howto:'Jak za\u010d\u00edt',nav_casino:'Kasino',
     nav_sports:'S\u00e1zky',nav_affiliates:'Affiliate',nav_review:'Review',
     nav_bonus:'Bonus',
+    nav_rewards:'Rewards',
     hero_badge:'Cloudbet Affiliate',hero_h1:'V\u00e1\u0161 n\u00e1skok\nv krypto s\u00e1zk\u00e1ch',
     hero_p:'Odborn\u00e9 tipy na kasino, sportovn\u00ed anal\u00fdzy a pr\u016fvodce Cloudbet.',
     hero_btn1:'P\u0159idat se na Cloudbet \u2197',hero_btn2:'Jak za\u010d\u00edt',
@@ -89,6 +91,7 @@ function getHeaderHTML(active) {
   var nav = [
     { label:t('nav_join'),       href:AFFILIATE_URL,                              ext:true, cta:true },
     { label:t('nav_bonus'),      href:'/bonus-details', bonus:true },
+    { label:t('nav_rewards'),    href:'/rewards', bonus:true },
     { label:t('nav_review'),     href:'/review' },
     { label:t('nav_howto'),      href:'/how-to' },
     { label:t('nav_casino'),     href:'/casino' },
@@ -133,6 +136,7 @@ function getHeaderHTML(active) {
     + '<a href="/">Home</a>'
     + '<a href="' + AFFILIATE_URL + '" target="_blank" rel="noopener" class="mob-cta">' + t('nav_join') + '</a>'
     + '<a href="/bonus-details" class="mob-bonus">' + t('nav_bonus') + '</a>'
+    + '<a href="/rewards" class="mob-bonus">' + t('nav_rewards') + '</a>'
     + '<a href=\"/review\">' + t('nav_review') + '</a>'
     + '<a href=\"/how-to\">' + t('nav_howto') + '</a>'
     + '<a href=\"/casino\">' + t('nav_casino') + '</a>'
