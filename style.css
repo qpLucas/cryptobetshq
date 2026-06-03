@@ -1160,3 +1160,10 @@ button { cursor: pointer; font-family: inherit; }
 #article-content .breadcrumb {
   padding-top: 28px;
 }
+
+/* ── ARTICLE LAYOUT: tighter sidebar ── */
+.article-layout {
+  grid-template-columns: 1fr 240px !important;
+  gap: 16px !important;
+  max-width: 1000px !important;
+}
