@@ -138,5 +138,83 @@ function saveReview() {
   setTimeout(function(){ msg.style.display='none'; }, 3000);
 }
 </script>
+
+<!-- AI REVIEW MODAL -->
+<div id="ai-review-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:999;align-items:center;justify-content:center;padding:20px">
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);width:100%;max-width:520px;padding:28px;position:relative">
+    <button onclick="closeAiReview()" style="position:absolute;top:12px;right:12px;background:var(--panel);border:none;border-radius:6px;width:28px;height:28px;color:var(--text-sec);cursor:pointer;font-size:16px">&#10005;</button>
+    <div style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:700;margin-bottom:6px">AI Review Generator</div>
+    <div style="font-size:13px;color:var(--text-sec);margin-bottom:18px">Claude will generate or rewrite the full Cloudbet review sections.</div>
+    <div class="form-group">
+      <label class="form-label">Instructions (optional)</label>
+      <textarea class="form-textarea" id="ai-rv-prompt" style="min-height:70px" placeholder="e.g. Focus on crypto deposits, no KYC, and the welcome bonus. Mention that Cloudbet has been operating since 2013."></textarea>
+    </div>
+    <button class="btn btn-green" onclick="runAiReview()" id="ai-rv-btn" style="width:100%;padding:12px;font-size:14px">Generate review sections</button>
+    <div id="ai-rv-status" style="display:none;margin-top:14px;padding:12px;background:var(--panel);border-radius:var(--radius);font-size:13px;color:var(--text-sec)"></div>
+  </div>
+</div>
+
+<script>
+function openAiReview() { document.getElementById('ai-review-modal').style.display = 'flex'; }
+function closeAiReview() {
+  document.getElementById('ai-review-modal').style.display = 'none';
+  document.getElementById('ai-rv-status').style.display = 'none';
+}
+
+async function runAiReview() {
+  var extra = document.getElementById('ai-rv-prompt').value.trim();
+  var btn = document.getElementById('ai-rv-btn');
+  var status = document.getElementById('ai-rv-status');
+
+  btn.disabled = true; btn.textContent = 'Generating...';
+  status.style.display = 'block';
+  status.innerHTML = '<div style="display:flex;align-items:center;gap:10px"><div class="ai-spinner"></div> Claude is writing your review...</div>';
+
+  var systemPrompt = 'You are an expert crypto gambling affiliate writer for Crypto Bets HQ, a Cloudbet affiliate site. '
+    + 'Write a professional, detailed review of Cloudbet covering 6 key sections. '
+    + 'Return ONLY a JSON object with these fields: '
+    + '{"verdict": "one compelling sentence", "summary": "2-3 sentence overview", "rating": 8.7, "sections": [{"title":"...", "icon":"emoji", "content":"detailed HTML paragraph using <p> tags"}]}. '
+    + 'Sections must cover: Casino, Sportsbook, Bonuses & Promotions, Deposits & Withdrawals, Security & Licensing, Customer Support. '
+    + 'Be specific about Cloudbet features. No markdown fences, return raw JSON only.';
+
+  var userMsg = 'Write a full Cloudbet review for our affiliate site.' + (extra ? ' Additional notes: ' + extra : '');
+
+  try {
+    var response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: systemPrompt,
+        messages: [{ role: 'user', content: userMsg }]
+      })
+    });
+
+    var data = await response.json();
+    var text = (data.content && data.content[0] ? data.content[0].text : '').replace(/```json|```/g, '').trim();
+    var result = JSON.parse(text);
+
+    if (result.verdict)  document.getElementById('rv-verdict').value  = result.verdict;
+    if (result.summary)  document.getElementById('rv-summary').value  = result.summary;
+    if (result.rating)   document.getElementById('rv-rating').value   = result.rating;
+    if (result.sections) { sections = result.sections; renderSections(); }
+
+    status.innerHTML = '<span style="color:#34d399">&#10003; Review generated! Check content and save.</span>';
+    btn.disabled = false; btn.textContent = 'Generate again';
+    setTimeout(closeAiReview, 1800);
+
+  } catch(err) {
+    status.innerHTML = '<span style="color:#f87171">Error: ' + (err.message || 'Try again.') + '</span>';
+    btn.disabled = false; btn.textContent = 'Generate review sections';
+  }
+}
+</script>
+
+<style>
+.ai-spinner { width:16px;height:16px;border:2px solid var(--border);border-top-color:var(--cta);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0; }
+@keyframes spin { to { transform:rotate(360deg); } }
+</style>
+
 </body>
 </html>

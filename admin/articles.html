@@ -63,7 +63,13 @@
       </div>
       <div class="form-group">
         <label class="form-label">Title</label>
-        <input type="text" class="form-input" id="art-title" placeholder="Article headline">
+        <div style="display:flex;gap:8px">
+          <input type="text" class="form-input" id="art-title" placeholder="Article headline">
+          <button class="btn btn-green" onclick="openAiWriter()" style="white-space:nowrap;flex-shrink:0" title="Generate with AI">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="margin-right:5px"><path d="M12 2l2 7h7l-5.5 4 2 7L12 16l-5.5 4 2-7L3 9h7z"/></svg>
+            AI Write
+          </button>
+        </div>
       </div>
       <div class="form-group">
         <label class="form-label">Summary / Excerpt</label>
@@ -191,5 +197,137 @@ function showMsg(txt, color) {
   setTimeout(function(){ el.style.display='none'; }, 3000);
 }
 </script>
+
+<!-- AI WRITER MODAL -->
+<div id="ai-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:999;align-items:center;justify-content:center;padding:20px">
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);width:100%;max-width:560px;padding:28px;position:relative">
+    <button onclick="closeAiWriter()" style="position:absolute;top:12px;right:12px;background:var(--panel);border:none;border-radius:6px;width:28px;height:28px;color:var(--text-sec);cursor:pointer;font-size:16px">&#10005;</button>
+    <div style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:700;margin-bottom:6px">AI Article Writer</div>
+    <div style="font-size:13px;color:var(--text-sec);margin-bottom:18px">Describe what you want and Claude will write a full article for your site.</div>
+
+    <div class="form-group">
+      <label class="form-label">Topic / prompt</label>
+      <textarea class="form-textarea" id="ai-prompt" style="min-height:90px" placeholder="e.g. Write a detailed review of Cloudbet's live casino section, covering game variety, software providers, and why crypto players prefer it. Include our affiliate angle."></textarea>
+    </div>
+
+    <div class="form-row" style="margin-bottom:14px">
+      <div class="form-group" style="margin:0">
+        <label class="form-label">Category</label>
+        <select class="form-select" id="ai-cat">
+          <option value="casino">Casino</option>
+          <option value="sports">Sports</option>
+          <option value="affiliates">Affiliates</option>
+          <option value="blog">Blog</option>
+        </select>
+      </div>
+      <div class="form-group" style="margin:0">
+        <label class="form-label">Tone</label>
+        <select class="form-select" id="ai-tone">
+          <option value="informative and expert">Informative & expert</option>
+          <option value="casual and friendly">Casual & friendly</option>
+          <option value="persuasive affiliate">Persuasive affiliate</option>
+          <option value="analytical and data-driven">Analytical</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="btn btn-green" onclick="runAiWriter()" id="ai-run-btn" style="width:100%;padding:12px;font-size:14px">
+      Generate article
+    </button>
+
+    <div id="ai-status" style="display:none;margin-top:14px;padding:12px;background:var(--panel);border-radius:var(--radius);font-size:13px;color:var(--text-sec)"></div>
+  </div>
+</div>
+
+<script>
+function openAiWriter() {
+  var modal = document.getElementById('ai-modal');
+  modal.style.display = 'flex';
+  // Pre-fill category from form
+  var cat = document.getElementById('art-cat').value;
+  document.getElementById('ai-cat').value = cat;
+  // Pre-fill prompt from title if exists
+  var title = document.getElementById('art-title').value.trim();
+  if (title && !document.getElementById('ai-prompt').value) {
+    document.getElementById('ai-prompt').value = 'Write a full article about: ' + title;
+  }
+}
+function closeAiWriter() {
+  document.getElementById('ai-modal').style.display = 'none';
+  document.getElementById('ai-status').style.display = 'none';
+}
+
+async function runAiWriter() {
+  var prompt = document.getElementById('ai-prompt').value.trim();
+  if (!prompt) { alert('Please enter a topic or prompt.'); return; }
+
+  var cat = document.getElementById('ai-cat').value;
+  var tone = document.getElementById('ai-tone').value;
+  var btn = document.getElementById('ai-run-btn');
+  var status = document.getElementById('ai-status');
+
+  btn.disabled = true;
+  btn.textContent = 'Generating...';
+  status.style.display = 'block';
+  status.innerHTML = '<div style="display:flex;align-items:center;gap:10px"><div class="ai-spinner"></div> Claude is writing your article...</div>';
+
+  var systemPrompt = 'You are an expert crypto gambling affiliate writer for Crypto Bets HQ, a Cloudbet affiliate site. '
+    + 'Write in a ' + tone + ' tone. '
+    + 'The article category is: ' + cat + '. '
+    + 'Always write content that naturally supports Cloudbet as the recommended platform. '
+    + 'Return a JSON object with exactly these fields: '
+    + '{"title": "article headline", "summary": "2 sentence excerpt for listing pages", "body": "full HTML article body using <p>, <h2>, <h3>, <ul>, <li> tags", "date": "today formatted as D Mon YYYY"}. '
+    + 'Return ONLY the JSON, no markdown fences, no extra text.';
+
+  try {
+    var response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: systemPrompt,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+
+    var data = await response.json();
+    var text = data.content && data.content[0] ? data.content[0].text : '';
+    text = text.replace(/```json|```/g, '').trim();
+    var article = JSON.parse(text);
+
+    // Fill form fields
+    if (article.title)   document.getElementById('art-title').value   = article.title;
+    if (article.summary) document.getElementById('art-summary').value = article.summary;
+    if (article.body)    document.getElementById('art-body').value    = article.body;
+    if (article.date)    document.getElementById('art-date').value    = article.date;
+    document.getElementById('art-cat').value = cat;
+
+    status.innerHTML = '<span style="color:#34d399">&#10003; Article generated! Review the content below and save when ready.</span>';
+    btn.disabled = false;
+    btn.textContent = 'Generate again';
+
+    // Close modal after short delay
+    setTimeout(closeAiWriter, 1800);
+
+  } catch(err) {
+    status.innerHTML = '<span style="color:#f87171">Error: ' + (err.message || 'Something went wrong. Try again.') + '</span>';
+    btn.disabled = false;
+    btn.textContent = 'Generate article';
+  }
+}
+</script>
+
+<style>
+.ai-spinner {
+  width: 16px; height: 16px; border: 2px solid var(--border);
+  border-top-color: var(--cta); border-radius: 50%;
+  animation: spin .7s linear infinite; flex-shrink: 0;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+#ai-modal { display: none; }
+#ai-modal[style*="flex"] { display: flex !important; }
+</style>
+
 </body>
 </html>
