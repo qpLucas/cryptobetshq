@@ -82,6 +82,7 @@ var DB = {
 
 // ── CONSTANTS ──
 var AFFILIATE_URL = 'https://cldbt.cloud/go/en/auth/sign-up?af_token=98f8cd6cce4dc6a600e699ee62740188&aftm_campaign=join-cloudbet&aftm_source=website&aftm_medium=links&aftm_cid=join-cloudbet';
+var ARTICLE_CTA_URL = 'https://cldbt.cloud/go/en/landing/bitcoin-bonus?af_token=98f8cd6cce4dc6a600e699ee62740188&aftm_campaign=Articles+CTA&aftm_source=website&aftm_medium=organic';
 
 // ── HEADER ──
 function getHeaderHTML(active) {
@@ -318,9 +319,12 @@ function initArticle() {
     + '<img src="' + (art.img||'') + '" alt="" style="width:100%;height:100%;object-fit:cover"></div>'
     + '<div style="color:var(--text-sec);line-height:1.85;font-size:15px">' + injectMobileCta(art.body || '<p>Full content coming soon.</p>', '<div class="art-mobile-cta">'
       + '<div class="art-sidebar-badge">Exclusive offer</div>'
-      + '<div style="font-family:\'Outfit\',sans-serif;font-size:22px;font-weight:800;color:var(--cta);margin:8px 0 4px">Up to $2500</div>'
-      + '<div style="font-size:13px;color:var(--text-sec);margin-bottom:14px">Welcome Bonus + Reward Program</div>'
-      + '<a href="' + AFFILIATE_URL + '" target="_blank" rel="noopener" class="btn btn-green" style="width:100%;padding:12px">Claim bonus &#x2197;</a>'
+      + '<div class="art-sidebar-title">Join Cloudbet</div>'
+      + '<div style="font-family:\'Outfit\',sans-serif;font-size:28px;font-weight:800;color:var(--cta);margin:8px 0 4px">Up to $2500</div>'
+      + '<div style="font-size:13px;color:var(--text-sec);margin-bottom:4px">Welcome Bonus</div>'
+      + '<div style="font-size:13px;color:var(--text-sec);margin-bottom:14px">+ Reward Program</div>'
+      + '<a href="' + ARTICLE_CTA_URL + '" target="_blank" rel="noopener" class="btn btn-green" style="width:100%;padding:12px">Claim bonus &#x2197;</a>'
+      + '<div style="font-size:11px;color:var(--text-dim);margin-top:10px;text-align:center">18+ &#xb7; T&Cs apply &#xb7; Gamble responsibly</div>'
       + '</div>') + '</div>'
     + '<div style="margin-top:32px;padding:22px;background:var(--card);border:1px solid rgba(221,181,254,0.3);border-radius:var(--radius-lg);text-align:center">'
     + '<div style="font-family:\'Outfit\',sans-serif;font-size:20px;font-weight:700;margin-bottom:8px">' + t('art_cta_title') + '</div>'
@@ -443,9 +447,12 @@ function initArticle() {
     + '<img src="' + (art.img||'') + '" alt="" style="width:100%;height:100%;object-fit:cover"></div>'
     + '<div style="color:var(--text-sec);line-height:1.85;font-size:15px">' + injectMobileCta(art.body || '<p>Full content coming soon.</p>', '<div class="art-mobile-cta">'
       + '<div class="art-sidebar-badge">Exclusive offer</div>'
-      + '<div style="font-family:\'Outfit\',sans-serif;font-size:22px;font-weight:800;color:var(--cta);margin:8px 0 4px">Up to $2500</div>'
-      + '<div style="font-size:13px;color:var(--text-sec);margin-bottom:14px">Welcome Bonus + Reward Program</div>'
-      + '<a href="' + AFFILIATE_URL + '" target="_blank" rel="noopener" class="btn btn-green" style="width:100%;padding:12px">Claim bonus &#x2197;</a>'
+      + '<div class="art-sidebar-title">Join Cloudbet</div>'
+      + '<div style="font-family:\'Outfit\',sans-serif;font-size:28px;font-weight:800;color:var(--cta);margin:8px 0 4px">Up to $2500</div>'
+      + '<div style="font-size:13px;color:var(--text-sec);margin-bottom:4px">Welcome Bonus</div>'
+      + '<div style="font-size:13px;color:var(--text-sec);margin-bottom:14px">+ Reward Program</div>'
+      + '<a href="' + ARTICLE_CTA_URL + '" target="_blank" rel="noopener" class="btn btn-green" style="width:100%;padding:12px">Claim bonus &#x2197;</a>'
+      + '<div style="font-size:11px;color:var(--text-dim);margin-top:10px;text-align:center">18+ &#xb7; T&Cs apply &#xb7; Gamble responsibly</div>'
       + '</div>') + '</div>'
     + '<div style="margin-top:32px;padding:22px;background:var(--card);border:1px solid rgba(221,181,254,0.3);border-radius:var(--radius-lg);text-align:center">'
     + '<div style="font-family:\'Outfit\',sans-serif;font-size:20px;font-weight:700;margin-bottom:8px">' + t('art_cta_title') + '</div>'
@@ -461,7 +468,7 @@ function initArticle() {
       + '<div class="art-sidebar-title">Join Cloudbet</div>'
       + '<div class="art-sidebar-bonus">Up to $2500<br><span>Welcome Bonus</span></div>'
       + '<div class="art-sidebar-sub">+ Reward Program</div>'
-      + '<a href="' + AFFILIATE_URL + '" target="_blank" rel="noopener" class="btn btn-green" style="width:100%;margin-top:16px;padding:12px">Claim bonus &#x2197;</a>'
+      + '<a href="' + ARTICLE_CTA_URL + '" target="_blank" rel="noopener" class="btn btn-green" style="width:100%;margin-top:16px;padding:12px">Claim bonus &#x2197;</a>'
       + '<div style="font-size:11px;color:var(--text-dim);margin-top:10px;text-align:center">18+ &#xb7; T&Cs apply &#xb7; Gamble responsibly</div>'
       + '</div>';
   }
