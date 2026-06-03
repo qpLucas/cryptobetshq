@@ -736,3 +736,22 @@ button { cursor: pointer; font-family: inherit; }
   background: var(--cta);
   border-radius: 2px;
 }
+
+/* ── ARTICLE BODY: heading spacing ── */
+#article-content h2,
+#article-content h3,
+#review-body h2,
+#review-body h3 {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-top: 36px;
+  margin-bottom: 12px;
+  color: var(--text);
+}
+#article-content h2, #review-body h2 { font-size: 22px; }
+#article-content h3, #review-body h3 { font-size: 18px; color: var(--accent); }
+#article-content p, #review-body p { margin-bottom: 14px; color: var(--text-sec); line-height: 1.8; }
+#article-content ul, #article-content ol,
+#review-body ul, #review-body ol { margin: 0 0 14px 20px; color: var(--text-sec); line-height: 1.8; }
+#article-content li, #review-body li { margin-bottom: 6px; }
